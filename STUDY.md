@@ -286,3 +286,136 @@ const riverNew = turf.buffer(turf.lineString([...]), 0.5, { units: 'kilometers' 
 | AMap.Marker div 不显示 | 加 `display:inline-block;font-size:0` |
 | `git restore` 撤销所有未提交修改 | 改前先 commit |
 | 编辑弯引号匹配失败 | 从 Grep 输出复制原始字符 |
+| PowerShell Set-Content -NoNewline 破坏文件 | 用 git restore 恢复后重改 |
+| 漏写变量声明导致 ReferenceError | 每次改完检查 let/const 是否完整 |
+
+
+---
+
+# 2026-06-11 地图四要素可视化改造
+
+## 一、四要素统一简约方案
+
+| 要素 | 形状 | 颜色 | 实现 |
+|---|---|---|---|
+| 🏥 医疗设施 | 青色圆点 r=4 | `#22d3ee` | `AMap.CircleMarker` |
+| 🌳 公园 | 绿色实心方块 10x10 | `#10b981` | `AMap.Marker` + div |
+| 🚇 地铁 | 蓝色服务区面 | `#38bdf8` | `AMap.Polygon` (凸包+缓冲) |
+| 🛣️ 道路环境 | 红色影响带面 | `#ef4444` | `AMap.Polygon` (连线+缓冲) |
+
+## 二、地铁：散点 → 面状服务区
+
+### 2.1 站名清洗（最重要）
+
+数据里同名站有 4 种不同写法，必须统一清洗再聚合：
+
+```js
+let baseName = rawName
+  .replace(/[\(\（][^)）]*[\)\）]/g, '')   // 去括号 (地铁站) (1号口)
+  .replace(/地铁站/g, '')                   // 去 "地铁站"
+  .replace(/\d+号口|[A-Z]口/g, '')          // 去 "1号口" "A口"
+  .replace(/出入口/g, '')                   // 去 "出入口"
+  .trim();
+if (!baseName.endsWith('站')) baseName += '站';
+```
+
+示例：`高新大道地铁站1号口` / `高新大道(地铁站)` / `高新大道地铁站出入口` → 统一 `高新大道站`
+
+### 2.2 服务区面生成
+
+```
+各出口坐标 → 同名聚合 → turf.convex(凸包) → turf.buffer(分级)
+
+出口数      缓冲半径
+  1个  →    300m
+  2-3个 →   350m
+  4+个  →   400m
+```
+
+### 2.3 评分改造
+
+```js
+// 改之前：0.8km 内数出口散点（多出口站虚高）
+const td = getCountInRange(transitFeatures, centerPt, 0.8);
+
+// 改之后：判断网格中心是否落在站点服务区面内（一个站只算一次）
+const stationCount = transitPolygons.filter(p =>
+  turf.booleanPointInPolygon(currentCenterPt, p)
+).length;
+
+score = 65 + Math.min(30, stationCount * 15 * weightTransit) + ...
+```
+
+### 2.4 执行顺序修复
+
+`renderEnvironmentLayers()` 必须**先于** `startAnalysis()` 调用，
+否则评分时 `transitPolygons` 还是空数组。
+
+## 三、邻避 → 道路环境影响带
+
+### 3.1 聚合逻辑
+
+```js
+// 提取道路名："九洲大道高架快速路出口与前湖大道交叉口" → "九洲大道高架快速路"
+const roadName = name.split(/出口|入口|与|交叉口/)[0].trim();
+
+// 多点 → 连线缓冲成面；单点 → 红色三角
+```
+
+### 3.2 文案去技术术语
+
+| 原 | 改 |
+|---|---|
+| ⚠️ 环境风险 (邻避) 惩罚 | 🛣️ 高架/快速路环境影响 |
+| ⚠️ 邻避风险 | 🛣️ 道路环境影响 |
+| C级高危：环境风险过高 | C级高危：道路环境影响较大 |
+
+## 四、赣江多分支排除
+
+### 4.1 大坑：turf.union 不重叠返回 null
+
+```js
+// ❌ 错误
+let rivers = turf.union(riverMain, riverBranch1); // 不重叠 → null！
+
+// ✅ 正确：数组逐个判断
+const riverZones = [main, branch1, branch2, branch21, branch22];
+const isExcluded = riverZones.some(z => turf.booleanPointInPolygon(pt, z));
+```
+
+### 4.2 最终排除结构
+
+```
+赣江主河道 (10点, 0.65km)
+├── 分支1   (8点,  0.50km)
+├── 分支2   (3点,  0.50km)
+├── 分支2.1 (6点,  0.40km)
+└── 支线2.2 (8点,  0.35km)
+```
+
+## 五、公园数据问题
+
+旧 `nanchang_parks.json` 91 条中仅 1 条真公园，其余是体育场馆。
+**根本解法**：用高德分类码 `110101`(公园) 重新爬取 → `real_parks.json`(193 条真公园)。
+
+## 六、图例与 UX
+
+### 6.1 地图图例（右上角）
+新增四要素说明 + 评分等级，客户一眼看懂颜色含义。
+
+### 6.2 站名标签
+每个地铁服务区面中心显示 `AMap.Text` 站名（深底蓝框）。
+
+### 6.3 评分基础分
+保持 65 分不变。河湖山地已排除，大多数格子 B 级反映真实情况即可。
+
+## 七、本次提交
+
+```
+78810c9 feat: 地图四要素可视化 + 地铁面状评分 + 赣江多分支 + 真公园数据
+```
+
+| 文件 | 改动 |
+|---|---|
+| `src/views/ConvergeAnalysis.vue` | 四要素渲染+评分+赣江+图例 |
+| `src/data/real_parks.json` | 新增，193条真公园数据 |
