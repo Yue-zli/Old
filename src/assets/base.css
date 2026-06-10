@@ -1,0 +1,194 @@
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+  --vt-c-white: #ffffff;
+  --vt-c-white-soft: #f8f8f8;
+  --vt-c-white-mute: #f2f2f2;
+
+  --vt-c-black: #181818;
+  --vt-c-black-soft: #222222;
+  --vt-c-black-mute: #282828;
+
+  --vt-c-indigo: #2c3e50;
+
+  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
+  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
+  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
+  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+
+  --vt-c-text-light-1: var(--vt-c-indigo);
+  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
+  --vt-c-text-dark-1: var(--vt-c-white);
+  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+  --vt-c-primary: #2c7be5; /* 柔和蓝色，适配养老系统温馨风格 */
+  --vt-c-success: #52c41a;
+  --vt-c-error: #f5222d;
+}
+
+/* semantic color variables for this project */
+:root {
+  --color-background: var(--vt-c-white);
+  --color-background-soft: var(--vt-c-white-soft);
+  --color-background-mute: var(--vt-c-white-mute);
+
+  --color-border: var(--vt-c-divider-light-2);
+  --color-border-hover: var(--vt-c-divider-light-1);
+
+  --color-heading: var(--vt-c-text-light-1);
+  --color-text: var(--vt-c-text-light-1);
+
+  --section-gap: 160px;
+
+    --login-border-radius: 6px;
+  --login-box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: var(--vt-c-black);
+    --color-background-soft: var(--vt-c-black-soft);
+    --color-background-mute: var(--vt-c-black-mute);
+
+    --color-border: var(--vt-c-divider-dark-2);
+    --color-border-hover: var(--vt-c-divider-dark-1);
+
+    --color-heading: var(--vt-c-text-dark-1);
+    --color-text: var(--vt-c-text-dark-2);
+    /* 深色模式下的登录页主题色适配 */
+    --vt-c-primary: #4096ff;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-background);
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  line-height: 1.6;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.login-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../images/背景图.jpg") no-repeat center center;
+  background-size: cover;
+}
+
+.login-card {
+  width: 420px;
+  padding: 40px 30px;
+  background-color: rgba(var(--vt-c-white-rgb), 0.95);
+  border-radius: var(--login-border-radius);
+  box-shadow: var(--login-box-shadow);
+}
+
+/* 适配深色模式下的登录卡片 */
+@media (prefers-color-scheme: dark) {
+  .login-card {
+    background-color: rgba(var(--vt-c-black-rgb), 0.9);
+  }
+}
+
+.login-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.login-logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.login-title {
+  font-size: 26px;
+  color: var(--vt-c-primary);
+  font-weight: 600;
+}
+
+.form-item {
+  margin-bottom: 22px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--color-text);
+  font-size: 14px;
+}
+
+.form-input {
+  width: 100%;
+  height: 42px;
+  padding: 0 15px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--login-border-radius);
+  font-size: 14px;
+  transition: border-color 0.3s;
+  color: var(--color-text);
+  background-color: var(--color-background-soft);
+}
+
+.form-input:focus {
+  border-color: var(--vt-c-primary);
+}
+
+.login-btn {
+  width: 100%;
+  height: 46px;
+  background-color: var(--vt-c-primary);
+  color: var(--vt-c-white);
+  border-radius: var(--login-border-radius);
+  font-size: 16px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  border: none;
+}
+
+.login-btn:hover {
+  background-color: #1d68d8;
+}
+
+.login-btn:disabled {
+  background-color: rgba(var(--vt-c-primary-rgb), 0.6);
+  cursor: not-allowed;
+}
+
+.error-tip {
+  color: var(--vt-c-error);
+  font-size: 12px;
+  margin-top: 5px;
+  height: 16px;
+  line-height: 16px;
+}

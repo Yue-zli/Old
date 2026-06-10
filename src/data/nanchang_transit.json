@@ -1,0 +1,3605 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌火车站(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.921071,
+          28.66318
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "地铁大厦(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线;2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.852386,
+          28.684076
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌西站(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.793362,
+          28.623431
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌东站(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.01846,
+          28.614067
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南路(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.789286,
+          28.552708
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "沈桥(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.97193,
+          28.640865
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "火炬(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.959803,
+          28.716623
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "国体中心(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.816739,
+          28.622378
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "生米(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.790844,
+          28.571832
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "楞上(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.942831,
+          28.650701
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "岭北(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.830145,
+          28.641038
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "市民中心(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.79619,
+          28.593435
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "定子山(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.874417,
+          28.772147
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "柏岗(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.918121,
+          28.544673
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "西站南广场(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线;4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.790539,
+          28.618386
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌大桥东(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.877575,
+          28.655413
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "昌北机场(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.918586,
+          28.855564
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "民园路西(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.947549,
+          28.718465
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "怀玉山大道(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.799433,
+          28.615132
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "观田(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.980876,
+          28.638231
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "龙岗(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.802987,
+          28.623161
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "人民公园(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.912328,
+          28.684019
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "国博(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.79587,
+          28.608219
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "梁万(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.960352,
+          28.690277
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "卫东地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.848156,
+          28.690521
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "卫东地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.848593,
+          28.691274
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "地铁大厦地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线;2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.85234,
+          28.684368
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "地铁大厦地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线;2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.852549,
+          28.68441
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌火车站地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.921182,
+          28.66257
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "中堡(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.753264,
+          28.62331
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "长江路(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.879619,
+          28.717481
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "地铁大厦地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线;2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.852071,
+          28.683794
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "斗门(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.927796,
+          28.528927
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "火炬广场(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.949586,
+          28.688182
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "建业大道(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.880506,
+          28.792796
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "北罗(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.949706,
+          28.647897
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "绿茵路(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.858056,
+          28.697587
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "彭家桥(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.933419,
+          28.674227
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "云天路(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.867984,
+          28.639402
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "北沥(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.972525,
+          28.715457
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "科技城(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.982102,
+          28.715406
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "福州路(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.903284,
+          28.680642
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "罗家集(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.989514,
+          28.633385
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "蛟桥(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.858957,
+          28.751591
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "安丰(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.809017,
+          28.610946
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "楞上地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.943344,
+          28.650226
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "顺外地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.929016,
+          28.6634
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌大桥东地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.878141,
+          28.65491
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "顺外(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.928124,
+          28.663683
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌火车站地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.921183,
+          28.662165
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "雅苑路(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.857386,
+          28.692061
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "国体中心地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.816782,
+          28.621623
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "东新(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.839267,
+          28.597913
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "沥山(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.915972,
+          28.556331
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "鹰潭街(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.799006,
+          28.599043
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "七里(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.927472,
+          28.709415
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "裕丰街(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.730482,
+          28.620635
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "青山湖西(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.923255,
+          28.693315
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "汇贤大道(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.882005,
+          28.806308
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "冠山(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.861531,
+          28.772526
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "地铁大厦地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线;2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.852955,
+          28.683123
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "地铁大厦地铁站地铁·更新天地北口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线;2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.85423,
+          28.686195
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "高新大道地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.95984,
+          28.67519
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "国展中心(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.006438,
+          28.616119
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "青山路口地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.901993,
+          28.688617
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "斗门地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.928991,
+          28.52865
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "枫下(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.997133,
+          28.622442
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九龙湖南(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.793412,
+          28.579703
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "青山湖大道(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.948836,
+          28.674363
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "市民中心地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.795629,
+          28.593943
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "瑶湖东(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.061335,
+          28.666177
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "生米地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.791189,
+          28.571289
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌西站地铁站北入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.793361,
+          28.623599
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "灌婴路(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.872805,
+          28.648037
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "卧龙山(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.822477,
+          28.631606
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "艾溪湖西(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.973685,
+          28.674424
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南齿(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.851141,
+          28.765791
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "地铁大厦地铁站地铁·更新天地南口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线;2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.853763,
+          28.685002
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "墩子塘(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.894791,
+          28.684957
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "丁公路南(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线;4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.91242,
+          28.663236
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "龙岗地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.803383,
+          28.622611
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌西站地铁站入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.79344,
+          28.623671
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "地铁大厦地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线;2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.853538,
+          28.68389
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "地铁大厦地铁站5号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线;2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.852291,
+          28.683534
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "地铁大厦地铁站4号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线;2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.85124,
+          28.684308
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "昌北机场地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.918574,
+          28.856508
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "璜溪(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.740447,
+          28.620206
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "丁家洲(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.856715,
+          28.622645
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "邓埠(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.909871,
+          28.589661
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "上沙沟(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "3号线;4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.911541,
+          28.694437
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "方志敏大道(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.855573,
+          28.75894
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "卫东(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.848985,
+          28.690856
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "八一广场(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线;2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.902665,
+          28.67514
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "丁公路北地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.913928,
+          28.674192
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "奥体中心地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.025971,
+          28.674019
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "八一馆地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.890986,
+          28.675834
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "八一馆地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.891426,
+          28.675571
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "十字街地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.905849,
+          28.653011
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌西站地铁站出口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.793186,
+          28.623219
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "地铁大厦地铁站3号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线;2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.851405,
+          28.684644
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "丁公路北地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.913292,
+          28.673581
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "京东大道地铁站1-2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.973184,
+          28.691856
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "高新大道(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.960385,
+          28.674424
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "珠江路(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.875913,
+          28.707524
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "北沥地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.972734,
+          28.714968
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "观洲地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.863845,
+          28.632785
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "中堡地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.753793,
+          28.623095
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "中堡地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.753883,
+          28.623593
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "东新地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.839917,
+          28.597539
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "东新地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.839998,
+          28.597973
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "斗门地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.928699,
+          28.528482
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "柏岗地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.918419,
+          28.544873
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "梁万地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.96151,
+          28.690736
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "生米地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.791449,
+          28.572522
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "国博地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.79629,
+          28.607551
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "国博地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.796471,
+          28.60821
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "西站南广场地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.790766,
+          28.617538
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "卫东地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.849535,
+          28.691253
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "北罗地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.950372,
+          28.647096
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "李巷地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.958607,
+          28.643381
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "沈桥地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.972839,
+          28.640916
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "沈桥地铁站3号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.971248,
+          28.641847
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "沈桥地铁站4号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.970649,
+          28.64066
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌大桥东地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.878432,
+          28.655536
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "施尧地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.908221,
+          28.614489
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "八一馆地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.892095,
+          28.675549
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "八一馆地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.892173,
+          28.67582
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "八一馆地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.891909,
+          28.675274
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "八一馆地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.891249,
+          28.676131
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "八一馆地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.891709,
+          28.676186
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "火炬地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.961177,
+          28.716994
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "怀玉山大道地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.799455,
+          28.614666
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "梁万地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.961604,
+          28.690076
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "柏岗地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.91872,
+          28.543564
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "施尧地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.908232,
+          28.61601
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "生米地铁站4号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.790414,
+          28.57129
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "观田地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.981543,
+          28.637727
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "国展中心地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.007606,
+          28.615592
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "楞上地铁站3号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.942261,
+          28.651439
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "楞上地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.943509,
+          28.650811
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "楞上地铁站4号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.941903,
+          28.650851
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "卫东地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.848787,
+          28.690009
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "八一馆(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线;3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.891523,
+          28.675659
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌火车站地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.921794,
+          28.663409
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "李巷(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.957776,
+          28.643979
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "麻丘(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.078631,
+          28.66657
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "京家山(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.906513,
+          28.639218
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "十字街(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.905842,
+          28.653894
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "国威路(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.941472,
+          28.687165
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "京东大道(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.972495,
+          28.692445
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "施尧(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.907843,
+          28.615182
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "师大南路(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.924203,
+          28.674034
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "庐山南大道(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.865675,
+          28.70141
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "奥体中心(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.024731,
+          28.674482
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "丁公路北(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线;4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.913332,
+          28.673933
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "青山路口(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线;3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.901589,
+          28.686554
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "谢家村地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.940018,
+          28.673591
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "火炬地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.95976,
+          28.716884
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "建业大道地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.880782,
+          28.792229
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "安丰地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.809757,
+          28.609841
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "高新大道地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.961318,
+          28.67399
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "高新大道地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.960897,
+          28.675086
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌东站地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.017669,
+          28.614676
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "万寿宫(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.885883,
+          28.675086
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "丁公路北地铁站7号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.913127,
+          28.672295
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "灌婴路地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.873381,
+          28.647207
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "灌婴路地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.873354,
+          28.648641
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "丁公路南地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.913317,
+          28.663833
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "八一广场地铁站14号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.902841,
+          28.675302
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "福州路地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.903547,
+          28.680854
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "丁公路南地铁站4号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.910074,
+          28.664005
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "国体中心地铁站4号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.816075,
+          28.621954
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "丁公路北地铁站4号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.912691,
+          28.673684
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "丁公路北地铁站3号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.912271,
+          28.674176
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "珠江路地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.875873,
+          28.706642
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "珠江路地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.876611,
+          28.707863
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "长江路地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.880011,
+          28.716623
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "绿茵路地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.857798,
+          28.698197
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "奥体中心地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.025832,
+          28.674757
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "青山路口地铁站3号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.902442,
+          28.688322
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "青山路口地铁站5号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.901223,
+          28.687845
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "十字街地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.906629,
+          28.65304
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "梁万地铁站4号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.960163,
+          28.689405
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "民园路西地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.948325,
+          28.717975
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌大桥东地铁站3号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.877554,
+          28.656198
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "国体中心地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.817467,
+          28.622762
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌东站地铁站6号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.019398,
+          28.612983
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "昌北机场地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.918359,
+          28.855945
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌火车站地铁站5号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.921067,
+          28.663109
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "八一广场地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.90268,
+          28.675067
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "丁公路北地铁站6号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.913127,
+          28.672987
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "科技城地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.982181,
+          28.715048
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "八一广场地铁站8号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.90355,
+          28.67693
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "国威路地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.942194,
+          28.686978
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "岭北地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.830309,
+          28.640252
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "市民中心地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.796214,
+          28.592672
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南路地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.789678,
+          28.55339
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南路地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.790123,
+          28.552288
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南路地铁站4号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.788991,
+          28.552028
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "长江路地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.880027,
+          28.717851
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "红谷中大道地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.86722,
+          28.692439
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "罗家集地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.990057,
+          28.632308
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "青山路口地铁站6号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.901006,
+          28.687375
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "火炬广场地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.950526,
+          28.688566
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌火车站地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.921641,
+          28.662964
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "复兴大道东地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.912561,
+          28.577092
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "复兴大道东地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.912808,
+          28.575542
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "青山湖西地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.923419,
+          28.693622
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "京东大道地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.973798,
+          28.693009
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "八一广场地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.903161,
+          28.673567
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "西站南广场地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.791424,
+          28.618404
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "绳金塔地铁站出入口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "3号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.901181,
+          28.658275
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "建业大道地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.880195,
+          28.793309
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南路地铁站3号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.788991,
+          28.553366
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌中学(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.789363,
+          28.56059
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "八一广场地铁站9号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.903568,
+          28.67734
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "国体中心地铁站3号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.816725,
+          28.6231
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "绿茵路地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.858396,
+          28.697104
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "观洲地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.862786,
+          28.633253
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "白马山(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.722486,
+          28.630675
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "桃苑(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.889983,
+          28.659711
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "学府大道东(地铁站)",
+        "type": "交通设施服务;地铁站;地铁站",
+        "address": "2号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.839123,
+          28.659244
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "火炬地铁站3号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.95886,
+          28.716755
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "汇贤大道地铁站2号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "1号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.881666,
+          28.807002
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "七里地铁站1号口",
+        "type": "交通设施服务;地铁站;出入口",
+        "address": "4号线",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.928214,
+          28.709604
+        ]
+      }
+    }
+  ]
+}

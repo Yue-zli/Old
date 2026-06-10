@@ -1,0 +1,1301 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "星锐篮球公园",
+        "type": "体育休闲服务;运动场馆;综合体育馆|体育休闲服务;运动场馆;篮球场馆",
+        "address": "高新区艾溪湖四路与创新一路交界口",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.006583,
+          28.700988
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "创星篮球公园",
+        "type": "体育休闲服务;运动场馆;篮球场馆",
+        "address": "小蓝经济技术开发区迎宾中大道668号汇通物流西区1号厂房",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.90911,
+          28.575172
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "梧凤山足球公园(南昌江滩店)",
+        "type": "风景名胜;公园广场;公园|体育休闲服务;运动场馆;综合体育馆",
+        "address": "沿江南大道朝阳江滩公园内",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.86925,
+          28.653861
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "国体足球公园",
+        "type": "体育休闲服务;运动场馆;足球场",
+        "address": "红谷滩区城运大道88号",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.823453,
+          28.623393
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洛克公园(青山湖店)",
+        "type": "体育休闲服务;运动场馆;综合体育馆",
+        "address": "塘山镇民安路448号(光华印刷厂内)",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.950687,
+          28.697653
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "RUCKER PARK洛克公园(王府井购物中心店)",
+        "type": "体育休闲服务;运动场馆;综合体育馆",
+        "address": "洪城路188号王府井购物中心六楼52区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.905113,
+          28.6539
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NBAHOOPPARK篮球公园(南昌首创奥特莱斯店)",
+        "type": "体育休闲服务;运动场馆;篮球场馆",
+        "address": "明矾路399号3层D01-D03",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.809906,
+          28.705713
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "八一公园拳咚咚店",
+        "type": "体育休闲服务;运动场馆;运动场所",
+        "address": "八一公园游乐场附近",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.897312,
+          28.6791
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "路人王·2+1篮球公园",
+        "type": "体育休闲服务;运动场馆;篮球场馆",
+        "address": "长寿路与九洲大街交叉口东北80米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.862244,
+          28.639422
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "青山湖区云翔体育MVP篮球公园",
+        "type": "体育休闲服务;运动场馆;篮球场馆",
+        "address": "高新火炬三路和高新六路交汇处火炬三路198号",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.967902,
+          28.699896
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "喜盈门运动休闲公园",
+        "type": "体育休闲服务;运动场馆;运动场所",
+        "address": "云天路与春桃路交叉口东140米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.871475,
+          28.638825
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "红谷滩奥林匹克足球公园",
+        "type": "体育休闲服务;运动场馆;足球场",
+        "address": "丰和北大道1188号",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.888821,
+          28.730673
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "锐成体育2+1篮球公园",
+        "type": "体育休闲服务;运动场馆;篮球场馆",
+        "address": "抚生路中段88号",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.862556,
+          28.639828
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "CBA篮球公园",
+        "type": "体育休闲服务;运动场馆;篮球场馆",
+        "address": "飞龙路与井冈山大道辅路交叉口东40米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.91838,
+          28.625779
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "篮球公园篮球场",
+        "type": "体育休闲服务;运动场馆;运动场所",
+        "address": "长江路与凤凰北大道交叉口西南40米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.874984,
+          28.717716
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "主场篮球公园南昌旗舰店",
+        "type": "体育休闲服务;运动场馆;篮球场馆",
+        "address": "元亨体育运动中心内",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.870462,
+          28.654591
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "88号台球俱乐部(南岸公园店)",
+        "type": "体育休闲服务;运动场馆;台球厅",
+        "address": "莲塘北大道204号",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.932859,
+          28.580294
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "博友乔氏台球俱乐部(绿地中央公园店)",
+        "type": "体育休闲服务;运动场馆;台球厅",
+        "address": "长堎镇文化大道1048号附近文鼎华苑(南区)",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.835913,
+          28.694231
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "江西南昌恒大体育公园",
+        "type": "体育休闲服务;运动场馆;综合体育馆",
+        "address": "迎宾大道3988号恒大绿洲",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.936967,
+          28.515253
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "赣江新区儒乐湖足球运动公园",
+        "type": "体育休闲服务;运动场馆;运动场所",
+        "address": "儒乐湖滨江公园内(南侧)",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.949522,
+          28.803797
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "礼步湖公园-足球场",
+        "type": "体育休闲服务;运动场馆;足球场",
+        "address": "长堎镇解放路237号礼步湖公园(西南角)",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.828697,
+          28.686226
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "滨湖森林公园月亮湾浴场",
+        "type": "体育休闲服务;运动场馆;海滨浴场",
+        "address": "迎宾大道辅路",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.242669,
+          28.401628
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "安义潦河市民公园-运动球场",
+        "type": "体育休闲服务;运动场馆;运动场所",
+        "address": "安义潦河市民公园",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.568427,
+          28.834011
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "力动健身开心馆(象湖公园店)",
+        "type": "体育休闲服务;运动场馆;健身中心",
+        "address": "象湖东港汇",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.900472,
+          28.618742
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "艾溪湖森林湿地公园-足球场",
+        "type": "体育休闲服务;运动场馆;足球场",
+        "address": "艾溪湖东路艾溪湖森林湿地公园内",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.980683,
+          28.69831
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌启明星足球俱乐部(星空足球公园店)",
+        "type": "体育休闲服务;运动场馆;足球场",
+        "address": "湖坊镇洪都中大道158-18号",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.924382,
+          28.666148
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "豪星台球俱乐部(爱琴海购物公园店)",
+        "type": "体育休闲服务;运动场馆;台球厅",
+        "address": "梅岭大道599号南昌湾里爱琴海购物中心F2层",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.743094,
+          28.690987
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌经开区龙潭足球公园",
+        "type": "体育休闲服务;运动场馆;足球场",
+        "address": "黄家湖西路辅路与范家路交叉口西北180米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.815081,
+          28.713969
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "童乐亿康篮球公园",
+        "type": "体育休闲服务;运动场馆;篮球场馆",
+        "address": "火炬二路与高新六路交叉口东160米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.971061,
+          28.694813
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌刺星足球俱乐部(经开区龙潭足球公园店)",
+        "type": "体育休闲服务;运动场馆;足球场",
+        "address": "黄家湖西路辅路与范家路交叉口西北180米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.815075,
+          28.713925
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "象湖南湿地公园-篮球场",
+        "type": "体育休闲服务;运动场馆;篮球场馆",
+        "address": "云卿路与翠菊路交叉口南380米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.857114,
+          28.612144
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "梅岭乡村篮球公园",
+        "type": "体育休闲服务;运动场馆;篮球场馆",
+        "address": "052县道梅岭生态旅游度假区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.756775,
+          28.794675
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "响袋24h自助棋牌台球(经开公园店)",
+        "type": "体育休闲服务;运动场馆;台球厅",
+        "address": "筠霁路旭辉一期A10栋202商铺",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.836927,
+          28.748983
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "名仕台球俱乐部",
+        "type": "体育休闲服务;运动场馆;台球厅",
+        "address": "福州路161号(人民公园地铁站4号口步行90米)",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.911069,
+          28.683419
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "YONEX南昌国际羽毛球交流中心东门",
+        "type": "体育休闲服务;运动场馆;羽毛球场",
+        "address": "庐山南大道2478号新势力文创公园A5栋",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.850889,
+          28.730778
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "武举潦河公园-篮球场",
+        "type": "体育休闲服务;运动场馆;篮球场馆",
+        "address": "南大附属学校龙安学校初中部东北侧160米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.587615,
+          28.835457
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "天空体育公园羽毛球馆",
+        "type": "体育休闲服务;运动场馆;羽毛球场",
+        "address": "青山湖大道199号五湖国际广场F4层",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.949751,
+          28.685473
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "篮球场",
+        "type": "体育休闲服务;运动场馆;篮球场馆",
+        "address": "赣江市民公园四期内(南侧)",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.808108,
+          28.570446
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "DFS全乔氏台球中心",
+        "type": "体育休闲服务;运动场馆;台球厅",
+        "address": "象湖金沙大道2662号南昌居住主题公园住宅区1栋一楼部分区域及二楼",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.89436,
+          28.59434
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "未篮体育中心",
+        "type": "体育休闲服务;运动场馆;综合体育馆",
+        "address": "京3文化公园10号楼二层202商铺",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.908208,
+          28.639095
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "S·普拉提瑜伽健身",
+        "type": "体育休闲服务;运动场馆;健身中心",
+        "address": "长堎街道文化大道1436号绿地中央公园",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.833824,
+          28.692098
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "REPRO型邦健身(经开店)",
+        "type": "体育休闲服务;运动场馆;健身中心",
+        "address": "南昌经济技术开发区庐山南大道2748号新势力文创公园A7栋106-116室",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.849192,
+          28.732039
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌市洪城足球俱乐部",
+        "type": "体育休闲服务;运动场馆;足球场",
+        "address": "洪都北大道八一体育公园(西北角)",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.927011,
+          28.682257
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "江西省游泳馆",
+        "type": "体育休闲服务;运动场馆;游泳馆",
+        "address": "铁路一中致远楼2楼(人民公园地铁站4号口步行160米)",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.910686,
+          28.682838
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "鼎红台球",
+        "type": "体育休闲服务;运动场馆;台球厅",
+        "address": "福州路161号(人民公园地铁站4号口步行90米)",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.91084,
+          28.683472
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "8号台球俱乐部",
+        "type": "体育休闲服务;运动场馆;台球厅",
+        "address": "煌盛中央公园南1门东南80米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.912784,
+          28.562975
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌悦动网球俱乐部",
+        "type": "体育休闲服务;运动场馆;网球场",
+        "address": "朝阳江滩公园元亨体育运动中心",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.870439,
+          28.654813
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌翱翔体育俱乐部训练基地",
+        "type": "体育休闲服务;运动场馆;健身中心",
+        "address": "江滩运动主题公园",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.866612,
+          28.651696
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "YOBOX约球吧总店",
+        "type": "体育休闲服务;运动场馆;台球厅",
+        "address": "子羽路与燕舞路南(华侨城运动公园内)889号",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.883097,
+          28.631788
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "云端台球俱乐部",
+        "type": "体育休闲服务;运动场馆;台球厅",
+        "address": "东新乡银湖四路煌盛熙岸公园15栋10D楼商铺",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.841317,
+          28.576719
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌正阖健康管理有限公司",
+        "type": "体育休闲服务;运动场馆;健身中心",
+        "address": "朝阳江滩公园梧凤山足球公园北面01号",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.869637,
+          28.654147
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌体育赛事中心",
+        "type": "体育休闲服务;运动场馆;运动场所",
+        "address": "湖滨公园南京东路东2门东北160米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.931375,
+          28.685625
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "燕鸣岛公园-健身区",
+        "type": "体育休闲服务;运动场馆;运动场所",
+        "address": "燕鸣岛",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.940483,
+          28.696352
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "新起灯光篮球场",
+        "type": "体育休闲服务;运动场馆;篮球场馆",
+        "address": "体育公园内(西北角)",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.268001,
+          28.364208
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Fortylove时领网球24h室内馆",
+        "type": "体育休闲服务;运动场馆;羽毛球场",
+        "address": "京3文化公园10号楼1楼104",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.908099,
+          28.639028
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌特能足球俱乐部",
+        "type": "体育休闲服务;运动场馆;足球场",
+        "address": "红谷滩区南昌国际体育中心国体足球公园",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.823436,
+          28.623395
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "911滑板俱乐部(海关店)",
+        "type": "体育休闲服务;运动场馆;运动场所",
+        "address": "南昌海关门口对面(江滩公园里面)",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.872989,
+          28.666615
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "晨铭乒乓球俱乐部",
+        "type": "体育休闲服务;运动场馆;乒乓球馆",
+        "address": "佘山路66号樟树林文化生活公园9座106号",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.916649,
+          28.697342
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "红泽体育游泳健身(爱琴海商场店)",
+        "type": "体育休闲服务;运动场馆;游泳馆",
+        "address": "梅岭大道爱琴海购物公园4楼",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.743568,
+          28.690196
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "樟树林羽毛球综合馆",
+        "type": "体育休闲服务;运动场馆;羽毛球场",
+        "address": "佘山路66号樟树林文化生活公园9座2层",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.918544,
+          28.696677
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌市击剑运动基地",
+        "type": "体育休闲服务;运动场馆;运动场所",
+        "address": "八一体育公园6-7号门中间",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.928603,
+          28.681904
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "怿瑜伽普拉提",
+        "type": "体育休闲服务;运动场馆;健身中心",
+        "address": "洪都北大道金域名都10幢114室靠近体育公园旁",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.928515,
+          28.67953
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "FitU·森综合体能训练馆",
+        "type": "体育休闲服务;运动场馆;健身中心",
+        "address": "真君路888号玩美公园F栋1005",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.884499,
+          28.630193
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "兴尚轮滑体育中心",
+        "type": "体育休闲服务;运动场馆;运动场所",
+        "address": "樟树林文化公园电影院二楼",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.916729,
+          28.697033
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "一胜搏击健身馆",
+        "type": "体育休闲服务;运动场馆;运动场所",
+        "address": "南昌居住主题公园南区荷塘月舍北1门东北130米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.892614,
+          28.594124
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "青旸孕产普拉提",
+        "type": "体育休闲服务;运动场馆;健身中心",
+        "address": "丹桂路777号联发公园前9栋二单元102室",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.874252,
+          28.63844
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "象湖水上游船娱乐部",
+        "type": "体育休闲服务;运动场馆;运动场所",
+        "address": "芳湖路象湖湿地公园内(东侧)",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.894641,
+          28.622295
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "江体体育(赣鄱青少年足球俱乐部)",
+        "type": "体育休闲服务;运动场馆;运动场所",
+        "address": "九洲公园内(东侧)",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.874386,
+          28.632821
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "立阳乒乓球俱乐部",
+        "type": "体育休闲服务;运动场馆;乒乓球馆",
+        "address": "南昌市人民公园映水厅(福州路96号)",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.913527,
+          28.680484
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "T-FOUR体能游泳中心(朝阳店)",
+        "type": "体育休闲服务;运动场馆;健身中心",
+        "address": "朝阳江滩公园元亨体育中心",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.870457,
+          28.654789
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "八一体育场",
+        "type": "体育休闲服务;运动场馆;综合体育馆",
+        "address": "洪都北大道489号",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.927883,
+          28.682116
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "力刻健身(南昌湾里领秀湖店)",
+        "type": "体育休闲服务;运动场馆;健身中心",
+        "address": "八面山路509号岭秀PARK浪漫中心负一层B1F-001-1、B1F-C01、B1F-C05号商铺",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.735727,
+          28.705135
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌二中九龙湖校区游泳馆",
+        "type": "体育休闲服务;运动场馆;游泳馆",
+        "address": "九龙湖公园7号楼真趣园第一层",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.809904,
+          28.594929
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "昌南体育中心",
+        "type": "体育休闲服务;运动场馆;综合体育馆|体育休闲服务;运动场馆;健身中心",
+        "address": "东莲路与桃花东路交叉口",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.866174,
+          28.581891
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "炼火体育(篮球羽毛球运动中心)",
+        "type": "体育休闲服务;运动场馆;综合体育馆",
+        "address": [],
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.925523,
+          28.635741
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "欣悦湖电竞文体产业园",
+        "type": "体育休闲服务;运动场馆;综合体育馆",
+        "address": "工业三路215号",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.786068,
+          28.68276
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "大象水世界",
+        "type": "体育休闲服务;休闲场所;水上活动中心|体育休闲服务;运动场馆;游泳馆",
+        "address": "湖坊镇昌东工业区沈桥商业街1号楼",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.964209,
+          28.644963
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "未来空间超级运动场(南昌新势力文创园店)",
+        "type": "体育休闲服务;运动场馆;运动场所",
+        "address": "庐山南大道2478号新势力文创园A4栋",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.850597,
+          28.731467
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "用友产业园乒乓球活动室",
+        "type": "体育休闲服务;运动场馆;乒乓球馆",
+        "address": "嘉言路668号用友产业园一楼D区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.788314,
+          28.649052
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "雷公坳文化体育产业园-羽毛球馆",
+        "type": "体育休闲服务;运动场馆;羽毛球场",
+        "address": "枫生快速路雷公坳8号",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.848221,
+          28.708711
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "雷公坳文化体育产业园西区16号楼",
+        "type": "体育休闲服务;运动场馆;游泳馆",
+        "address": "长青路与松鹤路交叉口西南480米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.844982,
+          28.707579
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+/* 重置浏览器默认样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "微软雅黑", sans-serif;
+  background-color: #f5f7fa;
+}
+a {
+  text-decoration: none;
+  color: #333;
+}
+input {
+  outline: none;
+  border: none;
+}
+button {
+  border: none;
+  cursor: pointer;
+}
+
+h1{
+  size: 20px;
+}

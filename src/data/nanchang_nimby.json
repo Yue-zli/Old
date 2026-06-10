@@ -1,0 +1,3365 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与前湖大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "红谷滩区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.837336,
+          28.653871
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路入口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "红谷滩区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.840503,
+          28.65192
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与前湖大道快速路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "红谷滩区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.840687,
+          28.652239
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与赣江南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "红谷滩区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.844573,
+          28.650149
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与赣江南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "红谷滩区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.844607,
+          28.650187
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与赣江南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "红谷滩区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.84474,
+          28.650333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路入口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "红谷滩区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.844706,
+          28.650091
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "红谷滩区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.844895,
+          28.650312
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与沿江南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.853198,
+          28.636651
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与沿江南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.853749,
+          28.63729
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与沿江南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.85723,
+          28.640911
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与九洲大道高架快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.857458,
+          28.640239
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与沿江南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.857536,
+          28.639811
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与沿江南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.858424,
+          28.642153
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与沿江南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.858,
+          28.640142
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.858614,
+          28.64107
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与沿江南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.859427,
+          28.639608
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.859608,
+          28.640326
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与沿江南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.860233,
+          28.641768
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与九洲大道高架快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.859848,
+          28.640008
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路入口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.859968,
+          28.640054
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与九洲大道高架快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.860442,
+          28.641576
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与沿江南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.860096,
+          28.639812
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与沿江南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.860999,
+          28.642438
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与沿江南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.860395,
+          28.640041
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与沿江南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.862783,
+          28.644266
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与九洲大道高架快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.861647,
+          28.639139
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与长寿路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.861577,
+          28.638627
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与长寿路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.861607,
+          28.638665
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与九洲大道高架快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.862824,
+          28.637749
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大街与九洲大道高架快速路入口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.863016,
+          28.637708
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路入口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.863054,
+          28.6377
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.863489,
+          28.637517
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与凉伞树路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.863473,
+          28.637184
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大街与九洲大道高架快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.863561,
+          28.637262
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与凉伞树路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.863679,
+          28.637379
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "金山大道高架",
+        "type": "地名地址信息;交通地名;道路名",
+        "address": "新建区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.898502,
+          28.760237
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "丹桂路与九洲大道高架快速路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.872337,
+          28.636202
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与云天路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.876786,
+          28.636592
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与云天路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.880235,
+          28.637665
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与云天路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.8803,
+          28.637603
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路入口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.880527,
+          28.637587
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与水厂路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.8814,
+          28.640426
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与水厂路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.881456,
+          28.64042
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与桃花南路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.881493,
+          28.639809
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与云天路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.881288,
+          28.638112
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路入口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.881396,
+          28.638167
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与云天路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.881372,
+          28.637995
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与桃花南路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.881352,
+          28.637859
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.881998,
+          28.63835
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与桃花南路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.8815,
+          28.635896
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.883166,
+          28.638935
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路入口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.884447,
+          28.63905
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与水厂路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.885941,
+          28.639211
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.886057,
+          28.639133
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与月池路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.886798,
+          28.63898
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与水厂路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.890511,
+          28.637836
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.901396,
+          28.636202
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与何坊西路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.90144,
+          28.63618
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路入口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.901775,
+          28.636234
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与何坊西路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.902143,
+          28.636181
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.905144,
+          28.635965
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与何坊西路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.905193,
+          28.635989
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与何坊西路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.905539,
+          28.636092
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与何坊西路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.90717,
+          28.635927
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与京山老街交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.907585,
+          28.635947
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路入口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.908108,
+          28.636073
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与九洲大道高架快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.908533,
+          28.63614
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与何坊西路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.908952,
+          28.636108
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与何坊西路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.910698,
+          28.635779
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.911123,
+          28.635999
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路入口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.911097,
+          28.635826
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.913681,
+          28.635805
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与井冈山大道辅路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.913898,
+          28.636024
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与江铃立交桥交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.913847,
+          28.635795
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与井冈山大道辅路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.91399,
+          28.635787
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与井冈山大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.914296,
+          28.635795
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.916429,
+          28.636194
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与何坊东路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.916594,
+          28.635987
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与洪都大道快速路辅路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.916996,
+          28.636809
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与何坊西路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.910583,
+          28.636071
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与桃花南路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.881488,
+          28.643622
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与迎宾北大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.905496,
+          28.635958
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与子羽路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.886041,
+          28.63901
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与何坊西路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.910538,
+          28.63584
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与水厂路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.883784,
+          28.639805
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路入口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.876548,
+          28.636516
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大街与九洲大道高架快速路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.864726,
+          28.636628
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与井冈山大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.914203,
+          28.63606
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与沿江南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.863108,
+          28.645229
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与长寿路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.861675,
+          28.638754
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与大市场东路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.890119,
+          28.638064
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与洪都大道快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.913664,
+          28.635996
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与京山老街交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.907554,
+          28.635921
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与沿江南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.860204,
+          28.639875
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与桃花南路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.88163,
+          28.637923
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与何坊西路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.905173,
+          28.635964
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与水厂路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.891827,
+          28.63749
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与迎宾北大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.906788,
+          28.635933
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与真君路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.889824,
+          28.638022
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与沿江南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.857817,
+          28.641648
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与沿江南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.858951,
+          28.640819
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与桃花南路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.88147,
+          28.638078
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与洪都大道快速路出口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.916411,
+          28.636324
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾高架路入口(规划路八方向)",
+        "type": "地名地址信息;交通地名;城市快速路入口",
+        "address": "青山湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.972036,
+          28.633206
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与洪都南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.916836,
+          28.63386
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "新村高架桥",
+        "type": "地名地址信息;交通地名;道路名",
+        "address": "南昌县",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.923775,
+          28.38893
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与抚生南路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.866004,
+          28.636189
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾高架路入口(东向)",
+        "type": "地名地址信息;交通地名;城市快速路入口",
+        "address": "青山湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.986137,
+          28.629688
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与象湖西路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.891854,
+          28.637557
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾高架路",
+        "type": "地名地址信息;交通地名;道路名",
+        "address": "青山湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.974124,
+          28.632645
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "桃花南路高架入口(桃花南路方向)",
+        "type": "地名地址信息;交通地名;城市快速路入口",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.875563,
+          28.623884
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "岗上高架桥",
+        "type": "地名地址信息;交通地名;立交桥|地名地址信息;交通地名;桥",
+        "address": "南昌县",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.865627,
+          28.414009
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "岗上高架桥",
+        "type": "地名地址信息;交通地名;道路名",
+        "address": "南昌县",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.866386,
+          28.413731
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与江铃立交桥交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.913456,
+          28.635792
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与水厂路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.885978,
+          28.639144
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与九洲大道高架快速路入口交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.894386,
+          28.637642
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾高架路",
+        "type": "地名地址信息;交通地名;道路名",
+        "address": "南昌县",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.062571,
+          28.6224
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与桃花南路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.881332,
+          28.643682
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "桃花南路高架出口(东北向)",
+        "type": "地名地址信息;交通地名;城市快速路出口",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.86965,
+          28.618851
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾高架路入口(东向)",
+        "type": "地名地址信息;交通地名;城市快速路入口",
+        "address": "青山湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.014923,
+          28.624583
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与抚河南路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.906591,
+          28.636074
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "金山大道高架",
+        "type": "地名地址信息;交通地名;道路名",
+        "address": "红谷滩区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.88839,
+          28.737905
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路入口与前湖大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "红谷滩区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.836703,
+          28.65344
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "金山大道高架入口(英雄大道方向)",
+        "type": "地名地址信息;交通地名;城市快速路入口",
+        "address": "新建区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.899755,
+          28.760861
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "桃花南路高架入口(桃花南路方向)",
+        "type": "地名地址信息;交通地名;城市快速路入口",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.880286,
+          28.630183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "金山大道高架入口(南向)",
+        "type": "地名地址信息;交通地名;城市快速路入口",
+        "address": "红谷滩区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.889056,
+          28.743529
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌富山高架桥",
+        "type": "地名地址信息;交通地名;道路名",
+        "address": "南昌县",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.861159,
+          28.514289
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "桃花南路高架入口(桃花南路方向)",
+        "type": "地名地址信息;交通地名;城市快速路入口",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.865902,
+          28.61419
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾高架路入口(西向)",
+        "type": "地名地址信息;交通地名;城市快速路入口",
+        "address": "青山湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.007639,
+          28.625799
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾高架路入口(西向)",
+        "type": "地名地址信息;交通地名;城市快速路入口",
+        "address": "青山湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.97711,
+          28.631951
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾高架路入口(东向)",
+        "type": "地名地址信息;交通地名;城市快速路入口",
+        "address": "青山湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.038901,
+          28.621691
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "新村高架桥",
+        "type": "地名地址信息;交通地名;立交桥",
+        "address": "南昌县",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.922873,
+          28.389307
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾高架路入口(洪腾高架路方向)",
+        "type": "地名地址信息;交通地名;城市快速路入口",
+        "address": "青山湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.002688,
+          28.625495
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南环高架桥",
+        "type": "地名地址信息;交通地名;立交桥",
+        "address": "南昌县",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.020809,
+          28.523533
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大街与九洲大道高架快速路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.865941,
+          28.636203
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾高架路入口(东向)",
+        "type": "地名地址信息;交通地名;城市快速路入口",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.946678,
+          28.633999
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾高架路入口(西向)",
+        "type": "地名地址信息;交通地名;城市快速路入口",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.929959,
+          28.636952
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路与施尧路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.901116,
+          28.636286
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "桃花南路高架入口(南一环路方向)",
+        "type": "地名地址信息;交通地名;城市快速路入口",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.867115,
+          28.616527
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "桃花南路高架出口(东北向)",
+        "type": "地名地址信息;交通地名;城市快速路出口",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.874864,
+          28.622352
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾高架路",
+        "type": "地名地址信息;交通地名;道路名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.920145,
+          28.636383
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾高架路入口(洪腾高架路方向)",
+        "type": "地名地址信息;交通地名;城市快速路入口",
+        "address": "青山湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.964209,
+          28.634219
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "金山大道高架",
+        "type": "地名地址信息;交通地名;道路名",
+        "address": "新建区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.898201,
+          28.760211
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与洪都大道快速路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.917033,
+          28.636978
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾高架路入口(天祥大道方向)",
+        "type": "地名地址信息;交通地名;城市快速路入口",
+        "address": "青山湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.022981,
+          28.623803
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾高架路出口(东一环路南向)",
+        "type": "地名地址信息;交通地名;城市快速路出口",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.917053,
+          28.636575
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "金山大道高架入口(杨家湖互通方向)",
+        "type": "地名地址信息;交通地名;城市快速路入口",
+        "address": "红谷滩区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.888556,
+          28.736542
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "九洲大道高架快速路出口与洪都南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.916796,
+          28.635831
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "蛟桥高架桥",
+        "type": "地名地址信息;交通地名;立交桥",
+        "address": "新建区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.849996,
+          28.767488
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南环高架桥",
+        "type": "地名地址信息;交通地名;道路名",
+        "address": "南昌县",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.941645,
+          28.532052
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌富山高架桥",
+        "type": "地名地址信息;交通地名;立交桥",
+        "address": "南昌县",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.86084,
+          28.512383
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "金山大道高架",
+        "type": "地名地址信息;交通地名;立交桥",
+        "address": "红谷滩区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.887078,
+          28.733656
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "桃花南路高架",
+        "type": "地名地址信息;交通地名;立交桥|地名地址信息;交通地名;道路名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.866169,
+          28.615452
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾高架路入口(东向)",
+        "type": "地名地址信息;交通地名;城市快速路入口",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.920462,
+          28.636233
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾高架路入口(洪腾高架路方向)",
+        "type": "地名地址信息;交通地名;城市快速路入口",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.93618,
+          28.636172
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "昌南高架桥",
+        "type": "地名地址信息;交通地名;立交桥",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.927162,
+          28.601846
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾高架路",
+        "type": "地名地址信息;交通地名;道路名",
+        "address": "青山湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.979994,
+          28.630825
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "桃花南路高架",
+        "type": "地名地址信息;交通地名;立交桥",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.877875,
+          28.62684
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南环高架桥",
+        "type": "地名地址信息;交通地名;桥",
+        "address": "南昌县",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.910504,
+          28.531134
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾高架",
+        "type": "地名地址信息;交通地名;立交桥",
+        "address": "青山湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.980367,
+          28.632981
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾高架",
+        "type": "地名地址信息;交通地名;立交桥",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.931401,
+          28.636907
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "中国电信(胜利南路创曼店)",
+        "type": "购物服务;家电电子卖场;手机销售",
+        "address": "胜利南路",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.258616,
+          28.358902
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "名门布艺",
+        "type": "购物服务;家居建材市场;布艺市场",
+        "address": "洪腾高架路入口与慈母路交叉口东240米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.002067,
+          28.62505
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "伊夏小店",
+        "type": "购物服务;便民商店/便利店;便民商店/便利店",
+        "address": "东一环路与洪腾高架路出口交叉口东北60米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.917255,
+          28.637583
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "鹰卫浴",
+        "type": "购物服务;家居建材市场;厨卫市场",
+        "address": "桃花南路与桃花南路高架入口交叉口东100米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.879675,
+          28.627825
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "LG电器南昌店",
+        "type": "购物服务;家电电子卖场;家电电子卖场",
+        "address": "桃花南路与桃花南路高架入口交叉口东南140米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.879896,
+          28.627041
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "西湖区菲凡家居店",
+        "type": "购物服务;家居建材市场;家居建材市场",
+        "address": "桃花南路与桃花南路高架入口交叉口东南100米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.879425,
+          28.627075
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌瑾谦家居有限公司",
+        "type": "购物服务;家居建材市场;家居建材市场",
+        "address": "桃花南路与桃花南路高架入口交叉口东南140米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.879915,
+          28.627021
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "家居购物中心",
+        "type": "购物服务;购物相关场所;购物相关场所",
+        "address": "博学路与洪腾高架路交叉口南140米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.942996,
+          28.633255
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "潮童世界童鞋专卖",
+        "type": "购物服务;专卖店;儿童用品店",
+        "address": "解放东路与517省道交叉口西120米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.99532,
+          28.627161
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "昌东大道与昌雄路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青山湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.980672,
+          28.630603
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "爱好文具",
+        "type": "购物服务;文化用品店;文化用品店",
+        "address": "罗家镇慈母路动漫双语幼儿园后",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.99965,
+          28.627386
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洋河蓝色经典(兴华路店)",
+        "type": "购物服务;专卖店;专营店",
+        "address": "长堎公交站垃圾站对面",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.828257,
+          28.679417
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "桃花南路与清流路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.867009,
+          28.616715
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "新溪桥路与石桥路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青山湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.956263,
+          28.634106
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "桃花南路与瑞虎路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.879278,
+          28.628732
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "新溪桥路与青渠路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.952148,
+          28.634196
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "桃花南路与莺歌路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.881365,
+          28.635174
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "舒达智能床(九洲大街店)",
+        "type": "购物服务;家居建材市场;家居建材市场",
+        "address": "桃花南路与桃花南路高架入口交叉口东南140米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.879824,
+          28.627102
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "秋水广场出口(金山大道高架南向)",
+        "type": "地名地址信息;交通地名;城市快速路出口",
+        "address": "红谷滩区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.887975,
+          28.73616
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "东升大道出口(洪腾高架路西向)",
+        "type": "地名地址信息;交通地名;城市快速路出口",
+        "address": "青山湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.972104,
+          28.63349
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "桃花南路与祥狮路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.88049,
+          28.630886
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "黑皮平价批发超市",
+        "type": "购物服务;购物相关场所;购物相关场所",
+        "address": "洪腾高架路出口与洪腾高架路入口交叉口北200米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.982229,
+          28.631905
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "泰州路",
+        "type": "地名地址信息;交通地名;道路名",
+        "address": "青山湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.001413,
+          28.62742
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "春红童装满月用品店",
+        "type": "购物服务;专卖店;儿童用品店",
+        "address": "洪腾大道与解放东路交叉口南100米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.995337,
+          28.627233
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "远东物资供应站(江西晶体建材厂生活区店)",
+        "type": "购物服务;家居建材市场;建材五金市场",
+        "address": "九洲大道高架快速路与九洲大道高架快速路入口交叉口北50米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.901489,
+          28.6366
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "席玛卫浴(朝阳农场九洲大道高架快速路店)",
+        "type": "购物服务;家居建材市场;厨卫市场",
+        "address": "抚生路喜盈门一期一楼1070号",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.870275,
+          28.640575
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "洪腾大道辅路",
+        "type": "地名地址信息;交通地名;道路名",
+        "address": "青山湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.992069,
+          28.628641
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "昌南大道中出口(桃花南路高架西南向)",
+        "type": "地名地址信息;交通地名;城市快速路出口",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.865518,
+          28.614144
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "江南食杂店",
+        "type": "购物服务;便民商店/便利店;便民商店/便利店",
+        "address": "民和镇三中垃圾中转站小区里面",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.901168,
+          28.672122
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "云卿路与桃花南路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.865996,
+          28.614701
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "小李百货(前进路店)",
+        "type": "购物服务;便民商店/便利店;便民商店/便利店",
+        "address": "前进路(商城垃圾站隔壁)",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.556434,
+          28.840779
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "蜂贝儿好物",
+        "type": "购物服务;购物相关场所;购物相关场所",
+        "address": "解放东路与517省道交叉口西120米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.995378,
+          28.627381
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "琪玲屋",
+        "type": "购物服务;购物相关场所;购物相关场所",
+        "address": "解放东路与517省道交叉口西100米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.995475,
+          28.627525
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "格莱斯瓷砖(总店)",
+        "type": "购物服务;家居建材市场;建材五金市场",
+        "address": "城南大道与洪腾高架路出口交叉口南120米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.946187,
+          28.632861
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "中大集团",
+        "type": "购物服务;超级市场;超市",
+        "address": "白兰路与洪腾大道交叉口西南20米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.987249,
+          28.629473
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "罗家小屋",
+        "type": "购物服务;服装鞋帽皮具店;服装鞋帽皮具店|生活服务;生活服务场所;生活服务场所",
+        "address": "解放东路与谢埠路交叉口西140米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.995233,
+          28.627686
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "西维娅晶晶美业",
+        "type": "购物服务;购物相关场所;购物相关场所",
+        "address": "罗家镇机修生活区旁",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.995256,
+          28.627747
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌经济技术开发区出口(金山大道高架北向)",
+        "type": "地名地址信息;交通地名;城市快速路出口",
+        "address": "红谷滩区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.889411,
+          28.743141
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "天祥南大道出口(洪腾高架路西向)",
+        "type": "地名地址信息;交通地名;城市快速路出口",
+        "address": "青山湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.01549,
+          28.624831
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "G6021杭长高速入口(杭州方向)",
+        "type": "地名地址信息;交通地名;高速路入口",
+        "address": "南昌县",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.02178,
+          28.523012
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "桃花路立交",
+        "type": "地名地址信息;交通地名;立交桥|地名地址信息;交通地名;道路名",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.865448,
+          28.613337
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "麒麟屋",
+        "type": "购物服务;服装鞋帽皮具店;服装鞋帽皮具店",
+        "address": "解放东路旭日幼儿园东侧约120米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.995391,
+          28.627709
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "南昌大道中出口(桃花南路高架西南向)",
+        "type": "地名地址信息;交通地名;城市快速路出口",
+        "address": "西湖区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.866928,
+          28.616679
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "城南路与新溪桥路交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.946863,
+          28.634131
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "新溪桥路与高新南大道交叉口",
+        "type": "地名地址信息;交通地名;路口名",
+        "address": "青云谱区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.955528,
+          28.634099
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "玥玛锁具",
+        "type": "购物服务;家居建材市场;建材五金市场",
+        "address": "解放东路与035县道交叉口西50米",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.99645,
+          28.628126
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "昌西大道出口(金山大道高架西南向)",
+        "type": "地名地址信息;交通地名;城市快速路出口",
+        "address": "新建区",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.899653,
+          28.761126
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "爱美丽化妆品(解放东路店)",
+        "type": "购物服务;个人用品/化妆品店;其它个人用品店",
+        "address": "罗家镇罗家集罗岗路",
+        "coord_type": "GCJ02_Raw"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.995319,
+          28.627427
+        ]
+      }
+    }
+  ]
+}
