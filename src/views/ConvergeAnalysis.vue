@@ -104,17 +104,38 @@
           </button>
         </div>
 
+        <!-- 图层要素图例 -->
         <div class="map-legend-overlay">
-          <div class="legend-title">{{ showEvaluationMode ? '选址综合评分 (分级透视)' : '医疗资源密度' }}</div>
+          <div class="legend-title">地图要素说明</div>
+          <div class="legend-items">
+            <div class="legend-row">
+              <div class="legend-dot" style="width:8px;height:8px;border-radius:50%;background:#22d3ee;border:1px solid #fff;"></div>
+              <span>医疗设施</span>
+            </div>
+            <div class="legend-row">
+              <div class="legend-dot" style="width:8px;height:8px;background:#10b981;border:1px solid #fff;"></div>
+              <span>公园绿地</span>
+            </div>
+            <div class="legend-row">
+              <div class="legend-dot" style="width:12px;height:5px;background:rgba(56,189,248,0.3);border:1px dashed #38bdf8;"></div>
+              <span>地铁站服务区</span>
+            </div>
+            <div class="legend-row">
+              <div class="legend-dot" style="width:12px;height:5px;background:rgba(239,68,68,0.2);border:1px dashed #ef4444;"></div>
+              <span>高架/快速路影响带</span>
+            </div>
+          </div>
+          <div class="legend-divider"></div>
+          <div class="legend-title">{{ showEvaluationMode ? '选址评分等级' : '医疗覆盖密度' }}</div>
           <div class="legend-bars" v-if="!showEvaluationMode">
             <span><div class="bar bar-low"></div> 稀缺</span>
             <span><div class="bar bar-mid"></div> 覆盖</span>
             <span><div class="bar bar-high"></div> 充沛</span>
           </div>
           <div class="legend-bars" v-else>
-            <span><div class="bar" style="background: rgba(239, 68, 68, 0.2); border: 2px solid #ef4444;"></div> C级高危</span>
-            <span><div class="bar" style="background: rgba(245, 158, 11, 0.2); border: 2px solid #f59e0b;"></div> B级备选</span>
-            <span><div class="bar" style="background: rgba(34, 211, 238, 0.2); border: 2px solid #22d3ee;"></div> A级优选</span>
+            <span><div class="bar" style="background: rgba(239, 68, 68, 0.2); border: 2px solid #ef4444;"></div> 不宜建设</span>
+            <span><div class="bar" style="background: rgba(245, 158, 11, 0.2); border: 2px solid #f59e0b;"></div> 备选区域</span>
+            <span><div class="bar" style="background: rgba(34, 211, 238, 0.2); border: 2px solid #22d3ee;"></div> 优选区域</span>
           </div>
         </div>
       </section>
@@ -126,7 +147,7 @@
 import { onMounted, ref } from 'vue';
 import * as turf from '@turf/turf';
 import facilityData from '../data/facilities.json';
-import parkData from '../data/nanchang_parks.json';
+import parkData from '../data/real_parks.json';
 import transitData from '../data/nanchang_transit.json';
 import nimbyData from '../data/nanchang_nimby.json';
 
@@ -209,10 +230,12 @@ const handleZoomTheme = (zoom) => {
 };
 
 let map = null;
+let facilityMarkers = [];
 let parkMarkers = [];
 let transitMarkers = [];
 let nimbyMarkers = [];
-let infoWindow = null; 
+let infoWindow = null;
+let transitPolygons = []; // 地铁站服务区面（用于评分）
 
 onMounted(() => {
   const initMap = () => {
@@ -242,10 +265,10 @@ onMounted(() => {
         });
       });
       
-      infoWindow = new AMap.InfoWindow({ offset: new AMap.Pixel(0, -10), closeWhenClickMap: true });
+      infoWindow = new AMap.InfoWindow({ offset: new AMap.Pixel(0, -30), closeWhenClickMap: true });
       map.on('complete', () => {
+        renderEnvironmentLayers();  // 先生成面（填充 transitPolygons），再评分
         startAnalysis();
-        renderEnvironmentLayers();
       });
     } else {
       setTimeout(initMap, 200);
@@ -341,10 +364,13 @@ const executeAnalysis = (bbox) => {
     if (medicalCount > 0) coveredCells++;
 
     const pd = getCountInRange(parkFeatures, currentCenterPt, 0.8);
-    const td = getCountInRange(transitFeatures, currentCenterPt, 0.8);
+    // 地铁改面状评分：网格中心落在几个站点服务区内（一站点只算一次）
+    const stationCount = transitPolygons.filter(p => {
+      try { return turf.booleanPointInPolygon(currentCenterPt, p); } catch (e) { return false; }
+    }).length;
     const nd = getCountInRange(nimbyFeatures, currentCenterPt, 1.0);
-    
-    let score = 65 + Math.min(30, (pd.count || 0) * 4 * weightPark.value) + Math.min(30, (td.count || 0) * 5 * weightTransit.value) - ((nd.count || 0) * 15 * weightNimby.value);
+
+    let score = 65 + Math.min(30, (pd.count || 0) * 4 * weightPark.value) + Math.min(30, stationCount * 15 * weightTransit.value) - ((nd.count || 0) * 15 * weightNimby.value);
     if (ptsInGrid.features.some(f => f.properties.name.includes('拟建'))) score += 15;
     if (nd.minDist < 0.2) score -= 40 * weightNimby.value;
     score = Math.max(0, Math.min(100, Math.floor(score)));
@@ -383,7 +409,7 @@ const executeAnalysis = (bbox) => {
       
       if (showEvaluationMode.value) {
         let parkDesc = pd.count > 0 ? `<span style="color:#10b981;">优 (${pd.count}处)</span>` : `<span style="color:#94a3b8;">缺</span>`;
-        let transitDesc = td.count > 0 ? `<span style="color:#38bdf8;">佳 (${td.count}处)</span>` : `<span style="color:#f59e0b;">弱</span>`;
+        let transitDesc = stationCount > 0 ? `<span style="color:#38bdf8;">覆盖 (${stationCount}个站)</span>` : `<span style="color:#f59e0b;">未覆盖</span>`;
         let nimbyDesc = nd.count > 0 ? `<span style="color:#ef4444;">附近 ${(nd.minDist * 1000).toFixed(0)}m 有高架/快速路</span>` : `<span style="color:#10b981;">无道路干扰</span>`;
         const advice = score >= 80 ? '<div style="color: #22d3ee; background: rgba(34,211,238,0.1); padding:6px; border-radius:4px;">🔥 A级优选：极度适宜建设</div>'
                      : (score >= 60 ? '<div style="color: #f59e0b; background: rgba(245,158,11,0.1); padding:6px; border-radius:4px;">⚠️ B级备选：需增设隔音/绿化</div>'
@@ -516,97 +542,122 @@ const undoLastAction = () => {
 const renderEnvironmentLayers = () => {
   if (!map) return;
   
-  // ⚡【核心优化】：如果 markers 已经存在，说明这是 startAnalysis() 触发的网格重绘。
-  // 我们直接退出函数，绝对不重复创建 Marker，这样能完美保持用户点击右上角开关的隐藏/显示状态。
+  // 如果 markers 已存在则跳过（防止重复创建）
   if (parkMarkers.length > 0 || transitMarkers.length > 0 || nimbyMarkers.length > 0) {
     return;
   }
 
-  // 🌳 1. 渲染 公园设施气泡 (生态疗愈)
+  // 🏥 0. 医疗设施：青色圆点
+  if (facilityData && facilityMarkers.length === 0) {
+    facilityData.forEach(item => {
+      const dot = new AMap.CircleMarker({
+        center: [item.lng, item.lat],
+        radius: 4,
+        fillColor: '#22d3ee',
+        fillOpacity: 0.9,
+        strokeColor: '#020617',
+        strokeWeight: 1,
+        zIndex: 120,
+        title: item.name
+      });
+      dot.setMap(map);
+      facilityMarkers.push(dot);
+    });
+  }
+
+  // 🌳 1. 公园：绿色实心方块（数据源已换为 real_parks.json，全部是真正公园）
   if (parkFeatures && parkFeatures.features) {
     parkFeatures.features.forEach(item => {
       const [lng, lat] = item.geometry.coordinates;
       const marker = new AMap.Marker({
         position: [lng, lat],
-        content: `<div class="poi-marker poi-park" title="${item.properties.name || ''}">🌳</div>`,
-        offset: new AMap.Pixel(-10, -10),
-        zIndex: 90
+        content: '<div style="width:10px;height:10px;background:#10b981;border:2px solid #fff;display:inline-block;font-size:0;line-height:0;vertical-align:top;" title="' + (item.properties.name || '') + '"></div>',
+        offset: new AMap.Pixel(-6, -6),
+        zIndex: 91
       });
       marker.setMap(map);
-      parkMarkers.push(marker); // 正确挂载到全局数组
+      parkMarkers.push(marker);
     });
   }
 
-  // 🚇 2. 渲染 地铁站点凸包面与线
-// 🚇 2. 【重构】地铁站点精细化视觉标识（中心标 + 出口微点 + 连通 footprint）
+  // 🚇 2. 地铁：按站聚合为服务区面（凸包 + 分级缓冲）
+  transitPolygons = [];
   if (transitFeatures && transitFeatures.features) {
     const stationGroups = {};
-    
-    // 2.1 重新聚合数据，确保名称清洗干净并附带真实出口
     transitFeatures.features.forEach(item => {
-      const [lng, lat] = item.geometry.coordinates; 
-      const rawName = item.properties.name || "";
-      // 正则清洗：将 "八一广场站(1号口)" 或 "八一广场站-A口" 统一截取为 "八一广场站"
-      let baseName = rawName.split(/地铁站|\(|-/)[0];
+      const [lng, lat] = item.geometry.coordinates;
+      const rawName = item.properties.name || '';
+      // 清洗：统一各种写法 → 纯站名
+      // "高新大道(地铁站)" / "高新大道地铁站出入口" / "高新大道地铁站1号口" → "高新大道站"
+      let baseName = rawName
+        .replace(/[\(\（][^)）]*[\)\）]/g, '')   // 去 (地铁站) (1号口) 等
+        .replace(/地铁站/g, '')                   // 去 "地铁站"
+        .replace(/\d+号口|[A-Z]口/g, '')          // 去 "1号口" "A口"
+        .replace(/出入口/g, '')                   // 去 "出入口"
+        .trim();
       if (!baseName.endsWith('站')) baseName += '站';
-      
-      if (!stationGroups[baseName]) {
-        stationGroups[baseName] = [];
-      }
-      stationGroups[baseName].push({
-        coords: [lng, lat],
-        fullName: rawName
-      });
+      if (!stationGroups[baseName]) stationGroups[baseName] = [];
+      stationGroups[baseName].push([lng, lat]);
     });
 
-    // 2.2 遍历每个聚合后的站点进行多层级渲染
-    Object.keys(stationGroups).forEach(stationName => {
-      const exits = stationGroups[stationName];
-      const coordArray = exits.map(e => e.coords);
+    Object.entries(stationGroups).forEach(([stationName, coords]) => {
+      // 出口越多 → 缓冲半径越大（300m/350m/400m）
+      const exitCount = coords.length;
+      let bufferKm = 0.3;
+      if (exitCount >= 4) bufferKm = 0.4;
+      else if (exitCount >= 2) bufferKm = 0.35;
 
-      // 利用 Turf.js 计算所有出口的中心点，作为该地铁站的“正心”
-      const ptsCollection = turf.featureCollection(coordArray.map(c => turf.point(c)));
-      const centerPt = turf.center(ptsCollection).geometry.coordinates;
+      let serviceArea;
+      if (coords.length >= 2) {
+        try {
+          const hull = turf.convex(turf.featureCollection(coords.map(c => turf.point(c))));
+          if (hull) serviceArea = turf.buffer(hull, bufferKm, { units: 'kilometers' });
+        } catch (e) {}
+      }
+      if (!serviceArea) {
+        // 单出口或凸包失败 → 直接缓冲点
+        serviceArea = turf.buffer(turf.point(coords[0]), bufferKm, { units: 'kilometers' });
+      }
 
-      // 核心层 A：绘制站点主图标 (用于宏观辨识)
-      const centerMarker = new AMap.Marker({
-        position: centerPt,
-        content: `<div class="subway-main-icon" title="${stationName}">🚇</div>`,
-        offset: new AMap.Pixel(-12, -12),
-        zIndex: 100 // 层级调高，防止被网格压住
-      });
-      centerMarker.setMap(map);
-      transitMarkers.push(centerMarker);
+      transitPolygons.push(serviceArea);
 
-      // 核心层 B：绘制每一个具体的出口微点 (用于微空间精准选址)
-      exits.forEach(exit => {
-        const exitMarker = new AMap.Marker({
-          position: exit.coords,
-          content: `<div class="subway-exit-dot" title="${exit.fullName}"></div>`,
-          offset: new AMap.Pixel(-4, -4),
-          zIndex: 105
+      // 绘制服务区面
+      try {
+        const polygon = new AMap.Polygon({
+          path: serviceArea.geometry.coordinates[0],
+          fillColor: '#38bdf8',
+          fillOpacity: 0.08,
+          strokeColor: '#38bdf8',
+          strokeWeight: 1,
+          strokeOpacity: 0.5,
+          strokeStyle: 'dashed',
+          zIndex: 55,
+          bubble: true
         });
-        exitMarker.setMap(map);
-        transitMarkers.push(exitMarker);
-      });
+        polygon.setMap(map);
+        transitMarkers.push(polygon);
 
-      const walkRadius = 300;
-      const coverageCircle = new AMap.Circle({
-        center: centerPt,
-        radius: walkRadius, // 单位：米
-        fillColor: '#0ea5e9',
-        // 使用极低的透明度，在暗色底图上形成优雅的“光晕”效果，且绝不会遮挡底层网格
-        fillOpacity: 0.04, 
-        strokeColor: '#38bdf8',
-        strokeWeight: 1,
-        strokeStyle: 'dashed',
-        strokeOpacity: 0.6,
-        zIndex: 88,
-        bubble: true // 允许鼠标事件穿透到下方的分析网格
-      });
-      
-      coverageCircle.setMap(map);
-      transitMarkers.push(coverageCircle);
+        // 站名标签（面中心）
+        const center = turf.center(serviceArea).geometry.coordinates;
+        const label = new AMap.Text({
+          text: stationName.replace('站', ''),
+          position: [center[0], center[1]],
+          style: {
+            'background-color': 'rgba(15,23,42,0.8)',
+            'border-color': '#38bdf8',
+            'border-width': '1px',
+            'border-style': 'solid',
+            'border-radius': '3px',
+            'padding': '2px 6px',
+            'font-size': '10px',
+            'color': '#bae6fd',
+            'text-align': 'center',
+          },
+          zIndex: 110
+        });
+        label.setMap(map);
+        transitMarkers.push(label);
+      } catch (e) {}
     });
   }
 
@@ -1018,9 +1069,13 @@ const renderEnvironmentLayers = () => {
   font-size: 11px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.4);
 }
-.legend-title { color: #94a3b8; font-weight: 500; margin-bottom: 6px; }
+.legend-title { color: #94a3b8; font-weight: 500; margin-bottom: 6px; font-size: 11px; }
+.legend-items { margin-bottom: 2px; }
+.legend-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; font-size: 11px; color: #cbd5e1; }
+.legend-dot { flex-shrink: 0; }
+.legend-divider { border-top: 1px solid rgba(255,255,255,0.08); margin: 8px 0; }
 .legend-bars { display: flex; gap: 12px; }
-.legend-bars span { display: flex; align-items: center; gap: 4px; color: #cbd5e1; }
+.legend-bars span { display: flex; align-items: center; gap: 4px; color: #cbd5e1; font-size: 11px; }
 .bar { width: 14px; height: 7px; border-radius: 1px; display: inline-block; }
 .bar-low { background: #334155; border: 1px solid rgba(255,255,255,0.1); }
 .bar-mid { background: #f59e0b; }

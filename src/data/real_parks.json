@@ -1,0 +1,3286 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.859624,
+          28.675454
+        ]
+      },
+      "properties": {
+        "id": "B031704TDD",
+        "name": "赣江市民公园",
+        "address": "红谷中大道1614号",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.838792,
+          28.690542
+        ]
+      },
+      "properties": {
+        "id": "B0G064MCII",
+        "name": "马兰圩湿地公园",
+        "address": "礼步湖绿地中央公园以东",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.830211,
+          28.68694
+        ]
+      },
+      "properties": {
+        "id": "B0FFH740HY",
+        "name": "礼步湖公园",
+        "address": "长堎镇解放路237号",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.897626,
+          28.678562
+        ]
+      },
+      "properties": {
+        "id": "B031704QZN",
+        "name": "八一公园",
+        "address": "百花洲街道民德路106号",
+        "typecode": "110101|200300",
+        "adname": "东湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.893612,
+          28.687512
+        ]
+      },
+      "properties": {
+        "id": "B031704BW1",
+        "name": "阳明公园",
+        "address": "环湖路193号(阳明公园地铁站1号口步行210米)",
+        "typecode": "110101",
+        "adname": "东湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.846979,
+          28.697067
+        ]
+      },
+      "properties": {
+        "id": "B0L6HHG0QZ",
+        "name": "樱花园",
+        "address": "金融大街11-112号",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.832459,
+          28.698963
+        ]
+      },
+      "properties": {
+        "id": "B0H195K558",
+        "name": "龙潭公园",
+        "address": "凌波路与马兰路交叉口西20米",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.895588,
+          28.67285
+        ]
+      },
+      "properties": {
+        "id": "B031703BC6",
+        "name": "孺子亭公园",
+        "address": "渊明南路65号(八一馆地铁站8号口步行480米)",
+        "typecode": "110101",
+        "adname": "西湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.854162,
+          28.665637
+        ]
+      },
+      "properties": {
+        "id": "B03170SW26",
+        "name": "红谷桃园",
+        "address": "南斯友好路与红谷中大道交叉口东300米",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.891083,
+          28.664347
+        ]
+      },
+      "properties": {
+        "id": "B0317064ZP",
+        "name": "抚河公园",
+        "address": "抚河中路41号",
+        "typecode": "110101",
+        "adname": "西湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.86234,
+          28.687461
+        ]
+      },
+      "properties": {
+        "id": "B0G1ZG3QS3",
+        "name": "中顺公园",
+        "address": "赣江中大道",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.87394,
+          28.692686
+        ]
+      },
+      "properties": {
+        "id": "B03170SYSE",
+        "name": "桂馥",
+        "address": "赣江中大道与飞虹路交叉口东北160米",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.85465,
+          28.661499
+        ]
+      },
+      "properties": {
+        "id": "B0FFHF4X8W",
+        "name": "南昌法治文化公园",
+        "address": "赣江南大道(江西省通信管理局对面)",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.84955,
+          28.676328
+        ]
+      },
+      "properties": {
+        "id": "B0FFL6PU4U",
+        "name": "三风主题公园",
+        "address": "红谷滩区丽景路南昌师范附属实验小学(红谷滩校区)",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.91454,
+          28.680514
+        ]
+      },
+      "properties": {
+        "id": "B031701G4U",
+        "name": "人民公园",
+        "address": "大院街道福州路96号",
+        "typecode": "110101",
+        "adname": "东湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.838308,
+          28.689808
+        ]
+      },
+      "properties": {
+        "id": "B0L1LSE1W9",
+        "name": "新建区禁毒文化主题公园",
+        "address": "新建马兰圩湿地公园",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.835564,
+          28.636985
+        ]
+      },
+      "properties": {
+        "id": "B0FFFEIKK3",
+        "name": "红谷滩湿地公园",
+        "address": "赣江南大道东",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.872129,
+          28.63309
+        ]
+      },
+      "properties": {
+        "id": "B0LB9AWDN2",
+        "name": "九洲公园",
+        "address": "丹桂路与九洲大街交叉口东200米",
+        "typecode": "110101",
+        "adname": "西湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.879389,
+          28.736286
+        ]
+      },
+      "properties": {
+        "id": "B0K045TY2R",
+        "name": "鱼目山公园",
+        "address": "经开大道与投书浦路交叉口西北420米",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.888472,
+          28.726085
+        ]
+      },
+      "properties": {
+        "id": "B0I1NA4GXW",
+        "name": "赣江市民公园五期",
+        "address": "赣江北大道与丰园路交叉口东南240米",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.83039,
+          28.62839
+        ]
+      },
+      "properties": {
+        "id": "B03170S58D",
+        "name": "滨江月季园",
+        "address": "卧龙路与赣江南大道交汇处东",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.927412,
+          28.684473
+        ]
+      },
+      "properties": {
+        "id": "B03170078D",
+        "name": "湖滨公园(南京东路)",
+        "address": "南京东路2号",
+        "typecode": "110101",
+        "adname": "青山湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.885181,
+          28.63063
+        ]
+      },
+      "properties": {
+        "id": "B0HGNDLKF1",
+        "name": "玩美公园",
+        "address": "真君路888号",
+        "typecode": "110101",
+        "adname": "西湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.889755,
+          28.624243
+        ]
+      },
+      "properties": {
+        "id": "B0FFG9UIYS",
+        "name": "象湖湿地公园",
+        "address": "芳湖路",
+        "typecode": "110101",
+        "adname": "西湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.913945,
+          28.690992
+        ]
+      },
+      "properties": {
+        "id": "B031703Z4W",
+        "name": "贤士湖公园",
+        "address": "贤士二路260号",
+        "typecode": "110101",
+        "adname": "东湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.827329,
+          28.669092
+        ]
+      },
+      "properties": {
+        "id": "B0J2AZ4QH8",
+        "name": "公园绿地寻园",
+        "address": "岭口路与科苑路交叉口东140米",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.850715,
+          28.636064
+        ]
+      },
+      "properties": {
+        "id": "B0GR5C29FQ",
+        "name": "生态口袋湿地公园",
+        "address": "朝阳大桥以南",
+        "typecode": "110101",
+        "adname": "西湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.799864,
+          28.647509
+        ]
+      },
+      "properties": {
+        "id": "B0FFJ4NNFM",
+        "name": "前湖公园",
+        "address": "环湖路与莲花路交叉口西北80米",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.906919,
+          28.690988
+        ]
+      },
+      "properties": {
+        "id": "B031702Q7X",
+        "name": "玉带河北支公园",
+        "address": "永外正街229-1号附近",
+        "typecode": "110101",
+        "adname": "东湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.82056,
+          28.655392
+        ]
+      },
+      "properties": {
+        "id": "B0MBK6OK74",
+        "name": "小微湿地",
+        "address": "南昌航空大学-南航25栋314附近",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.912939,
+          28.67928
+        ]
+      },
+      "properties": {
+        "id": "B03170UFCT",
+        "name": "人民公园-园中园",
+        "address": "福州路96号人民公园里",
+        "typecode": "110101",
+        "adname": "东湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.906856,
+          28.639564
+        ]
+      },
+      "properties": {
+        "id": "B0JGD7IYOX",
+        "name": "京3+文化公园",
+        "address": "青云谱京山北路32号(京家山地铁站3号口旁)",
+        "typecode": "110101",
+        "adname": "青云谱区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.896099,
+          28.67168
+        ]
+      },
+      "properties": {
+        "id": "B0LR9APLJ2",
+        "name": "西湖区禁毒主题公园",
+        "address": "孺子路与算子桥街交叉口西北20米",
+        "typecode": "110101",
+        "adname": "西湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.843509,
+          28.692463
+        ]
+      },
+      "properties": {
+        "id": "B0JBUADAEQ",
+        "name": "会展路游园",
+        "address": "会展路",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.858708,
+          28.624537
+        ]
+      },
+      "properties": {
+        "id": "B0GRD5IBKQ",
+        "name": "南昌市西湖区足球文化主题公园",
+        "address": "抚生南路(丁家洲地铁站1号口步行360米)",
+        "typecode": "110101",
+        "adname": "西湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.876094,
+          28.666756
+        ]
+      },
+      "properties": {
+        "id": "B0FFHCOU3L",
+        "name": "文体小游园",
+        "address": "团结路46号",
+        "typecode": "110101",
+        "adname": "西湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.932047,
+          28.703967
+        ]
+      },
+      "properties": {
+        "id": "B0MAFGRTMT",
+        "name": "青山湖西岸公园",
+        "address": "湖滨西路1号青山湖风景区内(北侧)",
+        "typecode": "110101",
+        "adname": "东湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.834364,
+          28.63488
+        ]
+      },
+      "properties": {
+        "id": "B0K3H95LUW",
+        "name": "红谷滩长天廉文化主题公园",
+        "address": "赣江南大道东红谷滩湿地公园(西南角)",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.825662,
+          28.685387
+        ]
+      },
+      "properties": {
+        "id": "B0FFKCRQGR",
+        "name": "礼步湖公园-法治主题公园",
+        "address": "长堎镇解放路237号礼步湖公园内(西侧)",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.898234,
+          28.653505
+        ]
+      },
+      "properties": {
+        "id": "B03170SX70",
+        "name": "抚河公园",
+        "address": "洪城路288号",
+        "typecode": "110101",
+        "adname": "西湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.862874,
+          28.696793
+        ]
+      },
+      "properties": {
+        "id": "B0L2SU6FJY",
+        "name": "红谷滩区禁毒主题公园",
+        "address": "红谷滩区金融大街和春晖路交叉口",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.797234,
+          28.70968
+        ]
+      },
+      "properties": {
+        "id": "B0FFFAI14K",
+        "name": "龙潭乐活公园",
+        "address": "昌北区榆林路20号",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.942119,
+          28.69766
+        ]
+      },
+      "properties": {
+        "id": "B0317040F1",
+        "name": "燕鸣岛",
+        "address": "湖景花园小区对面",
+        "typecode": "110101",
+        "adname": "青山湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.891751,
+          28.682092
+        ]
+      },
+      "properties": {
+        "id": "B0FFI49KEI",
+        "name": "南昌金安福园人文纪念公园",
+        "address": "建德观街与渊明北路交叉口西南20米",
+        "typecode": "110101",
+        "adname": "东湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.925883,
+          28.691829
+        ]
+      },
+      "properties": {
+        "id": "B03170071F",
+        "name": "相思林公园",
+        "address": "湖滨西路1号青山湖风景区",
+        "typecode": "110101",
+        "adname": "东湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.925617,
+          28.634904
+        ]
+      },
+      "properties": {
+        "id": "B0317030BK",
+        "name": "洪都公园",
+        "address": "新溪桥路339号",
+        "typecode": "110101",
+        "adname": "青云谱区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.895621,
+          28.673446
+        ]
+      },
+      "properties": {
+        "id": "B0FFHMOI3T",
+        "name": "孺子亭公园-廉政主题公园",
+        "address": "西湖街道西湖路孺子亭公园北门",
+        "typecode": "110101",
+        "adname": "西湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.891739,
+          28.676291
+        ]
+      },
+      "properties": {
+        "id": "B0G0PLEZLL",
+        "name": "推理公园",
+        "address": "中山路百盛太平洋商务大厦11楼09号",
+        "typecode": "110101",
+        "adname": "东湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.834851,
+          28.74862
+        ]
+      },
+      "properties": {
+        "id": "B0G26RNHS4",
+        "name": "南昌经开中央花园",
+        "address": "紫荆路与绿冠路交叉口东北80米",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.781773,
+          28.68688
+        ]
+      },
+      "properties": {
+        "id": "B0JDHC5LHV",
+        "name": "欣悦湖公园",
+        "address": "文化中心西路与文化中心南路交叉口西360米",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.88044,
+          28.60812
+        ]
+      },
+      "properties": {
+        "id": "B0FFFAHWCD",
+        "name": "象湖南湿地公园",
+        "address": "芳湖路",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.908767,
+          28.647179
+        ]
+      },
+      "properties": {
+        "id": "B031705A7Z",
+        "name": "豫章园",
+        "address": "建设西路国家电网旁",
+        "typecode": "110101",
+        "adname": "青云谱区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.822522,
+          28.677049
+        ]
+      },
+      "properties": {
+        "id": "B0G26OQ7YT",
+        "name": "红港公园",
+        "address": "东鲁路与邹家三路交叉口东60米",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.815715,
+          28.695662
+        ]
+      },
+      "properties": {
+        "id": "B0KUB7OT42",
+        "name": "广麦路游园",
+        "address": "广麦路与文化大道交叉口南100米",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.891018,
+          28.685141
+        ]
+      },
+      "properties": {
+        "id": "B0J1HA6D4R",
+        "name": "箭道巷口袋公园",
+        "address": "叠山路与箭道巷交叉口(墩子塘地铁站4号口步行370米)",
+        "typecode": "110101",
+        "adname": "东湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.800825,
+          28.684787
+        ]
+      },
+      "properties": {
+        "id": "B0FFKT20CX",
+        "name": "吾悦公园",
+        "address": "欣悦湖街道长堎大道666号吾悦广场(南昌新建店)",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.774759,
+          28.698774
+        ]
+      },
+      "properties": {
+        "id": "B031704ZJS",
+        "name": "白马寺公园",
+        "address": "白马寺",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.898569,
+          28.69386
+        ]
+      },
+      "properties": {
+        "id": "B0HGNGJOJU",
+        "name": "江药小游园",
+        "address": "爱国东路天奥经纬府邸",
+        "typecode": "110101",
+        "adname": "东湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.819551,
+          28.613744
+        ]
+      },
+      "properties": {
+        "id": "B0K0OZJ42F",
+        "name": "九龙湖消防公园",
+        "address": "赣江南大道1566号",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.888696,
+          28.720644
+        ]
+      },
+      "properties": {
+        "id": "B0I1B938VV",
+        "name": "南昌舰主题园-凤凰州湿地公园",
+        "address": "南昌舰主题园内(北侧)",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.833368,
+          28.600437
+        ]
+      },
+      "properties": {
+        "id": "B0KRK9COVA",
+        "name": "象湖滨江江滩公园",
+        "address": "东岳四路与沿江南大道交叉路口往西北约170米",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.817475,
+          28.625825
+        ]
+      },
+      "properties": {
+        "id": "B0MA4CVC6R",
+        "name": "祥云公园",
+        "address": "生米大桥入口与三清山大道交叉口西南180米",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.946535,
+          28.710833
+        ]
+      },
+      "properties": {
+        "id": "B0FFMDZQLG",
+        "name": "丹霞文体公园",
+        "address": "青山湖大道与丹霞大道交叉口西南120米",
+        "typecode": "110101",
+        "adname": "青山湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.94469,
+          28.708539
+        ]
+      },
+      "properties": {
+        "id": "B0FFGBB0E6",
+        "name": "丹霞岛",
+        "address": "湖滨东路南150米",
+        "typecode": "110101",
+        "adname": "青山湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.788221,
+          28.641072
+        ]
+      },
+      "properties": {
+        "id": "B0J33ZGH9B",
+        "name": "求实湿地公园",
+        "address": "求实路333号",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.962407,
+          28.711644
+        ]
+      },
+      "properties": {
+        "id": "B0HG7SL2DQ",
+        "name": "高处见美好生活公园",
+        "address": "东元路189号",
+        "typecode": "110101",
+        "adname": "青山湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.876427,
+          28.751613
+        ]
+      },
+      "properties": {
+        "id": "B0FFKP5L6C",
+        "name": "高山流水公园",
+        "address": "北山路99号",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.79532,
+          28.5895
+        ]
+      },
+      "properties": {
+        "id": "B0FFH45AJF",
+        "name": "九龙湖公园",
+        "address": "九龙湖管理处南龙蟠街与三清山大道交叉口东北侧",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.816459,
+          28.605323
+        ]
+      },
+      "properties": {
+        "id": "B0I3PLGNNO",
+        "name": "赣江市民公园活力公园",
+        "address": "赣江南大道与康平街交叉口东南40米",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.898204,
+          28.61535
+        ]
+      },
+      "properties": {
+        "id": "B0LKZ7EYHW",
+        "name": "湿地花卉公园",
+        "address": "芳湖路象湖湿地公园(东南角)",
+        "typecode": "110101",
+        "adname": "青云谱区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.943154,
+          28.698396
+        ]
+      },
+      "properties": {
+        "id": "B0LG0L3CC3",
+        "name": "燕鸣岛公园-休闲区",
+        "address": "燕鸣岛(东北角)",
+        "typecode": "110101",
+        "adname": "青山湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.81315,
+          28.587078
+        ]
+      },
+      "properties": {
+        "id": "B0JADME899",
+        "name": "赣江市民公园四期",
+        "address": "赣江南大道辅路与赣州大街交叉口东20米",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.811762,
+          28.686564
+        ]
+      },
+      "properties": {
+        "id": "B0FFMCA6ER",
+        "name": "子实路游园",
+        "address": "同兴路200号",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.803146,
+          28.632255
+        ]
+      },
+      "properties": {
+        "id": "B0KU1MX74G",
+        "name": "口袋公园",
+        "address": "茶园街玉栊苑雅园北面",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.73121,
+          28.705988
+        ]
+      },
+      "properties": {
+        "id": "B0FFME5PAE",
+        "name": "磨盘山森林公园",
+        "address": "八面山路",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.954427,
+          28.690029
+        ]
+      },
+      "properties": {
+        "id": "B03170439J",
+        "name": "休闲公园",
+        "address": "火炬一路与高新二路交叉口东南150米",
+        "typecode": "110101",
+        "adname": "青山湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.912181,
+          28.666316
+        ]
+      },
+      "properties": {
+        "id": "B0FFHU6SMV",
+        "name": "小游园",
+        "address": "丁公路街道丁公路40-1号附近",
+        "typecode": "110101",
+        "adname": "西湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.849494,
+          28.73301
+        ]
+      },
+      "properties": {
+        "id": "B0L25RDCCH",
+        "name": "新势力宠文旅公园",
+        "address": "庐山南大道2478号",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.902576,
+          28.699778
+        ]
+      },
+      "properties": {
+        "id": "B0I06CV4PX",
+        "name": "东湖区禁毒主题公园",
+        "address": "三经路与二七北路交叉处￼",
+        "typecode": "110101",
+        "adname": "东湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.994963,
+          28.71556
+        ]
+      },
+      "properties": {
+        "id": "B0GD3H167U",
+        "name": "鱼尾洲公园",
+        "address": "艾溪湖北路",
+        "typecode": "110101",
+        "adname": "青山湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.73721,
+          28.704585
+        ]
+      },
+      "properties": {
+        "id": "B0FFF2WIGY",
+        "name": "岭秀湖市民公园",
+        "address": "招贤中路与磨盘山南路交汇处",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.82198,
+          28.566416
+        ]
+      },
+      "properties": {
+        "id": "B0FFK2SF4E",
+        "name": "赣江昌南外滩公园",
+        "address": "八月湖路2888号8栋",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.885231,
+          28.708267
+        ]
+      },
+      "properties": {
+        "id": "B0FFG2SETN",
+        "name": "凤凰洲市民公园",
+        "address": "赣江北大道",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.857794,
+          28.694548
+        ]
+      },
+      "properties": {
+        "id": "B03170V58F",
+        "name": "绿茵园",
+        "address": "红谷滩区金融大街丰和小区(丰和都会西)",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.848041,
+          28.631974
+        ]
+      },
+      "properties": {
+        "id": "B0FFM7JA2M",
+        "name": "朝阳江滩公园",
+        "address": "云飞路与沿江中大道交叉口",
+        "typecode": "110101",
+        "adname": "西湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.843953,
+          28.724878
+        ]
+      },
+      "properties": {
+        "id": "B031704T6B",
+        "name": "环球公园",
+        "address": "玉屏东大街258号",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.909911,
+          28.662341
+        ]
+      },
+      "properties": {
+        "id": "B03170U4OL",
+        "name": "老福山街心花园",
+        "address": "南站街道老福山(丁公路南地铁站4号口步行300米)",
+        "typecode": "110101",
+        "adname": "西湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.87175,
+          28.720139
+        ]
+      },
+      "properties": {
+        "id": "B0LR6YFBUK",
+        "name": "投书浦公园(建设中)",
+        "address": "碟子湖大道与黄河路交叉口西南100米",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.858649,
+          28.635288
+        ]
+      },
+      "properties": {
+        "id": "B0FFKNYC24",
+        "name": "朝阳中央公园",
+        "address": "银环路与金环五路交叉口南180米",
+        "typecode": "110101",
+        "adname": "西湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.882415,
+          28.631377
+        ]
+      },
+      "properties": {
+        "id": "B0I6GRPJ34",
+        "name": "南昌华侨城·运动公园",
+        "address": "子羽路与燕舞路交叉口南约40米路东",
+        "typecode": "110101",
+        "adname": "西湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.951854,
+          28.676395
+        ]
+      },
+      "properties": {
+        "id": "B0JAADIE8C",
+        "name": "文泉艺术公园",
+        "address": "石泉村(青山湖大道地铁站2号口步行470米)",
+        "typecode": "110101",
+        "adname": "青山湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.80786,
+          28.631001
+        ]
+      },
+      "properties": {
+        "id": "B0JU5CG4IR",
+        "name": "祥云大道休闲空间公园",
+        "address": "茶园街818号",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.939746,
+          28.643324
+        ]
+      },
+      "properties": {
+        "id": "B0JACAUV8V",
+        "name": "北渠公园",
+        "address": "墅溪路53号",
+        "typecode": "110101",
+        "adname": "青云谱区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.974268,
+          28.664159
+        ]
+      },
+      "properties": {
+        "id": "B0FFKW5AAH",
+        "name": "寰宇万象湿地公园",
+        "address": "广阳湖路和艾溪湖南路交叉口",
+        "typecode": "110101",
+        "adname": "青山湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.968904,
+          28.652003
+        ]
+      },
+      "properties": {
+        "id": "B0I155UT82",
+        "name": "联胜天香公园(装修中)",
+        "address": "京东南大道与顺外路交叉口南260米",
+        "typecode": "110101",
+        "adname": "青山湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.812365,
+          28.59555
+        ]
+      },
+      "properties": {
+        "id": "B0HRVR0ZWF",
+        "name": "雨阳公园",
+        "address": "红谷滩区雅瑶路",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.887636,
+          28.683589
+        ]
+      },
+      "properties": {
+        "id": "B0L1KKT9Z2",
+        "name": "墟隐海海公园",
+        "address": "叠山路288号2楼202",
+        "typecode": "110101",
+        "adname": "东湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.897872,
+          28.661038
+        ]
+      },
+      "properties": {
+        "id": "B0J2HM2E2M",
+        "name": "南昌市井小游园",
+        "address": "站前西路与前进路交会处",
+        "typecode": "110101",
+        "adname": "西湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.940314,
+          28.718339
+        ]
+      },
+      "properties": {
+        "id": "B0K1DH58LV",
+        "name": "江纺中心花园",
+        "address": "江纺厂前路",
+        "typecode": "110101",
+        "adname": "青山湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.738704,
+          28.626317
+        ]
+      },
+      "properties": {
+        "id": "B03170S6KW",
+        "name": "望城滨水公园",
+        "address": "新建经开区璜溪大道与武功山大道交叉口",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.808033,
+          28.681945
+        ]
+      },
+      "properties": {
+        "id": "B0L2PRRAW9",
+        "name": "文润公园",
+        "address": "文润路与前卫路交叉口南220米",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.733765,
+          28.714943
+        ]
+      },
+      "properties": {
+        "id": "B031705HOO",
+        "name": "翠园",
+        "address": "湾里管理局翠园文化广场",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.77165,
+          28.557166
+        ]
+      },
+      "properties": {
+        "id": "B0KKM7K0C0",
+        "name": "南昌军事主题公园",
+        "address": "吉安路666号",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.905364,
+          28.632159
+        ]
+      },
+      "properties": {
+        "id": "B0FFLFE78E",
+        "name": "京山党建主题公园",
+        "address": "麻纺新路与三店西路交叉口北200米",
+        "typecode": "110101",
+        "adname": "青云谱区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.703828,
+          28.643168
+        ]
+      },
+      "properties": {
+        "id": "B0FFJGHCOG",
+        "name": "玲岗湿地公园",
+        "address": "新建经开区宁远大街",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.929717,
+          28.640012
+        ]
+      },
+      "properties": {
+        "id": "B0JDKD61UD",
+        "name": "街心公园",
+        "address": "新溪桥北二路与大梵路交叉口西80米",
+        "typecode": "110101",
+        "adname": "青云谱区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.717729,
+          28.738443
+        ]
+      },
+      "properties": {
+        "id": "B0FFH07F2E",
+        "name": "江西林湾省级森林公园",
+        "address": "乌井路",
+        "typecode": "110101|110200",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.928654,
+          28.57593
+        ]
+      },
+      "properties": {
+        "id": "B0J3SH1QU9",
+        "name": "前头溪森林公园",
+        "address": "振兴大道88号",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.808269,
+          28.691737
+        ]
+      },
+      "properties": {
+        "id": "B0KUB7NC6Z",
+        "name": "兴国路游园",
+        "address": "兴国路与长富大道交叉口南40米",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.814843,
+          28.695858
+        ]
+      },
+      "properties": {
+        "id": "B0LU2CWO2C",
+        "name": "乐怡游园",
+        "address": "文化大道与文峰路交叉口南80米",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.9723,
+          28.722809
+        ]
+      },
+      "properties": {
+        "id": "B0FFHTUSSY",
+        "name": "南昌高新孺子园",
+        "address": "京东大道与火炬六路交汇处西南角",
+        "typecode": "110101|110200",
+        "adname": "青山湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.722093,
+          28.715406
+        ]
+      },
+      "properties": {
+        "id": "B0HB7L2V9B",
+        "name": "星岭山地车公园",
+        "address": "052县道梅岭生态旅游度假区内(南侧)",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.892921,
+          28.582317
+        ]
+      },
+      "properties": {
+        "id": "B0L22R14O0",
+        "name": "金沙社区公园",
+        "address": "金沙大道1628号",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.745343,
+          28.694222
+        ]
+      },
+      "properties": {
+        "id": "B0FFM5OA16",
+        "name": "南昌市新建区凤鸣湖公园",
+        "address": "052县道梅岭生态旅游度假区内(南侧)",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.942714,
+          28.665486
+        ]
+      },
+      "properties": {
+        "id": "B0FFGDNPKH",
+        "name": "699创意工场-中心花园",
+        "address": "上海路与顺外路交叉口东北360米",
+        "typecode": "110101",
+        "adname": "青山湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.888453,
+          28.593853
+        ]
+      },
+      "properties": {
+        "id": "B0L1SUQ1QX",
+        "name": "清风公园",
+        "address": "迎日口腔诊所(象湖店)东南侧",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.934836,
+          28.55056
+        ]
+      },
+      "properties": {
+        "id": "B031705AIV",
+        "name": "澄碧湖公园",
+        "address": "莲塘街道向阳路",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.743413,
+          28.657551
+        ]
+      },
+      "properties": {
+        "id": "B0LBS5JZWC",
+        "name": "西海休闲公园",
+        "address": "南昌大道西与南昌大道西入口交叉口东160米",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.811546,
+          28.58928
+        ]
+      },
+      "properties": {
+        "id": "B0K1NSDT21",
+        "name": "复兴大道口袋公园",
+        "address": "复兴大道与赣江南大道交叉口西南角",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.947726,
+          28.812607
+        ]
+      },
+      "properties": {
+        "id": "B0FFM6DH4Y",
+        "name": "儒乐湖滨江公园",
+        "address": "儒乐湖大街与嘉和二路交叉口西南80米",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.943287,
+          28.660128
+        ]
+      },
+      "properties": {
+        "id": "B0FFLJAO5Z",
+        "name": "清风小游园",
+        "address": "东龙街与顺外路交叉口西南320米",
+        "typecode": "110101",
+        "adname": "青山湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.862453,
+          28.742743
+        ]
+      },
+      "properties": {
+        "id": "B0JK4MLJ1J",
+        "name": "绿地小游园(建设中)",
+        "address": "双港地铁站",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.877666,
+          28.548855
+        ]
+      },
+      "properties": {
+        "id": "B0FFKQE9V1",
+        "name": "玉湖公园",
+        "address": "小蓝经济开发区金沙二路与富山一路交汇处",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.891243,
+          28.592329
+        ]
+      },
+      "properties": {
+        "id": "B0LGFOT5OU",
+        "name": "南昌居住主题公园C区",
+        "address": "金沙大道与绿逸路交叉口西340米",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.785035,
+          28.686797
+        ]
+      },
+      "properties": {
+        "id": "B0MGYC6PLP",
+        "name": "河湖长制主题文化公园",
+        "address": "长富大道666号",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.943125,
+          28.681575
+        ]
+      },
+      "properties": {
+        "id": "B0MU6RWMP8",
+        "name": "长春休闲公园",
+        "address": "南京东路与国康路交叉口西南40米",
+        "typecode": "110101",
+        "adname": "青山湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.799807,
+          28.535299
+        ]
+      },
+      "properties": {
+        "id": "B0J25MQ0MD",
+        "name": "马咀山生态公园",
+        "address": "生米街道洪毛洲",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.797687,
+          28.575603
+        ]
+      },
+      "properties": {
+        "id": "B0FFKT0IHN",
+        "name": "中央公园",
+        "address": "九连山路与同喜路交叉口西南80米",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.971891,
+          28.730087
+        ]
+      },
+      "properties": {
+        "id": "B03170S6JP",
+        "name": "保利·东湾国际滨江公园",
+        "address": "(南昌高新开发区)京东大道1866号保利东湾国际",
+        "typecode": "110101",
+        "adname": "青山湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.018188,
+          28.709376
+        ]
+      },
+      "properties": {
+        "id": "B0FFL73HWL",
+        "name": "南塘湖创新公园",
+        "address": "艾溪湖北路与创新二路交汇处东北侧",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.77952,
+          28.600973
+        ]
+      },
+      "properties": {
+        "id": "B0IB77C3SG",
+        "name": "生米休闲公园(建设中)",
+        "address": "鹰潭街和龙虎山大道交界处",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.928096,
+          28.577446
+        ]
+      },
+      "properties": {
+        "id": "B0H3SHKHNZ",
+        "name": "昌南中央公园",
+        "address": "莲塘镇澄湖东路与河滨路交叉口东南方向",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.012102,
+          28.699817
+        ]
+      },
+      "properties": {
+        "id": "B0FFKWO8WM",
+        "name": "南塘湖市民公园",
+        "address": "南塘湖创新公园(西南角)",
+        "typecode": "110101",
+        "adname": "青山湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.904133,
+          28.555589
+        ]
+      },
+      "properties": {
+        "id": "B0I3DC44V9",
+        "name": "雄溪河生态公园",
+        "address": "莲河路与洪州大道东交叉口东240米",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.913394,
+          28.608034
+        ]
+      },
+      "properties": {
+        "id": "B0G0OUUKWH",
+        "name": "梅湖湾文旅公园",
+        "address": "南昌大道中与南昌大道中入口交叉口东140米",
+        "typecode": "110101",
+        "adname": "青云谱区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.918835,
+          28.687805
+        ]
+      },
+      "properties": {
+        "id": "B0J127Y16P",
+        "name": "有声普法广场公园",
+        "address": "阳明路与二七路交叉口",
+        "typecode": "110101",
+        "adname": "东湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.901386,
+          28.556295
+        ]
+      },
+      "properties": {
+        "id": "B0L66C7LHF",
+        "name": "雄溪河·银湖公园",
+        "address": "小蓝东大道231号",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.928495,
+          28.620371
+        ]
+      },
+      "properties": {
+        "id": "B0L1XAQOXJ",
+        "name": "青云谱区禁毒主题公园",
+        "address": "广州路245号",
+        "typecode": "110101",
+        "adname": "青云谱区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.909498,
+          28.530037
+        ]
+      },
+      "properties": {
+        "id": "B0HBY6G58W",
+        "name": "雄溪河湿地公园",
+        "address": "(南昌县象湖联圩管理站西南)东南侧260米",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.720482,
+          28.798733
+        ]
+      },
+      "properties": {
+        "id": "B0FFGAQ9FO",
+        "name": "九龙溪田园综合体",
+        "address": "太平镇",
+        "typecode": "110101|110200",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.943082,
+          28.536443
+        ]
+      },
+      "properties": {
+        "id": "B031701DTJ",
+        "name": "莲塘人民公园",
+        "address": "莲塘镇公园路69号",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.91406,
+          28.606962
+        ]
+      },
+      "properties": {
+        "id": "B0KUBLV5PR",
+        "name": "华南文旅公园",
+        "address": "望云路与青云谱路交叉口西180米",
+        "typecode": "110101",
+        "adname": "青云谱区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.957644,
+          28.828473
+        ]
+      },
+      "properties": {
+        "id": "B0J2YSE2NQ",
+        "name": "杨家湖公园",
+        "address": "儒乐湖新城和樵舍镇之间的生态廊道上",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.885672,
+          28.517799
+        ]
+      },
+      "properties": {
+        "id": "B0FFKVSP4Q",
+        "name": "雁沙湖公园",
+        "address": "迎富大道江西江铃汽车集团改装车股份有限公司附近",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.750751,
+          28.623692
+        ]
+      },
+      "properties": {
+        "id": "B0KUBRRSYZ",
+        "name": "龙兴大街水渠公园",
+        "address": "龙兴大街与明月山大道辅路交叉口东60米",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.758575,
+          28.708325
+        ]
+      },
+      "properties": {
+        "id": "B0MA69MQR3",
+        "name": "海棠公园",
+        "address": "保利半山国际奥兰多西侧180米",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.906371,
+          28.645401
+        ]
+      },
+      "properties": {
+        "id": "B0IGYCKEO0",
+        "name": "建南社区小游园",
+        "address": "建南社区",
+        "typecode": "110101",
+        "adname": "青云谱区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.921324,
+          28.528374
+        ]
+      },
+      "properties": {
+        "id": "B0KRKLCWCI",
+        "name": "富山森林公园",
+        "address": "江西省农机大市场西北侧370米",
+        "typecode": "110101|110200",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.06259,
+          28.671141
+        ]
+      },
+      "properties": {
+        "id": "B0KUBLVKVY",
+        "name": "南昌瑶湖省级湿地公园",
+        "address": "紫阳东大道1号瑶湖郊野森林公园(西南角)",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.910297,
+          28.514215
+        ]
+      },
+      "properties": {
+        "id": "B0H6LHE0OE",
+        "name": "象鼻山公园",
+        "address": "溪山大道与雄溪路交叉口东340米",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.908134,
+          28.604365
+        ]
+      },
+      "properties": {
+        "id": "B0L39RT5N3",
+        "name": "青云休闲公园",
+        "address": "定山路与军民路交叉口东北220米",
+        "typecode": "110101",
+        "adname": "青云谱区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.932071,
+          28.531721
+        ]
+      },
+      "properties": {
+        "id": "B0FFJ7PU79",
+        "name": "斗南路公园",
+        "address": "富山五路与斗南路交汇处(斗门地铁站1号口步行490米)",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.850105,
+          28.619415
+        ]
+      },
+      "properties": {
+        "id": "B0MD2Z49WE",
+        "name": "西湖区垃圾分类主题公园",
+        "address": "永富路548号",
+        "typecode": "110101",
+        "adname": "西湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.932388,
+          28.531712
+        ]
+      },
+      "properties": {
+        "id": "B0FFJ7Q6V8",
+        "name": "万科公园",
+        "address": "汽车大道与斗山路交叉口北100米",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.670172,
+          28.740518
+        ]
+      },
+      "properties": {
+        "id": "B0H27HVT5C",
+        "name": "高路入云端市民公园",
+        "address": "湾里洗药湖罗汉峰峰顶",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.103522,
+          28.722329
+        ]
+      },
+      "properties": {
+        "id": "B0H3XU3I5D",
+        "name": "航空公园",
+        "address": "环湖路与266乡道交叉口西北100米",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.840194,
+          28.926432
+        ]
+      },
+      "properties": {
+        "id": "B0FFMCQLC5",
+        "name": "星海湖禁毒主题公园",
+        "address": "新祺周大道与国药大道交叉口东南角",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.936351,
+          28.493465
+        ]
+      },
+      "properties": {
+        "id": "B0KRKLCOMR",
+        "name": "茵梦湖公园",
+        "address": "双龙大道与迎宾南大道交叉口南300米",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.061832,
+          28.655346
+        ]
+      },
+      "properties": {
+        "id": "B0LGGMW6HA",
+        "name": "旭小熊森林乐园",
+        "address": "爱莲街与宝龚段交叉口西南40米",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.80475,
+          28.600208
+        ]
+      },
+      "properties": {
+        "id": "B0L095CLVM",
+        "name": "天玺与久玺中间的公园",
+        "address": "九龙湖街道上饶大街1177号",
+        "typecode": "110101",
+        "adname": "红谷滩区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.943595,
+          28.512597
+        ]
+      },
+      "properties": {
+        "id": "B0FFJEZS2Z",
+        "name": "银三角市政景观公园",
+        "address": "迎宾南大道与银三角立交桥交叉口东南180米",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.554625,
+          28.762477
+        ]
+      },
+      "properties": {
+        "id": "B0G36UM2A8",
+        "name": "网纹红土公园",
+        "address": "石鼻镇田埠",
+        "typecode": "110101",
+        "adname": "安义县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.758846,
+          28.709762
+        ]
+      },
+      "properties": {
+        "id": "B0FFJ98FOT",
+        "name": "罗兰公园",
+        "address": "保利半山国际奥兰多西北侧220米",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.800459,
+          28.843763
+        ]
+      },
+      "properties": {
+        "id": "B0HDJKSS6R",
+        "name": "南昌溪霞滑翔伞飞行主题公园",
+        "address": "赤海村108号",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.935496,
+          28.548811
+        ]
+      },
+      "properties": {
+        "id": "B0GU3HI7SV",
+        "name": "南昌县禁毒主题公园",
+        "address": "澄碧湖湖心岛禁毒主题公园",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.612912,
+          28.849304
+        ]
+      },
+      "properties": {
+        "id": "B0I6SAR94A",
+        "name": "凤凰山工业公园",
+        "address": "南安公路与凤凰东路交叉口西北角",
+        "typecode": "110101",
+        "adname": "安义县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.883076,
+          28.382413
+        ]
+      },
+      "properties": {
+        "id": "B031702PRX",
+        "name": "兴农沙漠生态公园",
+        "address": "兴农小学东南侧60米",
+        "typecode": "110101|110200",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.996436,
+          28.671951
+        ]
+      },
+      "properties": {
+        "id": "B0GDHL2NX0",
+        "name": "京都主题公园",
+        "address": "创新二路8号三楼店面",
+        "typecode": "110101",
+        "adname": "青山湖区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.556634,
+          28.835506
+        ]
+      },
+      "properties": {
+        "id": "B0FFKOZD16",
+        "name": "安义潦河市民公园",
+        "address": "沿河东路与杨梅二路交叉口南20米",
+        "typecode": "110101",
+        "adname": "安义县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.892741,
+          28.874227
+        ]
+      },
+      "properties": {
+        "id": "B0MABHS9G0",
+        "name": "乐化镇人文公园",
+        "address": "乐昌段",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.969987,
+          28.445161
+        ]
+      },
+      "properties": {
+        "id": "B0FFILCY4U",
+        "name": "向塘市民公园",
+        "address": "星河东路与向沙路交叉口北120米",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.971021,
+          28.434119
+        ]
+      },
+      "properties": {
+        "id": "B0IAZZQI6F",
+        "name": "向塘三风公园",
+        "address": "星河西路",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.550868,
+          28.837339
+        ]
+      },
+      "properties": {
+        "id": "B031705YMI",
+        "name": "文峰公园",
+        "address": "文峰路68号",
+        "typecode": "110101",
+        "adname": "安义县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.574777,
+          28.839132
+        ]
+      },
+      "properties": {
+        "id": "B0H3XY18BD",
+        "name": "武举堤公园",
+        "address": "前进中路613号",
+        "typecode": "110101",
+        "adname": "安义县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.795846,
+          28.895135
+        ]
+      },
+      "properties": {
+        "id": "B0FFKURDGS",
+        "name": "罗亭新时代公园",
+        "address": "罗亭大道与上游路交叉口西南240米",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.835844,
+          28.94687
+        ]
+      },
+      "properties": {
+        "id": "B0G1ZG4ZAI",
+        "name": "青年湖公园",
+        "address": "博吾路济生药厂旁",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.604776,
+          28.542823
+        ]
+      },
+      "properties": {
+        "id": "B0FFK2FCED",
+        "name": "西山人文园",
+        "address": [],
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.831906,
+          28.924154
+        ]
+      },
+      "properties": {
+        "id": "B0L1DUUPMT",
+        "name": "中医药文化公园",
+        "address": "新祺周管理处思德广场(西北角)",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.135776,
+          28.410825
+        ]
+      },
+      "properties": {
+        "id": "B0JGYSYZJV",
+        "name": "罗溪镇金花公园",
+        "address": "坝泉段南40米",
+        "typecode": "110101",
+        "adname": "进贤县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.631343,
+          28.792459
+        ]
+      },
+      "properties": {
+        "id": "B0K6TMPKDG",
+        "name": "长埠骑行主题公园",
+        "address": "骆长段",
+        "typecode": "110101",
+        "adname": "安义县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.259722,
+          28.775513
+        ]
+      },
+      "properties": {
+        "id": "B0JRRAOE9B",
+        "name": "天子河公园",
+        "address": "五五段024县道",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.263978,
+          28.780726
+        ]
+      },
+      "properties": {
+        "id": "B0FFGA4VED",
+        "name": "南昌五星知青公园",
+        "address": "鹤舞路白鹤小镇内(北侧)",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.946173,
+          28.535896
+        ]
+      },
+      "properties": {
+        "id": "B0FFL51ZMV",
+        "name": "利民南杂店公园",
+        "address": "莲塘镇莲塘南大道303号",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.631348,
+          28.796366
+        ]
+      },
+      "properties": {
+        "id": "B0FFF4FLDN",
+        "name": "长埠乡村森林公园",
+        "address": "骆长段",
+        "typecode": "110101",
+        "adname": "安义县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.970994,
+          28.417517
+        ]
+      },
+      "properties": {
+        "id": "B0LAO7RH8M",
+        "name": "廉园",
+        "address": "友谊路56号",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.99926,
+          28.322115
+        ]
+      },
+      "properties": {
+        "id": "B0H2R40TR8",
+        "name": "罗渡乡村森林公园",
+        "address": "岭下罗渡村",
+        "typecode": "110101|110102",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.027803,
+          28.870318
+        ]
+      },
+      "properties": {
+        "id": "B0JBTS40D0",
+        "name": "一粒米乡村振兴生态公园",
+        "address": "联丰段",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.239822,
+          28.402781
+        ]
+      },
+      "properties": {
+        "id": "B0FFG5AWIJ",
+        "name": "青岚湖森林公园",
+        "address": "滨湖森林公园停车场西北300米处",
+        "typecode": "110101",
+        "adname": "进贤县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.812165,
+          28.89887
+        ]
+      },
+      "properties": {
+        "id": "B0L01OGWPC",
+        "name": "旱溪公园",
+        "address": "罗亭大道与张坊路交叉口东340米",
+        "typecode": "110101",
+        "adname": "新建区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.156495,
+          28.578121
+        ]
+      },
+      "properties": {
+        "id": "B0LBXKCNXX",
+        "name": "小游园",
+        "address": "东大街与西幽段交叉口东北160米",
+        "typecode": "110101",
+        "adname": "南昌县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.565472,
+          28.828003
+        ]
+      },
+      "properties": {
+        "id": "B0J1PZ1UQQ",
+        "name": "安义县禁毒主题公园",
+        "address": "龙安大道399号",
+        "typecode": "110101",
+        "adname": "安义县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.563128,
+          28.848276
+        ]
+      },
+      "properties": {
+        "id": "B0K2MAKABG",
+        "name": "延雄路口袋公园",
+        "address": "延雄路明珠花园旁",
+        "typecode": "110101",
+        "adname": "安义县"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.265647,
+          28.365292
+        ]
+      },
+      "properties": {
+        "id": "B0HKAUKNT2",
+        "name": "街心花园",
+        "address": "胜利中路",
+        "typecode": "110101",
+        "adname": "进贤县"
+      }
+    }
+  ]
+}
