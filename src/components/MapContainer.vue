@@ -103,29 +103,18 @@ function updateDisplay() {
 
   console.log("最终有效坐标点数量:", validPoints.length);
 
-  // 3. 处理热力图逻辑
+  // 3. 热力图/点位模式切换
   if (props.heatmap) {
-    // 模式 A：热力图模式
-    if (!heatmapInstance && window.AMap && window.AMap.HeatMap) {
-      heatmapInstance = new window.AMap.HeatMap(map, {
-        radius: 50,      // 半径大一点，容易连成片
-        opacity: [0, 0.9],
-        zIndex: 120      // 确保在最上层
-      });
-    }
-
     if (heatmapInstance) {
       heatmapInstance.setDataSet({
         data: validPoints,
-        max:5 // 
+        max: 5
       });
       heatmapInstance.show();
     }
   } else {
-    // 模式 B：普通点位模式
+    // 普通点位模式
     if (heatmapInstance) heatmapInstance.hide();
-    
-    // 调用你的渲染函数（确保你代码里有定义这个函数）
     renderMarkers(validPoints);
   }
 }
@@ -154,13 +143,6 @@ function renderMarkers(points) {
   
   // 批量添加到地图，性能更优
   map.add(markers);
-}
-
-function stopPlayback() {
-  clearInterval(timer);
-  isPlaying.value = false;
-  // 播放结束后恢复全量显示
-  displayOrders.value = orders.value;
 }
 
 watch(() => props.services, updateDisplay, { deep: true });

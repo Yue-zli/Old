@@ -79,3 +79,210 @@ a.挂载：页面打开，触发 onMounted。
 b.请求：fetchAll 派 stat.js 出去拿数据（Axios）。
 c.清洗：把后端给的 res.data.data 整理成 Vue 和 Echarts 认识的格式。
 d.上架：通过 .value 给响应式变量赋值，画面自动刷新。
+
+
+---
+
+# 2026-06-10 全流程修改笔记
+
+## 一、Git 基础操作
+
+### 1.1 安全改代码：先建分支
+
+```bash
+git checkout -b feature/test-changes   # 建新分支，改坏可切回 main
+git checkout main                       # 切回主分支，一切恢复原样
+```
+
+### 1.2 查看状态和历史
+
+```bash
+git status                   # 看当前改了哪些文件
+git diff                     # 看具体改了什么内容
+git log --oneline            # 简洁提交历史
+git show <hash>              # 看某次提交的详情
+git log -p <文件名>          # 看某个文件的提交历史
+```
+
+### 1.3 diff 格式解读
+
+| 符号 | 含义 |
+|---|---|
+| `--- a/xxx` | 旧文件 |
+| `+++ b/xxx` | 新文件 |
+| `@@ -65,9 +65,9 @@` | 旧第65行起9行 → 新第65行起9行 |
+| `-` 红色 | 被删的代码 |
+| `+` 绿色 | 新增的代码 |
+
+### 1.4 提交和推送
+
+```bash
+git add <文件>                              # 加入暂存区
+git commit -m "feat: 描述"                   # 提交到本地
+git remote add origin <GitHub仓库地址>        # 关联远程
+git push -u origin main                      # 推送
+```
+
+### 1.5 回退操作
+
+| 场景 | 命令 |
+|---|---|
+| 没 add，撤销修改 | `git restore <文件>` |
+| 已 add 但没 commit | `git restore --staged <文件>` |
+| 已 commit，保留修改 | `git reset --soft HEAD~1` |
+| 已 commit，全部丢弃 | `git reset --hard HEAD~1` |
+
+### 1.6 .gitignore 写法
+
+```gitignore
+node_modules/
+dist/
+.vite/
+*.local
+.env
+```
+
+---
+
+## 二、Mattpocock Skills 安装
+
+```bash
+git clone https://github.com/mattpocock/skills.git
+npx skills@latest add mattpocock/skills
+```
+
+安装后 29 个 skills 出现在 `.agents/skills/` 下。
+
+### improve-codebase-architecture 工作流程
+
+| 阶段 | 做什么 |
+|---|---|
+| ① 探索 | 遍历代码库找架构摩擦 |
+| ② HTML报告 | Mermaid图表 + 前后对比卡片 |
+| ③ 追问 | 选一个重构项深入讨论 |
+
+---
+
+## 三、Bug 修复
+
+### 3.1 Cards.vue Props 不匹配（已修）
+
+**问题**：BigScreen 传 `:orders="orders"`(Array)，Cards 声明 `ordersCount: Number`，
+三个卡片值永远是 0。
+
+**修复**：Cards 改为接收数组，内部用 `.length`。
+
+```js
+// 改之前
+defineProps({ ordersCount: Number, ... })
+cardConfig: [{ value: props.ordersCount }, ...]
+
+// 改之后
+defineProps({
+  orders: { type: Array, default: () => [] },
+  managers: { type: Array, default: () => [] },
+  volunteers: { type: Array, default: () => [] },
+})
+cardConfig: [{ value: props.orders.length }, ...]
+```
+
+### 3.2 MapContainer.vue 死代码（已修）
+
+| 问题 | 处理 |
+|---|---|
+| `stopPlayback()` 引用4个未声明变量 | 删除 6 行 |
+| `updateDisplay()` 重复初始化热力图 | 删除 9 行 |
+
+---
+
+## 四、地图可视化改造
+
+### 4.1 邻避→道路环境影响带（面状要素）
+
+**原理**：按道路名分组出入口 → 连成线 → `turf.buffer` 缓冲成面。
+
+```js
+// 按道路名分组
+const roadGroups = {};
+nimbyFeatures.features.forEach(item => {
+  const roadName = item.properties.name.split(/出口|入口|与|交叉口/)[0].trim();
+  roadGroups[roadName].push(item.geometry.coordinates);
+});
+
+// 多点→缓冲面
+if (coords.length >= 2) {
+  const line = turf.lineString(coords);
+  const buffer = turf.buffer(line, 0.3, { units: 'kilometers' });
+  new AMap.Polygon({ path: buffer.geometry.coordinates[0], ... });
+}
+```
+
+**文案改动**：
+
+| 原 | 改 |
+|---|---|
+| ⚠️ 环境风险 (邻避) 惩罚 | 🛣️ 高架/快速路环境影响 |
+| ⚠️ 邻避风险：警报(距XXm) | 🛣️ 道路环境影响：附近 XXm 有高架/快速路 |
+| C级高危：环境风险过高 | C级高危：道路环境影响较大 |
+
+### 4.2 公园数据问题
+
+`nanchang_parks.json` 91 个点中仅 1 个是真正的"公园广场"，
+其余 80 个是体育场馆（篮球公园、足球公园等）。
+**根本解法**：用正确的高德分类码重新获取数据。
+
+---
+
+## 五、赣江多分支排除 ⚠️ 重要
+
+### 5.1 大坑：turf.union 不重叠就返回 null
+
+```js
+// ❌ 错误 — 不重叠时 rivers 变成 null
+let rivers = riverMain;
+rivers = turf.union(rivers, riverBranch1);
+
+// ✅ 正确 — 用数组逐个判断
+const riverZones = [riverMain, riverBranch1, riverBranch2, ...];
+const isExcluded = riverZones.some(z => turf.booleanPointInPolygon(pt, z));
+```
+
+### 5.2 最终结构
+
+```
+赣江主河道 (10点, 0.65km)
+├── 分支1   (8点,  0.50km)
+├── 分支2   (3点,  0.50km)
+├── 分支2.1 (6点,  0.40km)
+└── 支线2.2 (8点,  0.35km)
+```
+
+缓冲逐级递减。以后加新分支只需：
+```js
+const riverNew = turf.buffer(turf.lineString([...]), 0.5, { units: 'kilometers' });
+// 然后把 riverNew 加到 riverZones 数组里
+```
+
+---
+
+## 六、文件变更汇总
+
+| 文件 | 改动 |
+|---|---|
+| `.gitignore` | 新建 |
+| `src/components/Cards.vue` | Props Number→Array |
+| `src/components/MapContainer.vue` | 删 15 行死代码 |
+| `src/views/ConvergeAnalysis.vue` | 邻避面状+文案+赣江多分支 |
+| `architecture-review.html` | 架构报告（E盘非C盘） |
+
+---
+
+## 七、踩过的坑
+
+| 坑 | 教训 |
+|---|---|
+| PowerShell 中文在 bash 里乱码 | 用英文参数名 |
+| `turf.union` 不重叠返回 null | 用数组 + `.some()` 逐判 |
+| AMap.Marker div 不显示 | 加 `display:inline-block;font-size:0` |
+| `git restore` 撤销所有未提交修改 | 改前先 commit |
+| 编辑弯引号匹配失败 | 从 Grep 输出复制原始字符 |

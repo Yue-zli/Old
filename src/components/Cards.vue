@@ -10,15 +10,15 @@
 <script setup>
 import { computed } from 'vue';
 const props = defineProps({
-    ordersCount: Number,
-    managersCount: Number,
-    volunteersCount: Number,
+    orders: { type: Array, default: () => [] },
+    managers: { type: Array, default: () => [] },
+    volunteers: { type: Array, default: () => [] },
 });
 
 const cardConfig = computed(() => [
-    { label: '需求单量', value: props.ordersCount },
-    { label: '在岗管理', value: props.managersCount },
-    { label: '注册志愿', value: props.volunteersCount }
+    { label: '需求单量', value: props.orders.length },
+    { label: '在岗管理', value: props.managers.length },
+    { label: '注册志愿', value: props.volunteers.length }
 ]);
 </script>
 

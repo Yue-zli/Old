@@ -55,7 +55,7 @@
               <input type="range" min="0" max="3" step="0.5" v-model.number="weightTransit" @change="startAnalysis" class="custom-slider" :disabled="!showEvaluationMode"/>
             </div>
             <div class="param-item">
-              <div class="param-label"><span>⚠️ 环境风险 (邻避) 惩罚</span><span class="param-val">x {{ weightNimby }}</span></div>
+              <div class="param-label"><span>🛣️ 高架/快速路环境影响</span><span class="param-val">x {{ weightNimby }}</span></div>
               <input type="range" min="0.5" max="5" step="0.5" v-model.number="weightNimby" @change="startAnalysis" class="custom-slider" :disabled="!showEvaluationMode"/>
             </div>
           </div>
@@ -285,8 +285,43 @@ const executeAnalysis = (bbox) => {
   const turfPoints = turf.featureCollection(facilityData.map(d => turf.point([d.lng, d.lat])));
   let coveredCells = 0; let validGridCount = 0;
   
+  // 赣江多分支排除 — 每条线各自缓冲，逐个判断（避免 union 在不重叠时返回 null）
+  const riverMain = turf.buffer(turf.lineString([
+    [115.813531, 28.559122], [115.820607, 28.585707],
+    [115.827391, 28.607841], [115.836063, 28.624838],
+    [115.843848, 28.639141], [115.860899, 28.655955],
+    [115.864645, 28.664164], [115.867854, 28.675827],
+    [115.87386, 28.685062],  [115.88685, 28.698198]
+  ]), 0.65, { units: 'kilometers' });
+
+  const riverBranch1 = turf.buffer(turf.lineString([
+    [115.889321, 28.710838], [115.892347, 28.719039],
+    [115.893538, 28.728927], [115.894593, 28.736363],
+    [115.89527, 28.74478],   [115.903619, 28.755819],
+    [115.91873, 28.765207],  [115.935743, 28.771323]
+  ]), 0.5, { units: 'kilometers' });
+
+  const riverBranch2 = turf.buffer(turf.lineString([
+    [115.904342, 28.707857], [115.914689, 28.714304],
+    [115.922442, 28.719456]
+  ]), 0.5, { units: 'kilometers' });
+
+  const riverBranch21 = turf.buffer(turf.lineString([
+    [115.925682, 28.725122], [115.931217, 28.731904],
+    [115.935265, 28.735839], [115.947193, 28.74853],
+    [115.964565, 28.762397], [115.977559, 28.773416]
+  ]), 0.4, { units: 'kilometers' });
+
+  const riverBranch22 = turf.buffer(turf.lineString([
+    [115.933195, 28.721669], [115.941853, 28.727136],
+    [115.958264, 28.733389], [115.971216, 28.734178],
+    [115.981191, 28.730595], [115.991096, 28.727376],
+    [116.002265, 28.72484],  [116.016338, 28.724322]
+  ]), 0.35, { units: 'kilometers' });
+
+  const riverZones = [riverMain, riverBranch1, riverBranch2, riverBranch21, riverBranch22];
+
   const exclusionZones = {
-    rivers: turf.buffer(turf.lineString([[115.959, 28.783], [115.932, 28.769], [115.896, 28.750], [115.893, 28.728], [115.910, 28.780]]), 0.55, { units: 'kilometers'}),
     lakes: turf.multiPolygon([[[[115.990, 28.660], [116.030, 28.660], [116.030, 28.720], [115.990, 28.720], [115.990, 28.660]]]]),
     mountains: turf.polygon([[[115.600, 28.740], [115.730, 28.740], [115.760, 28.780], [115.750, 28.880], [115.600, 28.880], [115.600, 28.740]]])
   };
@@ -294,7 +329,9 @@ const executeAnalysis = (bbox) => {
   squareGrid.features.forEach((cell) => {
     const currentCenterPt = turf.center(cell);
     const [lng, lat] = currentCenterPt.geometry.coordinates;
-    const isExcluded = turf.booleanPointInPolygon(currentCenterPt, exclusionZones.rivers) || turf.booleanPointInPolygon(currentCenterPt, exclusionZones.lakes) || turf.booleanPointInPolygon(currentCenterPt, exclusionZones.mountains);
+    const isExcluded = riverZones.some(z => turf.booleanPointInPolygon(currentCenterPt, z))
+      || turf.booleanPointInPolygon(currentCenterPt, exclusionZones.lakes)
+      || turf.booleanPointInPolygon(currentCenterPt, exclusionZones.mountains);
     if (isExcluded) return;
 
     validGridCount++;
@@ -347,10 +384,10 @@ const executeAnalysis = (bbox) => {
       if (showEvaluationMode.value) {
         let parkDesc = pd.count > 0 ? `<span style="color:#10b981;">优 (${pd.count}处)</span>` : `<span style="color:#94a3b8;">缺</span>`;
         let transitDesc = td.count > 0 ? `<span style="color:#38bdf8;">佳 (${td.count}处)</span>` : `<span style="color:#f59e0b;">弱</span>`;
-        let nimbyDesc = nd.count > 0 ? `<span style="color:#ef4444;">警报(距${(nd.minDist * 1000).toFixed(0)}m)</span>` : `<span style="color:#10b981;">安全</span>`;
-        const advice = score >= 80 ? '<div style="color: #22d3ee; background: rgba(34,211,238,0.1); padding:6px; border-radius:4px;">🔥 A级优选：极度适宜建设</div>' 
+        let nimbyDesc = nd.count > 0 ? `<span style="color:#ef4444;">附近 ${(nd.minDist * 1000).toFixed(0)}m 有高架/快速路</span>` : `<span style="color:#10b981;">无道路干扰</span>`;
+        const advice = score >= 80 ? '<div style="color: #22d3ee; background: rgba(34,211,238,0.1); padding:6px; border-radius:4px;">🔥 A级优选：极度适宜建设</div>'
                      : (score >= 60 ? '<div style="color: #f59e0b; background: rgba(245,158,11,0.1); padding:6px; border-radius:4px;">⚠️ B级备选：需增设隔音/绿化</div>'
-                                : '<div style="color: #ef4444; background: rgba(239,68,68,0.1); padding:6px; border-radius:4px;">🛑 C级高危：环境风险过高</div>');
+                                : '<div style="color: #ef4444; background: rgba(239,68,68,0.1); padding:6px; border-radius:4px;">🛑 C级高危：道路环境影响较大</div>');
         popupContent=` 
           <div class="custom-info-window" style="min-width: 300px;">
             <div style="font-size: 14px; font-weight: bold; border-bottom: 1px solid rgba(59,130,246,0.3); padding-bottom: 8px; margin-bottom: 10px; display: flex; justify-content: space-between;">
@@ -360,7 +397,7 @@ const executeAnalysis = (bbox) => {
                 <div><strong>🏥 现状医疗：</strong>${medicalCount > 0 ? `<span style="color:#10b981;">已覆盖 (${medicalCount}处)</span>` : '盲区'}</div>
                 <div><strong>🌳 生态环境：</strong>${parkDesc}</div>
                 <div><strong>🚇 交通节点：</strong>${transitDesc}</div>
-                <div><strong>⚠️ 邻避风险：</strong>${nimbyDesc}</div>
+                <div><strong>🛣️ 道路环境影响：</strong>${nimbyDesc}</div>
             </div>
             ${advice}
           </div>`;
@@ -573,18 +610,51 @@ const renderEnvironmentLayers = () => {
     });
   }
 
-  // ⚠️ 3. 渲染 高架桥/邻避点气泡 (环境风险)
+  // 3. 高架/快速路：按道路聚合为环境影响带（面状要素）
   if (nimbyFeatures && nimbyFeatures.features) {
+    const roadGroups = {};
     nimbyFeatures.features.forEach(item => {
-      const [lng, lat] = item.geometry.coordinates;
-      const marker = new AMap.Marker({
-        position: [lng, lat],
-        content: `<div class="poi-marker poi-nimby" title="${item.properties.name || ''}">⚠️</div>`,
-        offset: new AMap.Pixel(-10, -10),
-        zIndex: 90
-      });
-      marker.setMap(map);
-      nimbyMarkers.push(marker); // 正确挂载到全局数组
+      const name = item.properties.name || '';
+      // 提取道路名（取"出口""入口""与""交叉口"之前的部分）
+      const roadName = name.split(/出口|入口|与|交叉口/)[0].trim();
+      if (!roadName) return;
+      if (!roadGroups[roadName]) roadGroups[roadName] = [];
+      roadGroups[roadName].push(item.geometry.coordinates);
+    });
+
+    Object.entries(roadGroups).forEach(([roadName, coords]) => {
+      if (coords.length >= 2) {
+        // 多个出入口：画缓冲面（道路环境影响带）
+        coords.sort((a, b) => a[0] - b[0]);
+        try {
+          const line = turf.lineString(coords);
+          const buffer = turf.buffer(line, 0.3, { units: 'kilometers' });
+          const polygon = new AMap.Polygon({
+            path: buffer.geometry.coordinates[0],
+            fillColor: '#ef4444',
+            fillOpacity: 0.08,
+            strokeColor: '#ef4444',
+            strokeWeight: 1,
+            strokeOpacity: 0.4,
+            strokeStyle: 'dashed',
+            zIndex: 50,
+            bubble: true
+          });
+          polygon.setMap(map);
+          nimbyMarkers.push(polygon);
+        } catch (e) { /* buffer 失败则跳过 */ }
+      } else {
+        // 单个出入口：红色三角标记
+        const [lng, lat] = coords[0];
+        const marker = new AMap.Marker({
+          position: [lng, lat],
+          content: '<div style="width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:10px solid #ef4444;font-size:0;line-height:0;" title="' + roadName + '"></div>',
+          offset: new AMap.Pixel(-5, -10),
+          zIndex: 85
+        });
+        marker.setMap(map);
+        nimbyMarkers.push(marker);
+      }
     });
   }
   

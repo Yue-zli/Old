@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>架构审查报告 — 南昌养老资源时空分析决策平台</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: 'dark', themeVariables: { primaryColor: '#3b82f6', primaryTextColor: '#fff', lineColor: '#60a5fa' } });</script>
+<style>
+  body { background: #0f172a; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; }
+  .card { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 1px solid rgba(59,130,246,0.15); border-radius: 12px; transition: all 0.3s; }
+  .card:hover { border-color: rgba(59,130,246,0.4); box-shadow: 0 4px 30px rgba(59,130,246,0.1); }
+  .badge-strong { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.4); }
+  .badge-worth { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.4); }
+  .badge-spec { background: rgba(34,211,238,0.15); color: #22d3ee; border: 1px solid rgba(34,211,238,0.4); }
+  .diagram-box { background: #0b1120; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden; }
+  .highlight-line { background: linear-gradient(90deg, #3b82f6, transparent); height: 2px; }
+</style>
+</head>
+<body class="min-h-screen p-6 md:p-10">
+
+<header class="mb-12 text-center">
+  <div class="text-sm text-blue-400 mb-2 uppercase tracking-widest">Architecture Review Report</div>
+  <h1 class="text-4xl font-black bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent mb-3">
+    南昌养老资源时空分析决策平台
+  </h1>
+  <p class="text-slate-400 max-w-2xl mx-auto">
+    基于 <span class="text-blue-400 font-bold">mattpocock/skills improve-codebase-architecture</span> 流程 —
+    探索 → 识别摩擦 → 提出深化机会（Deepening Opportunities）
+  </p>
+  <div class="flex justify-center gap-4 mt-4 text-xs text-slate-500">
+    <span>📅 2026-06-10</span>
+    <span>📦 96 files · Vue3 + AMap + ECharts</span>
+    <span>🔍 10 个候选重构项</span>
+    <span>📍 E:\桌面\养老系统\JSAPI_Vue3_2</span>
+  </div>
+</header>
+
+<!-- ============ 总览图 ============ -->
+<section class="max-w-6xl mx-auto mb-12">
+  <h2 class="text-xl font-bold text-slate-200 mb-4">📐 当前架构总览</h2>
+  <div class="diagram-box p-6">
+    <pre class="mermaid">
+graph TB
+    subgraph "入口层"
+        A[main.js] --> B[App.vue]
+        B --> R[Vue Router]
+    end
+    subgraph "页面 Views"
+        R --> V1["/dashboard → BigScreen.vue<br/>737行 超级组件"]
+        R --> V2["/coverage → ConvergeAnalysis.vue<br/>1227行 巨型组件"]
+        R --> V3["/analysis → DispatchAnalysis.vue"]
+        R --> V4["/route → RoutePlanner.vue"]
+        R --> V5["/requesters → Requesters.vue"]
+        R --> V6["/login → Login.vue"]
+    end
+    subgraph "BigScreen 子组件"
+        V1 --> M[MapContainer]
+        V1 --> C[Cards]
+        V1 --> H[TheHeader]
+        V1 --> P[PlaybackPanel]
+        V1 --> AG[AgeChart]
+        V1 --> GD[GenderChart]
+        V1 --> TR[TrendChart]
+        V1 --> TP[TypeChart]
+    end
+    subgraph "数据 & 工具"
+        API[api/stat.js - Axios]
+        HOOK1[usePlayback.js ✓]
+        HOOK2[useDashboardCharts.js ✗ 未使用]
+        MOCK[mockService / mockUsers]
+    end
+    V1 --> API
+    V3 --> API
+    style V1 fill:#ef4444,stroke:#fff,color:#fff
+    style V2 fill:#ef4444,stroke:#fff,color:#fff
+    style HOOK2 fill:#f59e0b,stroke:#fff,color:#000
+    </pre>
+    <p class="text-xs text-slate-500 mt-2 text-center">🔴 红色 = 500+ 行单体组件 | 🟡 黄色 = 死代码</p>
+  </div>
+</section>
+
+<!-- ============ 候选列表 ============ -->
+<section class="max-w-6xl mx-auto">
+  <h2 class="text-xl font-bold text-slate-200 mb-6">🔍 架构深化机会（10 项）</h2>
+
+  <!-- Card 1: 超级组件 -->
+  <div class="card p-6 mb-5">
+    <div class="flex items-start justify-between mb-4">
+      <div><span class="text-xs text-slate-500 mr-2">#1</span><span class="px-3 py-1 rounded-full text-xs font-bold badge-strong">Strong</span></div>
+      <span class="text-xs text-slate-600">BigScreen.vue</span>
+    </div>
+    <h3 class="text-lg font-bold text-white mb-3">BigScreen.vue — 超级组件需拆分</h3>
+    <div class="grid md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <p class="text-xs font-bold text-blue-400 mb-1">🚫 问题</p>
+        <p class="text-sm text-slate-300">737 行 SFC：模式切换 + 数据获取 + 8个子组件状态 + 图表ref + 回放控制 + 详情弹窗。修改数据获取可能意外影响弹窗——违背了 <span class="text-cyan-300">Locality</span> 原则。</p>
+      </div>
+      <div>
+        <p class="text-xs font-bold text-green-400 mb-1">✅ 方案</p>
+        <p class="text-sm text-slate-300">拆为 <span class="text-white font-bold">DashboardShell</span>（布局壳）+ <span class="text-white font-bold">useDashboardState</span>（composable）+ <span class="text-white font-bold">DetailPanel</span>（独立组件）。</p>
+      </div>
+    </div>
+    <div class="diagram-box p-4">
+      <pre class="mermaid">
+graph LR
+    subgraph "重构前: 1个God组件"
+        OLD["BigScreen.vue 737行<br/>状态+布局+数据+弹窗"]
+    end
+    subgraph "重构后: 深度模块"
+        NEW1["DashboardShell 80行"]
+        NEW2["useDashboardState.ts"]
+        NEW3["DetailPanel.vue"]
+    end
+    OLD --> NEW1
+    OLD --> NEW2
+    OLD --> NEW3
+      </pre>
+    </div>
+  </div>
+
+  <!-- Card 2: 巨型分析 -->
+  <div class="card p-6 mb-5">
+    <div class="flex items-start justify-between mb-4">
+      <div><span class="text-xs text-slate-500 mr-2">#2</span><span class="px-3 py-1 rounded-full text-xs font-bold badge-strong">Strong</span></div>
+      <span class="text-xs text-slate-600">ConvergeAnalysis.vue</span>
+    </div>
+    <h3 class="text-lg font-bold text-white mb-3">ConvergeAnalysis.vue — 1200+ 行地理分析巨兽</h3>
+    <div class="grid md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <p class="text-xs font-bold text-blue-400 mb-1">🚫 问题</p>
+        <p class="text-sm text-slate-300">地图初始化 + 网格分析(Turf.js) + 评分算法 + 5个环境图层 + 工具栏 + 信息弹窗 + 选址模拟 + CSS 全挤在一个文件。修改评分公式需理解上千行上下文。</p>
+      </div>
+      <div>
+        <p class="text-xs font-bold text-green-400 mb-1">✅ 方案</p>
+        <p class="text-sm text-slate-300">拆为 <span class="text-white font-bold">ScoringEngine</span>（纯函数）、<span class="text-white font-bold">LayerRenderer</span>（图层）、<span class="text-white font-bold">useAnalysisMap</span>（地图生命周期）。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 3: Props Bug -->
+  <div class="card p-6 mb-5">
+    <div class="flex items-start justify-between mb-4">
+      <div><span class="text-xs text-slate-500 mr-2">#3</span><span class="px-3 py-1 rounded-full text-xs font-bold badge-strong">Strong</span></div>
+      <span class="text-xs text-slate-600">Cards.vue / BigScreen.vue</span>
+    </div>
+    <h3 class="text-lg font-bold text-white mb-3">Cards.vue — Props 接口不匹配（运行时 Bug）</h3>
+    <div class="grid md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <p class="text-xs font-bold text-blue-400 mb-1">🚫 问题</p>
+        <p class="text-sm text-slate-300">BigScreen 传 <code class="text-yellow-400">:orders="orders"</code>（Array），但 Cards 声明 <code class="text-yellow-400">ordersCount: Number</code>。卡片显示的「需求单量」永远是 0。</p>
+      </div>
+      <div>
+        <p class="text-xs font-bold text-green-400 mb-1">✅ 方案</p>
+        <p class="text-sm text-slate-300">统一接口：Cards 接收 <code class="text-white">orders: Array</code>，内部 computed 计算 count。</p>
+      </div>
+    </div>
+    <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-3 text-xs">
+      <span class="text-red-400 font-bold">⚠️ 当前：</span>
+      BigScreen template: <code>:orders="orders"</code> → Cards props: <code>ordersCount: Number</code> → Vue 不报错但值永远 undefined
+    </div>
+  </div>
+
+  <!-- Card 4: 死代码 -->
+  <div class="card p-6 mb-5">
+    <div class="flex items-start justify-between mb-4">
+      <div><span class="text-xs text-slate-500 mr-2">#4</span><span class="px-3 py-1 rounded-full text-xs font-bold badge-strong">Strong</span></div>
+      <span class="text-xs text-slate-600">MapContainer.vue</span>
+    </div>
+    <h3 class="text-lg font-bold text-white mb-3">MapContainer.vue — 含幽灵函数与死代码</h3>
+    <div class="grid md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <p class="text-xs font-bold text-blue-400 mb-1">🚫 问题</p>
+        <p class="text-sm text-slate-300">第159-163行 <code class="text-yellow-400">stopPlayback()</code> 引用未声明的 <code>timer</code>、<code>isPlaying</code>——这个函数永远不会被调用，且执行就崩溃。另有重复的热力图初始化代码。</p>
+      </div>
+      <div>
+        <p class="text-xs font-bold text-green-400 mb-1">✅ 方案</p>
+        <p class="text-sm text-slate-300"><span class="text-red-400 font-bold">直接删除</span> 第159-164行。合并重复的热力图初始化。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 5: 死 Hook -->
+  <div class="card p-6 mb-5">
+    <div class="flex items-start justify-between mb-4">
+      <div><span class="text-xs text-slate-500 mr-2">#5</span><span class="px-3 py-1 rounded-full text-xs font-bold badge-worth">Worth Exploring</span></div>
+      <span class="text-xs text-slate-600">useDashboardCharts.js</span>
+    </div>
+    <h3 class="text-lg font-bold text-white mb-3">useDashboardCharts.js — 写好但从未使用</h3>
+    <div class="grid md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <p class="text-xs font-bold text-blue-400 mb-1">🚫 问题</p>
+        <p class="text-sm text-slate-300">提供了完整的图表生命周期管理（init/dispose/resize），但 BigScreen 用4个独立ref手动管理——Shallow Module。</p>
+      </div>
+      <div>
+        <p class="text-xs font-bold text-green-400 mb-1">✅ 方案</p>
+        <p class="text-sm text-slate-300">BigScreen 使用它替代手动的4个ref，减少约30行样板代码。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 6: 数据字段不一致 -->
+  <div class="card p-6 mb-5">
+    <div class="flex items-start justify-between mb-4">
+      <div><span class="text-xs text-slate-500 mr-2">#6</span><span class="px-3 py-1 rounded-full text-xs font-bold badge-worth">Worth Exploring</span></div>
+      <span class="text-xs text-slate-600">数据层</span>
+    </div>
+    <h3 class="text-lg font-bold text-white mb-3">数据字段命名不一致 — 缺统一 Adapter</h3>
+    <div class="grid md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <p class="text-xs font-bold text-blue-400 mb-1">🚫 问题</p>
+        <p class="text-sm text-slate-300">BigScreen 第262行映射了 <code class="text-yellow-400">rName || r_name</code>、<code class="text-yellow-400">rLat || r_lat || rlat</code> 等变体。MapContainer第94行又做了一遍。数据清洗逻辑散落两处。</p>
+      </div>
+      <div>
+        <p class="text-xs font-bold text-green-400 mb-1">✅ 方案</p>
+        <p class="text-sm text-slate-300">创建 <code class="text-white font-bold">adapters/serviceOrderAdapter.js</code> 统一规范化，所有组件通过Adapter消费。</p>
+      </div>
+    </div>
+    <div class="diagram-box p-4">
+      <pre class="mermaid">
+graph LR
+    subgraph "当前: 各自清洗"
+        API1[API] --> BS1[BigScreen清洗]
+        API2[API] --> MC1[MapContainer清洗]
+    end
+    subgraph "改进: 统一Adapter"
+        API3[API] --> AD[ServiceOrderAdapter]
+        AD --> BS2[BigScreen直接使用]
+        AD --> MC2[MapContainer直接使用]
+    end
+      </pre>
+    </div>
+  </div>
+
+  <!-- Card 7: API Key -->
+  <div class="card p-6 mb-5">
+    <div class="flex items-start justify-between mb-4">
+      <div><span class="text-xs text-slate-500 mr-2">#7</span><span class="px-3 py-1 rounded-full text-xs font-bold badge-worth">Worth Exploring</span></div>
+      <span class="text-xs text-slate-600">安全配置</span>
+    </div>
+    <h3 class="text-lg font-bold text-white mb-3">AMap API Key 硬编码</h3>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div>
+        <p class="text-xs font-bold text-blue-400 mb-1">🚫 问题</p>
+        <p class="text-sm text-slate-300">高德Key <code class="text-yellow-400">3b1255de...</code> 和 securityJsCode 硬编码在 MapContainer、DispatchAnalysis 等多个文件中。</p>
+      </div>
+      <div>
+        <p class="text-xs font-bold text-green-400 mb-1">✅ 方案</p>
+        <p class="text-sm text-slate-300">提取到 <code class="text-white">.env</code> → <code>VITE_AMAP_KEY</code>，通过 <code>import.meta.env</code> 读取。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 8: 缺少状态 -->
+  <div class="card p-6 mb-5">
+    <div class="flex items-start justify-between mb-4">
+      <div><span class="text-xs text-slate-500 mr-2">#8</span><span class="px-3 py-1 rounded-full text-xs font-bold badge-worth">Worth Exploring</span></div>
+      <span class="text-xs text-slate-600">BigScreen.vue</span>
+    </div>
+    <h3 class="text-lg font-bold text-white mb-3">缺少加载/错误/空状态处理</h3>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div>
+        <p class="text-xs font-bold text-blue-400 mb-1">🚫 问题</p>
+        <p class="text-sm text-slate-300">fetchAll() 失败只有 console.error，用户看到空白页。接口不完整——调用者不知道模块可能有 loading/error/empty 三种状态。</p>
+      </div>
+      <div>
+        <p class="text-xs font-bold text-green-400 mb-1">✅ 方案</p>
+        <p class="text-sm text-slate-300">引入 <code class="text-white">{ loading, error, data }</code> 三态模式，loading 显示骨架屏，error 显示重试按钮。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 9: 热力图 -->
+  <div class="card p-6 mb-5">
+    <div class="flex items-start justify-between mb-4">
+      <div><span class="text-xs text-slate-500 mr-2">#9</span><span class="px-3 py-1 rounded-full text-xs font-bold badge-spec">Speculative</span></div>
+      <span class="text-xs text-slate-600">MapContainer / DispatchAnalysis</span>
+    </div>
+    <h3 class="text-lg font-bold text-white mb-3">热力图逻辑在两处独立实现</h3>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div>
+        <p class="text-xs font-bold text-blue-400 mb-1">🚫 问题</p>
+        <p class="text-sm text-slate-300">MapContainer 和 DispatchAnalysis 各自独立创建 AMap.HeatMap，参数相似但不同。</p>
+      </div>
+      <div>
+        <p class="text-xs font-bold text-green-400 mb-1">✅ 方案</p>
+        <p class="text-sm text-slate-300">提取 <code class="text-white">useHeatmap(map, options)</code> composable。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 10: CSS -->
+  <div class="card p-6 mb-5">
+    <div class="flex items-start justify-between mb-4">
+      <div><span class="text-xs text-slate-500 mr-2">#10</span><span class="px-3 py-1 rounded-full text-xs font-bold badge-spec">Speculative</span></div>
+      <span class="text-xs text-slate-600">全局样式</span>
+    </div>
+    <h3 class="text-lg font-bold text-white mb-3">科技风 CSS 在4个文件中重复</h3>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div>
+        <p class="text-xs font-bold text-blue-400 mb-1">🚫 问题</p>
+        <p class="text-sm text-slate-300">玻璃拟态/科技蓝边框/backdrop-filter 在 BigScreen、Cards、ConvergeAnalysis、TheHeader 中各自定义。</p>
+      </div>
+      <div>
+        <p class="text-xs font-bold text-green-400 mb-1">✅ 方案</p>
+        <p class="text-sm text-slate-300">抽到 <code class="text-white">assets/styles/theme.css</code>，用 CSS 变量统一管理。</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============ 总结 ============ -->
+<section class="max-w-6xl mx-auto mt-12 mb-8">
+  <div class="highlight-line mb-6"></div>
+  <h2 class="text-xl font-bold text-slate-200 mb-4">📊 总结与优先级</h2>
+
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="text-left text-slate-400 border-b border-slate-700">
+          <th class="pb-2">#</th><th class="pb-2">问题</th><th class="pb-2">严重性</th><th class="pb-2">影响</th><th class="pb-2">建议顺序</th>
+        </tr>
+      </thead>
+      <tbody class="text-slate-300">
+        <tr class="border-b border-slate-800/50"><td class="py-2">3</td><td>Cards Props 不匹配</td><td class="text-red-400">🔴 Bug</td><td>数据显示错误</td><td>🥇 第1优先</td></tr>
+        <tr class="border-b border-slate-800/50"><td class="py-2">4</td><td>MapContainer 死代码</td><td class="text-red-400">🔴 Bug</td><td>潜在崩溃</td><td>🥈 第2优先</td></tr>
+        <tr class="border-b border-slate-800/50"><td class="py-2">6</td><td>数据字段不一致</td><td class="text-orange-400">🟠 技术债</td><td>维护困难</td><td>🥉 第3优先</td></tr>
+        <tr class="border-b border-slate-800/50"><td class="py-2">7</td><td>API Key 硬编码</td><td class="text-orange-400">🟠 安全</td><td>密钥泄露</td><td>第4优先</td></tr>
+        <tr class="border-b border-slate-800/50"><td class="py-2">8</td><td>缺少加载/错误状态</td><td class="text-orange-400">🟠 体验</td><td>用户困惑</td><td>第5优先</td></tr>
+        <tr class="border-b border-slate-800/50"><td class="py-2">5</td><td>useDashboardCharts 未用</td><td class="text-yellow-400">🟡 死代码</td><td>浪费</td><td>第6优先</td></tr>
+        <tr class="border-b border-slate-800/50"><td class="py-2">1</td><td>BigScreen 超级组件</td><td class="text-blue-400">🔵 架构</td><td>可维护性</td><td>第7优先</td></tr>
+        <tr class="border-b border-slate-800/50"><td class="py-2">2</td><td>ConvergeAnalysis 巨型</td><td class="text-blue-400">🔵 架构</td><td>可测试性</td><td>第8优先</td></tr>
+        <tr class="border-b border-slate-800/50"><td class="py-2">9</td><td>热力图重复</td><td class="text-slate-400">⚪ 重复</td><td>维护成本</td><td>第9优先</td></tr>
+        <tr><td class="py-2">10</td><td>CSS 重复</td><td class="text-slate-400">⚪ 样式</td><td>维护成本</td><td>第10优先</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-8 p-6 rounded-xl bg-gradient-to-r from-blue-900/30 to-cyan-900/20 border border-blue-500/20">
+    <h3 class="text-lg font-bold text-blue-300 mb-2">🏆 Top 推荐</h3>
+    <p class="text-sm text-slate-300 leading-relaxed">
+      最紧急：<span class="text-red-400 font-bold">#3 Cards Props Bug</span> + <span class="text-red-400 font-bold">#4 MapContainer 死代码</span>（影响运行正确性）。
+      基础建设：<span class="text-orange-400 font-bold">#6 统一 Adapter</span>（后续重构的基础）。
+      架构升级：<span class="text-blue-400 font-bold">#1/#2 拆分超级组件</span>（需仔细规划）。
+    </p>
+  </div>
+</section>
+
+<footer class="text-center text-xs text-slate-600 py-6">
+  由 <span class="text-blue-400">mattpocock/skills improve-codebase-architecture</span> 生成 ·
+  DeepSeek V4 Pro · 2026-06-10 ·
+  报告位置: <span class="text-slate-500">E:\桌面\养老系统\JSAPI_Vue3_2\architecture-review.html</span>
+</footer>
+
+</body>
+</html>
