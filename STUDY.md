@@ -419,3 +419,81 @@ const isExcluded = riverZones.some(z => turf.booleanPointInPolygon(pt, z));
 |---|---|
 | `src/views/ConvergeAnalysis.vue` | 四要素渲染+评分+赣江+图例 |
 | `src/data/real_parks.json` | 新增，193条真公园数据 |
+
+
+---
+
+# 思维导图：养老系统大屏项目全流程
+
+```
+养老系统大屏项目改造
+│
+├─ 一、Git 基础
+│   ├─ 安全操作：git checkout -b 建分支
+│   ├─ 查看：status / diff / log / show
+│   ├─ 提交流程：add → commit → push
+│   ├─ 回退：restore / reset --soft / reset --hard
+│   └─ 关联远程：git remote add → git push -u
+│
+├─ 二、Bug 修复
+│   ├─ Cards.vue Props 不匹配
+│   │   ├─ 问题：传 Array 声明 Number → 卡片永远 0
+│   │   └─ 修法：改 Props 为 Array，内部 .length
+│   │
+│   └─ MapContainer.vue 死代码
+│       ├─ stopPlayback() 引用 4 个未声明变量
+│       └─ 热力图重复初始化 → 删除
+│
+├─ 三、地图四要素可视化（ConvergeAnalysis.vue）
+│   ├─ 🏥 医疗设施
+│   │   └─ 青色圆点 CircleMarker r=4  #22d3ee
+│   │
+│   ├─ 🌳 公园
+│   │   ├─ 绿色方块 10x10  #10b981
+│   │   ├─ 数据源换为 real_parks.json（193 条真公园）
+│   │   └─ 旧数据 91 条中 80 条是体育场馆（篮球公园等）
+│   │
+│   ├─ 🚇 地铁（重点改造）
+│   │   ├─ 散点 → 面状服务区
+│   │   │   ├─ 同名站清洗：去括号/去出入口/去号口 → 统一站名
+│   │   │   ├─ 凸包 turf.convex + 分级缓冲（300/350/400m）
+│   │   │   └─ 蓝色 AMap.Polygon + 站名 Text 标签
+│   │   │
+│   │   └─ 评分改造
+│   │       ├─ 旧：0.8km 内数出口散点（多出口站虚高）
+│   │       └─ 新：booleanPointInPolygon 判断是否在服务区面内
+│   │           └─ 每站 +15 分，上限 30 分
+│   │
+│   └─ 🛣️ 道路环境（邻避）
+│       ├─ 散点 → 按道路名分组 → 连线缓冲成面（300m）
+│       ├─ 单点：红色三角标记
+│       └─ 文案：邻避 → 高架/快速路环境影响
+│
+├─ 四、赣江多分支排除
+│   ├─ 结构：主河道 → 分支1 → 分支2 → 分支2.1 → 支线2.2
+│   ├─ 缓冲递减：0.65 → 0.50 → 0.50 → 0.40 → 0.35 km
+│   ├─ ⚠️ 大坑：turf.union 不重叠返回 null
+│   └─ 解法：数组 .some() 逐个判断，不用 union 合并
+│
+├─ 五、UX 优化
+│   ├─ 图例：地图要素说明（4 种 + 评分等级）
+│   ├─ 站名标签：AMap.Text 蓝色标签
+│   ├─ 评分基础分：保持 65（已排除不可建区域）
+│   └─ 执行顺序：renderEnvironmentLayers → startAnalysis
+│
+├─ 六、踩过的坑
+│   ├─ turf.union 不重叠返回 null → 用数组逐判
+│   ├─ AMap.Marker div 不显示 → 加 display:inline-block;font-size:0
+│   ├─ 同名站清洗不完整 → 统一处理出入口/号口/括号
+│   ├─ 漏写变量声明 → facilityMarkers 未定义
+│   ├─ 渲染在评分之后 → transitPolygons 为空
+│   └─ PowerShell 中文乱码 → 用英文参数
+│
+└─ 七、架构审查（improve-codebase-architecture）
+    ├─ BigScreen.vue 737 行超级组件
+    ├─ ConvergeAnalysis.vue 1227 行巨型组件
+    ├─ useDashboardCharts.js 写好但未使用
+    ├─ 数据字段命名不一致（rName/r_name）
+    ├─ AMap Key 硬编码
+    └─ CSS 玻璃拟态重复定义
+```
