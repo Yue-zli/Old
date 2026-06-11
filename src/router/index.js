@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Login from '../views/Login.vue'
-import BigScreen from '../components/BigScreen.vue'
+import BigScreen from '../views/BigScreen.vue'
 import Requesters from '../views/Requesters.vue'
 import DispatchAnalysis from '../views/DispatchAnalysis.vue'
 import RoutePlanner from '../views/RoutePlanner.vue'

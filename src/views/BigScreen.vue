@@ -146,17 +146,17 @@ import { mockManagers, mockVolunteers } from '../data/mockUsers.js';
 
 
 //组件
-import TheHeader from '../components/TheHeader.vue';
-import MapContainer from './MapContainer.vue';
-import PlaybackPanel from './PlaybackPanel.vue';
-import Cards from './Cards.vue';
-import AgeChart from './Charts/AgeChart.vue';
-import GenderChart from './Charts/GenderChart.vue';
-import TypeChart from './Charts/TypeChart.vue';
-import TrendChart from './Charts/TrendChart.vue';
+import TheHeader from '../components/dashboard/TheHeader.vue';
+import MapContainer from '../components/dashboard/MapContainer.vue';
+import PlaybackPanel from '../components/dashboard/PlaybackPanel.vue';
+import Cards from '../components/dashboard/Cards.vue';
+import AgeChart from '../components/dashboard/charts/AgeChart.vue';
+import GenderChart from '../components/dashboard/charts/GenderChart.vue';
+import TypeChart from '../components/dashboard/charts/TypeChart.vue';
+import TrendChart from '../components/dashboard/charts/TrendChart.vue';
 
 //播放逻辑
-import { usePlayback } from '../views/usePlayback.js';
+import { usePlayback } from '../hooks/usePlayback.js';
 
 const router = useRouter();
 
