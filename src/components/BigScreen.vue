@@ -3,11 +3,36 @@
     <!--回放控制面板-->
 
 
-    <TheHeader 
+    <TheHeader
       :current-Mode="currentMode"
       @switch-mode="handleModeSwitch"
     />
+
+    <!-- KPI 概览栏：总量统计 + 快捷操作 -->
     <div class="kpi-overview">
+      <div class="kpi-item">
+        <div class="kpi-value">{{ totalStats.total }}</div>
+        <div class="kpi-label">{{ totalStats.label }}</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">{{ managers.length }}</div>
+        <div class="kpi-label">在岗管理</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">{{ volunteers.length }}</div>
+        <div class="kpi-label">注册志愿</div>
+      </div>
+      <div class="kpi-actions">
+        <button class="action-btn heatmap-btn" :class="{ active: heatmap }" @click="toggleHeatmap" title="切换热力图">
+          🔥 {{ heatmap ? '热力开' : '热力关' }}
+        </button>
+        <button class="action-btn nav-btn" @click="goAnalysis" title="跳转设施覆盖评价">
+          📊 设施覆盖
+        </button>
+        <button class="action-btn nav-btn" @click="goList" title="跳转需求者列表">
+          📋 需求列表
+        </button>
+      </div>
     </div>
 
     <main class="main">
@@ -20,10 +45,11 @@
           <div class="date-display">{{ selectedDateStr }} 调度监控中</div>
         </div>
         <div class="map-container-box" style="position: relative">
-          <MapContainer 
-            :services="displayOrders" 
+          <MapContainer
+            :services="displayOrders"
+            :heatmap="heatmap"
             :currentMode="currentMode"
-            @marker-click="openDetail" 
+            @marker-click="openDetail"
           />
           <PlaybackPanel
             :isPlaying="isPlaying"
@@ -270,14 +296,14 @@ async function fetchAll() {
       publishTime: item.publishTime || item.publish_time || item.publishtime
     }));
     initDisplayOrders();
-    
-    //静态图表
-    ageData.value = await api.statElderlyAge(60,70,80);
-    genderData.value = await api.statElderlyGender();
-    typeData.value = await api.statServiceType();
+
+    // 静态图表各自独立请求，一个挂不影响其他（带日志便于排查）
+    try { ageData.value = await api.statElderlyAge(60,70,80); console.log('年龄数据:', ageData.value); } catch (e) { console.error('年龄统计失败:', e); }
+    try { genderData.value = await api.statElderlyGender(); console.log('性别数据:', genderData.value); } catch (e) { console.error('性别统计失败:', e); }
+    try { typeData.value = await api.statServiceType(); console.log('服务类型数据:', typeData.value); } catch (e) { console.error('服务类型统计失败:', e); }
 
   } catch (e) {
-    console.error('数据加载失败:', e);
+    console.error('订单数据加载失败:', e);
   }
 }
 
@@ -314,7 +340,7 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-/* 仪表盘整体布局 */
+/* ===== 全局布局 ===== */
 .dashboard {
   height: 100vh;
   display: flex;
@@ -323,78 +349,86 @@ onBeforeUnmount(() => {
   overflow: hidden;
 }
 
-.kpi-overview{
+/* ===== KPI 概览栏（紧凑） ===== */
+.kpi-overview {
   display: flex;
-  justify-content: space-around;
-  padding: 20px 0;
-  background: rgba(16,24,48,0.8);
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 24px;
+  background: rgba(16, 24, 48, 0.9);
   border-bottom: 1px solid rgba(59, 130, 246, 0.2);
-  backdrop-filter: blur(10px); /* 磨砂玻璃效果 */
+  backdrop-filter: blur(10px);
+  gap: 24px;
 }
+.kpi-item { text-align: center; flex-shrink: 0; }
+.kpi-value { font-size: 22px; font-weight: 800; color: #3b82f6; text-shadow: 0 0 10px rgba(59, 130, 246, 0.4); }
+.kpi-label { font-size: 10px; color: #64748b; margin-top: 1px; letter-spacing: 1px; }
 
-.kpi-item { text-align: center; }
-.kpi-value { font-size: 28px; font-weight: bold; color: #3b82f6; text-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
-.kpi-label { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+.kpi-actions { display: flex; gap: 6px; margin-left: auto; }
+.action-btn.heatmap-btn,
+.action-btn.nav-btn {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  color: #94a3b8;
+  padding: 5px 12px;
+  border-radius: 5px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.25s;
+  white-space: nowrap;
+}
+.action-btn.heatmap-btn:hover,
+.action-btn.nav-btn:hover { background: rgba(59, 130, 246, 0.15); border-color: #3b82f6; color: #e2e8f0; }
+.action-btn.heatmap-btn.active { background: rgba(245, 158, 11, 0.2); border-color: #f59e0b; color: #f59e0b; box-shadow: 0 0 10px rgba(245, 158, 11, 0.3); }
 
-/* 主内容区域 */
+/* ===== 主内容区：地图 60% + 图表 40% ===== */
 .main {
   display: flex;
   flex: 1;
-  padding: 16px;
-  gap: 16px;
+  padding: 12px;
+  gap: 12px;
   overflow: hidden;
 }
 
+/* 左侧地图面板 */
 .left-panel {
-  flex: 1.2;
+  flex: 3;
   display: flex;
   flex-direction: column;
   background: #0d1425;
   border-radius: 8px;
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  border: 1px solid rgba(59, 130, 246, 0.25);
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
-
+  overflow: hidden;
 }
-
 .panel-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 16px;
+  justify-content: space-between;
+  padding: 10px 16px;
+  font-size: 14px;
   font-weight: bold;
-  color: #60a5fa; /* 科技蓝 */
-  text-shadow: 0 0 10px rgba(96, 165, 250, 0.5); /* 增加微弱发光 */
+  color: #60a5fa;
+  background: rgba(13, 20, 37, 0.6);
+  border-bottom: 1px solid rgba(59, 130, 246, 0.15);
+  text-shadow: 0 0 8px rgba(96, 165, 250, 0.4);
 }
-
 .map-container-box {
-  width: 100%;
-  height: 100%; /* 或者固定高度，不能为0 */
+  flex: 1;
   overflow: hidden;
+  position: relative;
 }
 
+/* 右侧图表面板 */
 .right-panel {
-  flex: 0.8;
+  flex: 2;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-
+  gap: 8px;
+  min-width: 0;
 }
 
-/* 统计卡片保持紧凑 */
-
-
-.card-label {
-  font-size: 11px;
-  color: #64748b;
-}
-
-.card-value {
-  font-size: 20px;
-  font-weight: bold;
-  color: #1e40af;
-}
-
-/* 图表区块优化 */
+/* ===== 图表区：三段比例 ===== */
 .charts-section {
   flex: 1;
   display: flex;
@@ -404,142 +438,70 @@ onBeforeUnmount(() => {
   overflow: hidden;
 }
 
-/* 年龄 + 性别图行：固定占 22% 高度 */
+/* 上段：年龄 + 性别 (22%) — 紧凑 */
 .charts-upper {
   display: flex;
   gap: 8px;
-  flex: 0 0 22%;
+  flex: 2.2;
   min-height: 0;
 }
+.charts-upper > * { flex: 1; min-width: 0; min-height: 0; }
 
-.charts-upper > * {
-  flex: 1;
-  min-width: 0;
-  min-height: 0;
-}
-
-/* 趋势图：占最多空间 flex:2 */
+/* 中段：趋势图 (56%) — 主力图表给最多空间 */
 .trend-analysis-box {
-  flex: 2;
+  flex: 5.6;
   display: flex;
   flex-direction: column;
   min-height: 0;
   overflow: hidden;
 }
 
-/* full-width 去掉固定高度，改为 100% 撑满父容器 */
-.full-width {
-  width: 100%;
-  height: 100%;
-}
-
-/* 服务类型图：固定占 22% */
+/* 下段：服务类型占比 (22%) — 紧凑 */
 .lower-group {
-  flex: 0 0 22%;
+  flex: 2.2;
   min-height: 0;
   overflow: hidden;
 }
 
-.flex-grow {
-  flex: 1.5;
-}
+.full-width { width: 100%; height: 100%; }
 
-
-
-/* 图例缩小并放入组内 */
-.legend-box.mini {
-  flex: 1;
-  padding: 10px;
-  background: white;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
-  overflow: hidden;
-}
-
-.legend-title {
-  font-size: 12px;
-  margin-bottom: 8px;
-  color: #1e3a8a;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 4px;
-}
-
-.svc-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.svc-list li {
-  font-size: 10px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-bottom: 4px;
-  white-space: nowrap;
-}
-
-.svc-badge {
-  background: #dbeafe;
-  color: #1e40af;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 9px;
-  font-weight: bold;
-}
-
-/* 详情弹窗 */
+/* ===== 详情弹窗（暗色主题） ===== */
 .detail-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
   z-index: 2000;
 }
-
 .detail-side {
   position: absolute;
   right: 20px;
   top: 70px;
-  width: 280px;
-  background: white;
-  border-radius: 8px;
+  width: 300px;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(12px);
+  border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  border-top: 4px solid #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
-
 .detail-header {
-  font-size: 18px;
+  font-size: 16px;
+  color: #e2e8f0;
   margin-bottom: 10px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(59, 130, 246, 0.2);
   padding-bottom: 8px;
 }
-
 .detail-row {
   display: flex;
   flex-direction: column;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   font-size: 13px;
+  color: #cbd5e1;
 }
-
-.detail-row label {
-  color: #94a3b8;
-  font-size: 11px;
-}
-
-.status-done { 
-  color: #10b981;
-  font-weight: bold;
-}
-
-.status-doing {
-  color: #f59e0b;
-  font-weight: bold;
-}
+.detail-row label { color: #64748b; font-size: 10px; letter-spacing: 1px; }
+.status-done { color: #10b981; font-weight: bold; }
+.status-doing { color: #f59e0b; font-weight: bold; }
 
 .trend-header {
   display: flex;
@@ -700,35 +662,20 @@ onBeforeUnmount(() => {
   animation: spin 1s linear infinite;
 }
 
-/* 💡 统一管理所有子组件的容器 */
+/* ===== 图表通用容器：暗色科技风 ===== */
 :deep(.chart-container) {
-  width: 100%;
-  height: 100%;
-  background: rgba(16, 24, 48, 0.4) !important; /* 透明深蓝背景 */
-  backdrop-filter: blur(8px); /* 磨砂效果 */
-  border: 1px solid rgba(59, 130, 246, 0.2) !important; /* 科技蓝边框 */
+  width: 100%; height: 100%;
+  background: rgba(16, 24, 48, 0.5) !important;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(59, 130, 246, 0.2) !important;
   border-radius: 8px;
   position: relative;
   overflow: hidden;
-  box-shadow: inset 0 0 15px rgba(59, 130, 246, 0.1);
   transition: all 0.3s ease;
 }
-
-/* 💡 增加发光装饰边角 */
-:deep(.chart-container::before) {
-  content: "";
-  position: absolute;
-  top: 0; left: 0;
-  width: 10px; height: 10px;
-  border-top: 2px solid #60a5fa;
-  border-left: 2px solid #60a5fa;
-  z-index: 1;
-}
-
-/* 💡 鼠标悬停时的发光互动 */
 :deep(.chart-container:hover) {
-  border-color: rgba(59, 130, 246, 0.5) !important;
-  box-shadow: inset 0 0 30px rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.4) !important;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
 }
 
 @keyframes spin {

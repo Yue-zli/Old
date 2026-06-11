@@ -497,3 +497,550 @@ const isExcluded = riverZones.some(z => turf.booleanPointInPolygon(pt, z));
     ├─ AMap Key 硬编码
     └─ CSS 玻璃拟态重复定义
 ```
+
+
+---
+
+# 2026-06-11（下）医院服务半径 + 分级查询 + UX 优化
+
+## 一、医疗覆盖率：点判定 → 服务半径面
+
+**文件**：`src/views/ConvergeAnalysis.vue` — `executeAnalysis()` 函数
+
+### 1.1 删旧代码：points 点集合
+
+```js
+// ❌ 删除：医院作为散点 FeatureCollection，在格子里数点
+// const points = turf.featureCollection(facilityData.map((d) => {
+//   return turf.point([d.lng, d.lat], { name: d.name, type: d.type, tier: getHospitalTier(d.type) });
+// }));
+// const turfPoints = turf.featureCollection(facilityData.map(d => turf.point([d.lng, d.lat])));
+```
+
+### 1.2 新代码：hospitalBuffers 服务区面
+
+```js
+// ✅ 新增：每个医院生成服务半径缓冲面
+// 三甲3km / 综合2km / 专科1km，用于判断网格中心是否被覆盖
+const hospitalBuffers = facilityData.map(d => {
+  const tier = getHospitalTier(d.type);                         // 1=三甲 2=综合 3=专科
+  const radiusKm = tier === 1 ? 3 : tier === 2 ? 2 : 1;       // 等级越高半径越大
+  const weight   = tier === 1 ? 3 : tier === 2 ? 2 : 1;       // 权重：三甲×3 综合×2 专科×1
+  return {
+    buffer: turf.buffer(                                       // Turf.js 点→圆面
+      turf.point([d.lng, d.lat]),
+      radiusKm,
+      { units: 'kilometers' }
+    ),
+    name: d.name, tier, weight, lng: d.lng, lat: d.lat
+  };
+});
+```
+
+### 1.3 网格覆盖判定替换
+
+```js
+// ❌ 删除：格子里数医院点
+// const ptsInGrid = turf.pointsWithinPolygon(points, cell);
+// const medicalWeight = ptsInGrid.features.reduce((sum, f) => { ... }, 0);
+// const medicalCount = ptsInGrid.features.length;
+
+// ✅ 替换：判断格子中心在哪些医院的服务区面内
+const covering = hospitalBuffers.filter(h => {
+  try {
+    return turf.booleanPointInPolygon(currentCenterPt, h.buffer);
+  } catch (e) { return false; }
+});
+const medicalWeight = covering.reduce((s, h) => s + h.weight, 0);  // 加权分（仅用于覆盖率统计）
+const medicalCount  = covering.length;                              // 覆盖医院数
+cell.properties.count = medicalWeight;
+if (medicalWeight >= 1) coveredCells++;  // 覆盖率统计：有任意医院覆盖就算
+```
+
+### 1.4 弹窗引用替换
+
+```js
+// ❌ 删除
+// if (ptsInGrid.features.some(f => ...))          // 拟建检查
+// const names = ptsInGrid.features.map(f => ...)   // 医院名列表
+
+// ✅ 替换为 covering
+if (covering.some(h => h.name.includes('拟建'))) score += 15;
+const names = covering.map(h => `<li>📍 ${h.name}</li>`).join('');
+```
+
+### 1.5 效果
+
+三甲 1 家 3km 半径覆盖 ~110 个格子（改前只覆盖所在格子）。
+
+---
+
+## 二、医院 200m 聚类合并
+
+**文件**：`src/views/ConvergeAnalysis.vue` — `renderEnvironmentLayers()` — 设施渲染块
+
+**场景**：同一医院的门诊部+住院部 200m 内 → 合并为一个点显示
+
+### 2.1 距离计算（Haversine 近似）
+
+```js
+// 用经纬度差近似计算两点间距离（米），比 turf.distance 快，200m 精度足够
+const dist = (a, b) => {
+  const dx = (a.lng - b.lng) * 111320 * Math.cos((a.lat + b.lat) / 2 * Math.PI / 180);
+  const dy = (a.lat - b.lat) * 111320;
+  return Math.sqrt(dx * dx + dy * dy);
+};
+```
+
+### 2.2 聚类逻辑
+
+```js
+// 遍历所有医院，200m 内归入同一 cluster
+const clusters = [];
+facilityData.forEach(item => {
+  let found = false;
+  for (const c of clusters) {
+    if (dist(item, c.rep) < 200) {        // 距离 < 200 米 → 合并
+      c.members.push(item);
+      found = true;
+      break;
+    }
+  }
+  if (!found) clusters.push({ rep: item, members: [item] });  // 新 cluster
+});
+```
+
+### 2.3 每个 cluster 取代表
+
+```js
+clusters.forEach(cluster => {
+  // 取簇内最高等级（数字最小 = 等级最高）
+  const bestTier = Math.min(...cluster.members.map(m => getTier(m.type)));
+
+  // 主名取最短（去括号后），副名在悬浮提示里展示
+  const names = cluster.members.map(m =>
+    m.name.replace(/[\(\（][^)）]*[\)\）]/g, '').trim()
+  );
+  const mainName = names.reduce((a, b) => a.length <= b.length ? a : b);
+  const extraCount = cluster.members.length - 1;
+
+  // 悬浮提示：合并后显示"主名 + N个附属设施"
+  const tooltip = extraCount > 0
+    ? `${mainName} + ${extraCount}个附属设施\n${cluster.members.map(m => '  ' + m.name).join('\n')}`
+    : cluster.members[0].name;
+
+  // ...后续渲染逻辑（大小、颜色、点击事件等）
+});
+```
+
+---
+
+## 三、医院三级分级渲染
+
+### 3.1 大小和颜色配置
+
+```js
+// 根据等级决定渲染参数
+const config = bestTier === 1
+  ? { radius: 6, fillColor: '#06b6d4', opacity: 1.0, zIndex: 125 }   // 三甲：亮青大圆 白边
+  : bestTier === 2
+  ? { radius: 4, fillColor: '#0ea5e9', opacity: 0.85, zIndex: 120 }  // 综合：中蓝圆
+  : { radius: 2.5, fillColor: '#64748b', opacity: 0.7, zIndex: 115 }; // 专科：灰蓝小圆（不抢眼）
+```
+
+### 3.2 渲染并存储等级标签
+
+```js
+const dot = new AMap.CircleMarker({
+  center: [rep.lng, rep.lat],
+  radius: config.radius,
+  fillColor: config.fillColor,
+  fillOpacity: config.opacity,
+  strokeColor: bestTier === 1 ? '#fff' : '#020617',
+  strokeWeight: bestTier === 1 ? 2 : 0.5,
+  zIndex: config.zIndex,
+  title: tooltip          // 悬浮提示：合并后的名称
+});
+dot._tier = bestTier;     // ⚡ 关键：存储等级，供分级查询按钮使用
+dot.setMap(map);
+facilityMarkers.push(dot);
+
+// 三甲额外加名称标签（AMap.Text）
+if (bestTier === 1) {
+  const label = new AMap.Text({
+    text: mainName.length > 8 ? mainName.slice(0, 8) + '...' : mainName,
+    position: [rep.lng, rep.lat],
+    offset: new AMap.Pixel(10, -10),
+    style: {
+      'font-size': '9px',
+      'color': '#cffafe',
+      'background-color': 'rgba(0,0,0,0.6)',
+      'border-color': '#06b6d4',
+      'border-width': '1px',
+      'border-style': 'solid',
+      'border-radius': '2px',
+      'padding': '1px 4px',
+    },
+    zIndex: 126
+  });
+  label._tier = bestTier; // ⚡ 标签也存等级，跟 marker 同步显隐
+  label.setMap(map);
+  facilityMarkers.push(label);
+}
+```
+
+---
+
+## 四、点击医院查周边公园+地铁
+
+```js
+// 绑定点击事件：查看 1km 内公园和地铁站
+dot.on('click', () => {
+  const nearbyParks = [];
+  const nearbyStations = new Set();  // Set 自动去重（多出口 → 同一站名）
+
+  // ① 遍历公园：1km 内按距离排序，取最近 5 个
+  if (parkFeatures && parkFeatures.features) {
+    parkFeatures.features.forEach(p => {
+      const d = turf.distance(
+        turf.point([rep.lng, rep.lat]), p,
+        { units: 'kilometers' }
+      );
+      if (d <= 1) nearbyParks.push({ name: p.properties.name, dist: d });
+    });
+  }
+
+  // ② 遍历地铁口：1km 内，清洗站名去重
+  if (transitFeatures && transitFeatures.features) {
+    transitFeatures.features.forEach(t => {
+      const d = turf.distance(
+        turf.point([rep.lng, rep.lat]), t,
+        { units: 'kilometers' }
+      );
+      if (d <= 1) {
+        // 清洗："八一广场(地铁站)" / "地铁大厦地铁站地铁·更新天地南口" → "八一广场" / "地铁大厦"
+        let sn = (t.properties.name || '')
+          .replace(/[\(\（][^)）]*[\)\）]/g, '')
+          .replace(/地铁站|出入口|\d+号口|[A-Z]口|[南北东西]口/g, '')
+          .replace(/·.+$/, '')
+          .trim();
+        if (sn) nearbyStations.add(sn);
+      }
+    });
+  }
+
+  // ③ 拼接弹窗 HTML
+  const tierName = bestTier === 1 ? '三级甲等' : bestTier === 2 ? '综合医院' : '专科/其他';
+  const membersHTML = cluster.members.length > 1
+    ? `<div style="font-size:10px;color:#64748b;margin-bottom:4px">
+         含：${cluster.members.map(m => m.name).join('、')}
+       </div>`
+    : '';
+
+  const parkList = nearbyParks.length > 0
+    ? nearbyParks
+        .sort((a, b) => a.dist - b.dist)           // 最近排前
+        .slice(0, 5)                                 // 最多 5 个
+        .map(p => `<div>🌳 ${p.name} (${(p.dist*1000).toFixed(0)}m)</div>`)
+        .join('')
+    : '<div style="color:#64748b">1km内无公园</div>';
+
+  const stationList = nearbyStations.size > 0
+    ? [...nearbyStations].slice(0, 5)
+        .map(s => `<div>🚇 ${s}</div>`)
+        .join('')
+    : '<div style="color:#64748b">1km内无地铁站</div>';
+
+  // ④ 弹窗
+  infoWindow.setContent(`
+    <div class="custom-info-window" style="min-width:280px">
+      <div style="font-size:14px;font-weight:bold;color:#06b6d4;margin-bottom:2px">
+        🏥 ${mainName}
+      </div>
+      <div style="font-size:11px;color:#94a3b8;margin-bottom:4px">
+        ${tierName}${extraCount > 0 ? ` · 共${cluster.members.length}个设施` : ''}
+      </div>
+      ${membersHTML}
+      <div style="border-top:1px solid rgba(59,130,246,0.2);padding-top:6px;font-size:12px;line-height:1.8">
+        <div style="color:#10b981;font-weight:bold;margin-bottom:2px">🌳 周边公园</div>${parkList}
+        <div style="color:#38bdf8;font-weight:bold;margin-top:6px;margin-bottom:2px">🚇 周边地铁站</div>${stationList}
+      </div>
+    </div>
+  `);
+  infoWindow.open(map, [rep.lng, rep.lat]);
+});
+```
+
+---
+
+## 五、医院分级查询按钮
+
+### 5.1 HTML 模板
+
+```html
+<!-- 新增：地图右上角，工具栏下方的分级查询 -->
+<div class="hospital-filter-overlay">
+  <button class="filter-chip"
+    :class="{ 'chip-active': hospitalFilter === 'all' }"
+    @click="setHospitalFilter('all')">全部医院</button>
+
+  <button class="filter-chip"
+    :class="{ 'chip-active': hospitalFilter === 'tier1' }"
+    @click="setHospitalFilter('tier1')">仅三甲</button>
+
+  <button class="filter-chip"
+    :class="{ 'chip-active': hospitalFilter === 'tier12' }"
+    @click="setHospitalFilter('tier12')">三甲+综合</button>
+
+  <button class="filter-chip"
+    :class="{ 'chip-active': hospitalFilter === 'tier3' }"
+    @click="setHospitalFilter('tier3')">仅专科</button>
+</div>
+```
+
+### 5.2 响应式状态
+
+```js
+const hospitalFilter = ref('all');  // 'all' | 'tier1' | 'tier12' | 'tier3'
+```
+
+### 5.3 过滤逻辑
+
+```js
+const setHospitalFilter = (filter) => {
+  hospitalFilter.value = filter;
+  // 遍历所有设施标记，根据 _tier 属性显示或隐藏
+  facilityMarkers.forEach(m => {
+    if (m._tier === undefined) return;           // 跳过非医院标记
+    if (filter === 'all')   { m.show(); return; }           // 全部
+    if (filter === 'tier1') { m._tier === 1 ? m.show() : m.hide(); return; }  // 仅三甲
+    if (filter === 'tier12') { m._tier <= 2 ? m.show() : m.hide(); return; }  // 三甲+综合
+    if (filter === 'tier3') { m._tier === 3 ? m.show() : m.hide(); return; }  // 仅专科
+  });
+};
+```
+
+### 5.4 CSS
+
+```css
+/* 医院分级查询按钮组：固定在工具栏下方 */
+.hospital-filter-overlay {
+  position: absolute;
+  top: 56px; right: 16px;
+  z-index: 99;
+  display: flex; gap: 6px;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 4px 6px;
+  border-radius: 8px;
+  border: 1px solid rgba(51, 65, 85, 0.5);
+}
+.filter-chip {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.filter-chip:hover { color: #cbd5e1; border-color: rgba(255,255,255,0.15); }
+/* 选中态：亮青色高亮 */
+.filter-chip.chip-active {
+  background: rgba(6,182,212,0.15);
+  color: #06b6d4;
+  border-color: rgba(6,182,212,0.4);
+  font-weight: 600;
+}
+```
+
+---
+
+## 六、评分公式（医院不参与）
+
+```js
+// 选址评分 = 65 + 公园 + 地铁 - 道路（医院只展示，不计分）
+let score = 65
+  + Math.min(30, (pd.count || 0) * 4 * weightPark.value)        // 公园：0.8km内计数
+  + Math.min(30, stationCount * 15 * weightTransit.value)        // 地铁：每站+15，上限30
+  - ((nd.count || 0) * 15 * weightNimby.value);                  // 道路：每条-15
+
+if (covering.some(h => h.name.includes('拟建'))) score += 15;    // 选址模拟加分
+if (nd.minDist < 0.2) score -= 40 * weightNimby.value;           // 紧邻道路重罚
+score = Math.max(0, Math.min(100, Math.floor(score)));
+```
+
+---
+
+## 七、弹窗内容改造
+
+### 7.1 评估模式：分级汇总
+
+```js
+// 统计各等级覆盖数量
+const tier1Count = covering.filter(h => h.tier === 1).length;  // 三甲
+const tier2Count = covering.filter(h => h.tier === 2).length;  // 综合
+const tier3Count = covering.filter(h => h.tier === 3).length;  // 专科
+
+// 拼分级描述（无加权）
+let medicalDesc = '<span style="color:#ef4444;">盲区</span>';
+if (medicalCount > 0) {
+  const parts = [];
+  if (tier1Count) parts.push(`<span style="color:#06b6d4;">三甲×${tier1Count}</span>`);
+  if (tier2Count) parts.push(`<span style="color:#0ea5e9;">综合×${tier2Count}</span>`);
+  if (tier3Count) parts.push(`<span style="color:#94a3b8;">专科×${tier3Count}</span>`);
+  medicalDesc = parts.join(' ');  // 仅展示，不参与评分
+}
+
+// 公园和地铁显示实际加分
+let parkDesc = pd.count > 0
+  ? `<span style="color:#10b981;">${pd.count}处 (+${Math.min(30, pd.count * 4 * weightPark.value)}分)</span>`
+  : `<span style="color:#94a3b8;">无公园</span>`;
+let transitDesc = stationCount > 0
+  ? `<span style="color:#38bdf8;">${stationCount}个站 (+${Math.min(30, stationCount * 15 * weightTransit.value)}分)</span>`
+  : `<span style="color:#f59e0b;">无地铁覆盖</span>`;
+```
+
+### 7.2 普通模式：分级列表（每级最多5家）
+
+```js
+const tier1Names = covering.filter(h => h.tier === 1).map(h => h.name);
+const tier2Names = covering.filter(h => h.tier === 2).map(h => h.name);
+const tier3Count = covering.filter(h => h.tier === 3).length;
+
+let listHTML = '';
+// 三甲：列前5，超出显示"...还有X家"
+if (tier1Names.length) {
+  listHTML += `<div style="color:#06b6d4;font-weight:bold;margin-top:4px;">▸ 三甲 (${tier1Names.length}家)</div>`
+    + tier1Names.slice(0, 5).map(n => `<li>📍 ${n}</li>`).join('')
+    + (tier1Names.length > 5 ? `<li style="color:#64748b;">...还有${tier1Names.length - 5}家</li>` : '');
+}
+// 综合：同上
+if (tier2Names.length) {
+  listHTML += `<div style="color:#0ea5e9;font-weight:bold;margin-top:4px;">▸ 综合 (${tier2Names.length}家)</div>`
+    + tier2Names.slice(0, 5).map(n => `<li>📍 ${n}</li>`).join('')
+    + (tier2Names.length > 5 ? `<li style="color:#64748b;">...还有${tier2Names.length - 5}家</li>` : '');
+}
+// 专科：只报数不列名
+if (tier3Count) {
+  listHTML += `<div style="color:#94a3b8;font-weight:bold;margin-top:4px;">▸ 专科/其他 (${tier3Count}家)</div>`;
+}
+
+// 汇总
+`覆盖 ${medicalCount} 处设施（仅供参考，不参与评分）`
+```
+
+---
+
+## 八、弹窗交互优化
+
+### 8.1 可滚动
+
+```css
+/* 根因：高德 InfoWindow 默认阻止鼠标事件 → 滚动条鼠标碰不到 */
+/* 修复：启用 pointer-events + 限制高度 */
+
+:deep(.amap-info-content) {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  pointer-events: auto !important;   /* ← 关键：启用鼠标交互 */
+  overflow: visible !important;
+}
+
+:deep(.custom-info-window) {
+  background: rgba(15, 23, 42, 0.95) !important;
+  backdrop-filter: blur(6px);
+  border: 1px solid #3b82f6 !important;
+  border-radius: 6px;
+  padding: 12px;
+  min-width: 210px;
+  max-height: 320px;                 /* ← 限制高度 */
+  overflow-y: auto;                  /* ← 超出滚动 */
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+}
+/* 滚动条美化 */
+:deep(.custom-info-window)::-webkit-scrollbar { width: 4px; }
+:deep(.custom-info-window)::-webkit-scrollbar-thumb {
+  background-color: #475569; border-radius: 2px;
+}
+```
+
+### 8.2 关闭逻辑：从定时关闭改为点击关闭
+
+```js
+// ❌ 改前：离开格子 300ms 后自动关 → 鼠标移到弹窗就消失
+polygon.on('mouseout', () => {
+  infoTimer = setTimeout(() => infoWindow.close(), 300);
+});
+
+// ✅ 改后：离开格子只恢复样式，不关弹窗
+// 弹窗通过 infoWindow 自身的 closeWhenClickMap: true 关闭（点击地图任意处）
+polygon.on('mouseout', () => {
+  polygon.setOptions({
+    fillOpacity: showEvaluationMode.value ? 0.15 : baseFillOpacity,
+    strokeWeight: strokeWeight,
+    strokeColor: strokeColor
+  });
+});
+```
+
+---
+
+## 九、工具栏：公园/地铁独立开关
+
+### 9.1 HTML
+
+```html
+<!-- 改前：一个按钮控制所有设施 -->
+<!-- <button @click="toggleLayer('facilities')">🏥 设施</button> -->
+
+<!-- 改后：公园和地铁各自独立 -->
+<button class="toolbar-tile"
+  :class="{ 'active-tile': layerVisibility.parks }"
+  @click="toggleLayer('parks')">
+  <span class="tile-icon">🌳</span><span class="tile-text">公园</span>
+</button>
+<button class="toolbar-tile"
+  :class="{ 'active-tile': layerVisibility.transits }"
+  @click="toggleLayer('transits')">
+  <span class="tile-icon">🚇</span><span class="tile-text">地铁</span>
+</button>
+```
+
+### 9.2 缩放联动修复
+
+```js
+// 改前：统一判断 layerVisibility.value.facilities
+// const shouldShowNimby = zoom >= 13.5 && layerVisibility.value.facilities;
+// const shouldShowBasic = zoom >= 12.5 && layerVisibility.value.facilities;
+
+// 改后：各自独立判断
+const shouldShowNimby = zoom >= 13.5 && layerVisibility.value.nimbys;
+nimbyMarkers.forEach(m => shouldShowNimby ? m.show() : m.hide());
+const shouldShowBasic = zoom >= 12.5;
+if (layerVisibility.value.parks)    parkMarkers.forEach(m => shouldShowBasic ? m.show() : m.hide());
+if (layerVisibility.value.transits) transitMarkers.forEach(m => shouldShowBasic ? m.show() : m.hide());
+```
+
+---
+
+## 十、图例提示
+
+```html
+<!-- 图例中加操作提示 -->
+<div class="legend-hint">💡 点击地图上的图标可查看详情</div>
+```
+
+---
+
+## 十一、本次全部改动文件
+
+| 文件 | 改动 |
+|---|---|
+| `src/views/ConvergeAnalysis.vue` | 服务半径覆盖 + 200m聚类 + 三级渲染 + 分级按钮 + 弹窗优化 + 工具栏分离 + 点击互动 |
+| `src/data/facilities.json` | 换用 196 条真医院数据（33三甲+44综合+119专科） |

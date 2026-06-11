@@ -88,8 +88,11 @@
           <button class="toolbar-tile" :class="{ 'active-tile': layerVisibility.grid }" @click="toggleLayer('grid')">
             <span class="tile-icon">⬡</span><span class="tile-text">网格</span>
           </button>
-          <button class="toolbar-tile" :class="{ 'active-tile' : layerVisibility.facilities }" @click="toggleLayer('facilities')">
-            <span class="tile-icon">🏥</span><span class="tile-text">设施</span>
+          <button class="toolbar-tile" :class="{ 'active-tile' : layerVisibility.parks }" @click="toggleLayer('parks')">
+            <span class="tile-icon">🌳</span><span class="tile-text">公园</span>
+          </button>
+          <button class="toolbar-tile" :class="{ 'active-tile' : layerVisibility.transits }" @click="toggleLayer('transits')">
+            <span class="tile-icon">🚇</span><span class="tile-text">地铁</span>
           </button>
           <button class="toolbar-tile" @click="startDraw" title="圈选特定区域进行局部推演">
             <span class="tile-icon">📐</span><span class="tile-text">区域圈选</span>
@@ -102,6 +105,14 @@
             :style="{ opacity: addedMarkers.length === 0 ? 0 : 1, pointerEvents: addedMarkers.length === 0 ? 'none' : 'auto' }" title="撤销上一步选址">
             ↩
           </button>
+        </div>
+
+        <!-- 医院分级查询 -->
+        <div class="hospital-filter-overlay">
+          <button class="filter-chip" :class="{ 'chip-active': hospitalFilter === 'all' }" @click="setHospitalFilter('all')">全部医院</button>
+          <button class="filter-chip" :class="{ 'chip-active': hospitalFilter === 'tier1' }" @click="setHospitalFilter('tier1')">仅三甲</button>
+          <button class="filter-chip" :class="{ 'chip-active': hospitalFilter === 'tier12' }" @click="setHospitalFilter('tier12')">三甲+综合</button>
+          <button class="filter-chip" :class="{ 'chip-active': hospitalFilter === 'tier3' }" @click="setHospitalFilter('tier3')">仅专科</button>
         </div>
 
         <!-- 图层要素图例 -->
@@ -126,6 +137,7 @@
             </div>
           </div>
           <div class="legend-divider"></div>
+          <div class="legend-hint">💡 点击地图上的图标可查看详情</div>
           <div class="legend-title">{{ showEvaluationMode ? '选址评分等级' : '医疗覆盖密度' }}</div>
           <div class="legend-bars" v-if="!showEvaluationMode">
             <span><div class="bar bar-low"></div> 稀缺</span>
@@ -156,7 +168,8 @@ const showEvaluationMode = ref(false);
 const weightPark = ref(1.0);
 const weightTransit = ref(1.0);
 const weightNimby = ref(2.0);
-const activeGradeFilter = ref('ALL'); // 新增：网格分级筛选器状态
+const activeGradeFilter = ref('ALL'); // 网格分级筛选
+const hospitalFilter = ref('all');    // 医院分级查询
 
 const parkFeatures = parkData;
 const transitFeatures = transitData;
@@ -187,6 +200,18 @@ const applyPreset = (park, transit, nimby) => {
 const setGradeFilter = (grade) => {
   activeGradeFilter.value = grade;
   startAnalysis(); // 触发过滤重绘
+};
+
+const setHospitalFilter = (filter) => {
+  hospitalFilter.value = filter;
+  // 根据等级显示/隐藏医院标记
+  facilityMarkers.forEach(m => {
+    if (!m._tier) return; // 跳过非医院标记（如文字标签）
+    if (filter === 'all') { m.show(); return; }
+    if (filter === 'tier1') { m._tier === 1 ? m.show() : m.hide(); return; }
+    if (filter === 'tier12') { m._tier <= 2 ? m.show() : m.hide(); return; }
+    if (filter === 'tier3') { m._tier === 3 ? m.show() : m.hide(); return; }
+  });
 };
 
 const toggleEvaluationMode = () => {
@@ -222,11 +247,12 @@ const handleZoomTheme = (zoom) => {
   else if (zoom >= 11 && zoom <= 14) currentTheme.value = '区域协同诊断';
   else currentTheme.value = '社区精准选址';
 
-  const shouldShowNimby = zoom >= 13.5 && layerVisibility.value.facilities;
+  // 缩放到近景时显示细节图层（公园/地铁各自独立控制）
+  const shouldShowNimby = zoom >= 13.5 && layerVisibility.value.nimbys;
   nimbyMarkers.forEach(m => shouldShowNimby ? m.show() : m.hide());
-  const shouldShowBasic = zoom >= 12.5 && layerVisibility.value.facilities;
-  parkMarkers.forEach(m => shouldShowBasic ? m.show() : m.hide());
-  transitMarkers.forEach(m => shouldShowBasic ? m.show() : m.hide());
+  const shouldShowBasic = zoom >= 12.5;
+  if (layerVisibility.value.parks) parkMarkers.forEach(m => shouldShowBasic ? m.show() : m.hide());
+  if (layerVisibility.value.transits) transitMarkers.forEach(m => shouldShowBasic ? m.show() : m.hide());
 };
 
 let map = null;
@@ -308,11 +334,17 @@ const executeAnalysis = (bbox) => {
     if (type.includes('综合医院')) return 2;           // 综合医院
     return 3;                                          // 专科/其他
   };
-  const points = turf.featureCollection(facilityData.map((d) => {
-    return turf.point([d.lng, d.lat], { name: d.name, type: d.type, tier: getHospitalTier(d.type) });
-  }));
+  // 医院服务区缓冲面：三甲3km / 综合2km / 专科1km
+  const hospitalBuffers = facilityData.map(d => {
+    const tier = getHospitalTier(d.type);
+    const radiusKm = tier === 1 ? 3 : tier === 2 ? 2 : 1;
+    const weight = tier === 1 ? 3 : tier === 2 ? 2 : 1;
+    return {
+      buffer: turf.buffer(turf.point([d.lng, d.lat]), radiusKm, { units: 'kilometers' }),
+      name: d.name, tier, weight, lng: d.lng, lat: d.lat
+    };
+  });
 
-  const turfPoints = turf.featureCollection(facilityData.map(d => turf.point([d.lng, d.lat])));
   let coveredCells = 0; let validGridCount = 0;
   
   // 赣江多分支排除 — 每条线各自缓冲，逐个判断（避免 union 在不重叠时返回 null）
@@ -365,13 +397,12 @@ const executeAnalysis = (bbox) => {
     if (isExcluded) return;
 
     validGridCount++;
-    const ptsInGrid = turf.pointsWithinPolygon(points, cell);
-    // 加权医疗资源：三甲×3 + 综合×2 + 其他×1
-    const medicalWeight = ptsInGrid.features.reduce((sum, f) => {
-      const t = f.properties.tier || 3;
-      return sum + (t === 1 ? 3 : t === 2 ? 2 : 1);
-    }, 0);
-    const medicalCount = ptsInGrid.features.length;
+    // 网格中心被哪些医院服务区覆盖（三甲3km/综合2km/专科1km）
+    const covering = hospitalBuffers.filter(h => {
+      try { return turf.booleanPointInPolygon(currentCenterPt, h.buffer); } catch (e) { return false; }
+    });
+    const medicalWeight = covering.reduce((s, h) => s + h.weight, 0);
+    const medicalCount = covering.length;
     cell.properties.count = medicalWeight;
     if (medicalWeight >= 1) coveredCells++;
 
@@ -383,7 +414,7 @@ const executeAnalysis = (bbox) => {
     const nd = getCountInRange(nimbyFeatures, currentCenterPt, 1.0);
 
     let score = 65 + Math.min(30, (pd.count || 0) * 4 * weightPark.value) + Math.min(30, stationCount * 15 * weightTransit.value) - ((nd.count || 0) * 15 * weightNimby.value);
-    if (ptsInGrid.features.some(f => f.properties.name.includes('拟建'))) score += 15;
+    if (covering.some(h => h.name.includes('拟建'))) score += 15;
     if (nd.minDist < 0.2) score -= 40 * weightNimby.value;
     score = Math.max(0, Math.min(100, Math.floor(score)));
 
@@ -415,39 +446,65 @@ const executeAnalysis = (bbox) => {
       map: map, zIndex: 10, bubble: true
     });
 
+    // 鼠标悬浮：高亮 + 显示弹窗
     polygon.on('mouseover', (e) => {
       polygon.setOptions({ fillOpacity: 0.4, strokeColor: '#fff', strokeWeight: 2 });
       let popupContent = '';
       
+      // ---- 弹窗内容 ----
       if (showEvaluationMode.value) {
-        let parkDesc = pd.count > 0 ? `<span style="color:#10b981;">优 (${pd.count}处)</span>` : `<span style="color:#94a3b8;">缺</span>`;
-        let transitDesc = stationCount > 0 ? `<span style="color:#38bdf8;">覆盖 (${stationCount}个站)</span>` : `<span style="color:#f59e0b;">未覆盖</span>`;
+        // === 评估模式：分级汇总 ===
+        const tier1Count = covering.filter(h => h.tier === 1).length;
+        const tier2Count = covering.filter(h => h.tier === 2).length;
+        const tier3Count = covering.filter(h => h.tier === 3).length;
+        let medicalDesc = '<span style="color:#ef4444;">盲区</span>';
+        if (medicalCount > 0) {
+          const parts = [];
+          if (tier1Count) parts.push(`<span style="color:#06b6d4;">三甲×${tier1Count}</span>`);
+          if (tier2Count) parts.push(`<span style="color:#0ea5e9;">综合×${tier2Count}</span>`);
+          if (tier3Count) parts.push(`<span style="color:#94a3b8;">专科×${tier3Count}</span>`);
+          medicalDesc = parts.join(' '); // 医院仅展示，不参与选址评分
+        }
+
+        let parkDesc = pd.count > 0 ? `<span style="color:#10b981;">${pd.count}处 (+${Math.min(30, pd.count * 4 * weightPark.value)}分)</span>` : `<span style="color:#94a3b8;">无公园</span>`;
+        let transitDesc = stationCount > 0 ? `<span style="color:#38bdf8;">${stationCount}个站 (+${Math.min(30, stationCount * 15 * weightTransit.value)}分)</span>` : `<span style="color:#f59e0b;">无地铁覆盖</span>`;
         let nimbyDesc = nd.count > 0 ? `<span style="color:#ef4444;">附近 ${(nd.minDist * 1000).toFixed(0)}m 有高架/快速路</span>` : `<span style="color:#10b981;">无道路干扰</span>`;
         const advice = score >= 80 ? '<div style="color: #22d3ee; background: rgba(34,211,238,0.1); padding:6px; border-radius:4px;">🔥 A级优选：极度适宜建设</div>'
                      : (score >= 60 ? '<div style="color: #f59e0b; background: rgba(245,158,11,0.1); padding:6px; border-radius:4px;">⚠️ B级备选：需增设隔音/绿化</div>'
                                 : '<div style="color: #ef4444; background: rgba(239,68,68,0.1); padding:6px; border-radius:4px;">🛑 C级高危：道路环境影响较大</div>');
-        popupContent=` 
+        popupContent = `
           <div class="custom-info-window" style="min-width: 300px;">
             <div style="font-size: 14px; font-weight: bold; border-bottom: 1px solid rgba(59,130,246,0.3); padding-bottom: 8px; margin-bottom: 10px; display: flex; justify-content: space-between;">
               <span>🎯 选址综合诊断评估</span><span style="color: ${score >= 80 ? '#22d3ee' : (score >= 60 ? '#f59e0b' : '#ef4444')}; font-size: 16px;">${score} 分</span>
             </div>
             <div style="font-size: 12px; line-height: 1.8; margin-bottom: 10px;">
-                <div><strong>🏥 医疗资源：</strong>${medicalCount > 0 ? `<span style="color:#10b981;">${medicalCount}处 (加权${medicalWeight}分)</span>` : '<span style="color:#ef4444;">盲区</span>'}</div>
-                <div><strong>🌳 生态环境：</strong>${parkDesc}</div>
-                <div><strong>🚇 交通节点：</strong>${transitDesc}</div>
-                <div><strong>🛣️ 道路环境影响：</strong>${nimbyDesc}</div>
+                <div><strong>🏥 医疗资源：</strong>${medicalDesc}</div>
+                <div><strong>🌳 公园绿地：</strong>${parkDesc}</div>
+                <div><strong>🚇 地铁交通：</strong>${transitDesc}</div>
+                <div><strong>🛣️ 道路环境：</strong>${nimbyDesc}</div>
             </div>
             ${advice}
           </div>`;
       } else {
+        // === 普通模式：按等级分组展示（避免列20+个医院名） ===
         if (medicalCount > 0) {
-           const names = ptsInGrid.features.map(f => `<li style="padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">📍 ${f.properties.name || '未知设施'}</li>`).join('');
+           const tier1Names = covering.filter(h => h.tier === 1).map(h => h.name);
+           const tier2Names = covering.filter(h => h.tier === 2).map(h => h.name);
+           const tier3Count = covering.filter(h => h.tier === 3).length;
+           let listHTML = '';
+           if (tier1Names.length) listHTML += `<div style="color:#06b6d4;font-weight:bold;margin-top:4px;">▸ 三甲 (${tier1Names.length}家)</div>`
+             + tier1Names.slice(0, 5).map(n => `<li>📍 ${n}</li>`).join('')
+             + (tier1Names.length > 5 ? `<li style="color:#64748b;">...还有${tier1Names.length - 5}家</li>` : '');
+           if (tier2Names.length) listHTML += `<div style="color:#0ea5e9;font-weight:bold;margin-top:4px;">▸ 综合 (${tier2Names.length}家)</div>`
+             + tier2Names.slice(0, 5).map(n => `<li>📍 ${n}</li>`).join('')
+             + (tier2Names.length > 5 ? `<li style="color:#64748b;">...还有${tier2Names.length - 5}家</li>` : '');
+           if (tier3Count) listHTML += `<div style="color:#94a3b8;font-weight:bold;margin-top:4px;">▸ 专科/其他 (${tier3Count}家)</div>`;
            popupContent = `
-            <div class="custom-info-window" style="min-width: 220px;">
-              <div class="window-header">🏥 医疗覆盖精细化评估</div>
+            <div class="custom-info-window" style="min-width: 240px;">
+              <div class="window-header">🏥 医疗覆盖评估</div>
               <div class="window-body">
-                <p style="margin: 0 0 8px 0; color: #10b981;">已覆盖设施：${medicalCount} 处</p>
-                <ul style="max-height: 150px; overflow-y: auto;">${names}</ul>
+                <p style="margin: 0 0 6px 0; color: #10b981;">覆盖 ${medicalCount} 处设施（仅供参考，不参与评分）</p>
+                <ul style="max-height: 200px; overflow-y: auto; font-size:11px;">${listHTML}</ul>
               </div>
             </div>`;
         } else {
@@ -459,10 +516,9 @@ const executeAnalysis = (bbox) => {
       infoWindow.open(map, [lng, lat]);
     });
 
+    // 鼠标离开：恢复样式，弹窗保持打开（点击地图空白处关闭）
     polygon.on('mouseout', ()=> {
-      // 🐞 修复点：调用上面存好的闭包变量 baseFillOpacity 
       polygon.setOptions({ fillOpacity: showEvaluationMode.value ? 0.15 : baseFillOpacity, strokeWeight: strokeWeight, strokeColor: strokeColor });
-      infoWindow.close();
     });
   });
 
@@ -559,7 +615,7 @@ const renderEnvironmentLayers = () => {
     return;
   }
 
-  // 🏥 0. 医疗设施：三级分级展示
+  // 🏥 0. 医疗设施：三级分级展示 + 200m内同院合并
   if (facilityData && facilityMarkers.length === 0) {
     const getTier = (type) => {
       if (!type) return 3;
@@ -567,32 +623,104 @@ const renderEnvironmentLayers = () => {
       if (type.includes('综合医院')) return 2;
       return 3;
     };
-    facilityData.forEach(item => {
-      const tier = getTier(item.type);
-      const config = tier === 1
-        ? { radius: 6, fillColor: '#06b6d4', opacity: 1.0, zIndex: 125 }   // 三甲：亮青大圆
-        : tier === 2
-        ? { radius: 4, fillColor: '#0ea5e9', opacity: 0.85, zIndex: 120 }  // 综合：中蓝
-        : { radius: 2.5, fillColor: '#64748b', opacity: 0.7, zIndex: 115 }; // 专科：灰蓝小圆
 
+    // 200m内聚类合并（门诊/院区 → 归入同一家医院）
+    const dist = (a, b) => {
+      const dx = (a.lng - b.lng) * 111320 * Math.cos((a.lat + b.lat) / 2 * Math.PI / 180);
+      const dy = (a.lat - b.lat) * 111320;
+      return Math.sqrt(dx * dx + dy * dy);
+    };
+    const clusters = [];
+    facilityData.forEach(item => {
+      let found = false;
+      for (const c of clusters) {
+        if (dist(item, c.rep) < 200) { c.members.push(item); found = true; break; }
+      }
+      if (!found) clusters.push({ rep: item, members: [item] });
+    });
+
+    clusters.forEach(cluster => {
+      // 取簇内最高等级（数字最小 = 等级最高）
+      const bestTier = Math.min(...cluster.members.map(m => getTier(m.type)));
+      // 主名：最短的那个（去括号后的核心名），副名：其余
+      const names = cluster.members.map(m => m.name.replace(/[\(\（][^)）]*[\)\）]/g, '').trim());
+      const mainName = names.reduce((a, b) => a.length <= b.length ? a : b);
+      const extraCount = cluster.members.length - 1;
+      const tooltip = extraCount > 0
+        ? `${mainName} + ${extraCount}个附属设施\n${cluster.members.map(m => '  ' + m.name).join('\n')}`
+        : cluster.members[0].name;
+
+      const config = bestTier === 1
+        ? { radius: 6, fillColor: '#06b6d4', opacity: 1.0, zIndex: 125 }
+        : bestTier === 2
+        ? { radius: 4, fillColor: '#0ea5e9', opacity: 0.85, zIndex: 120 }
+        : { radius: 2.5, fillColor: '#64748b', opacity: 0.7, zIndex: 115 };
+
+      const rep = cluster.rep;
       const dot = new AMap.CircleMarker({
-        center: [item.lng, item.lat],
+        center: [rep.lng, rep.lat],
         radius: config.radius,
         fillColor: config.fillColor,
         fillOpacity: config.opacity,
-        strokeColor: tier === 1 ? '#fff' : '#020617',
-        strokeWeight: tier === 1 ? 2 : 0.5,
+        strokeColor: bestTier === 1 ? '#fff' : '#020617',
+        strokeWeight: bestTier === 1 ? 2 : 0.5,
         zIndex: config.zIndex,
-        title: item.name + (tier === 1 ? ' [三甲]' : tier === 2 ? ' [综合]' : '')
+        title: tooltip
       });
+
+      // 点击：查周边
+      dot.on('click', () => {
+        const nearbyParks = [];
+        const nearbyStations = new Set();
+        if (parkFeatures && parkFeatures.features) {
+          parkFeatures.features.forEach(p => {
+            const d = turf.distance(turf.point([rep.lng, rep.lat]), p, { units: 'kilometers' });
+            if (d <= 1) nearbyParks.push({ name: p.properties.name, dist: d });
+          });
+        }
+        if (transitFeatures && transitFeatures.features) {
+          transitFeatures.features.forEach(t => {
+            const d = turf.distance(turf.point([rep.lng, rep.lat]), t, { units: 'kilometers' });
+            if (d <= 1) {
+              let sn = t.properties.name || '';
+              sn = sn.replace(/[\(\（][^)）]*[\)\）]/g, '').replace(/地铁站|出入口|\d+号口|[A-Z]口|[南北东西]口/g, '').replace(/·.+$/, '').trim();
+              if (sn) nearbyStations.add(sn);
+            }
+          });
+        }
+        const tierName = bestTier === 1 ? '三级甲等' : bestTier === 2 ? '综合医院' : '专科/其他';
+        const membersHTML = cluster.members.length > 1
+          ? `<div style="font-size:10px;color:#64748b;margin-bottom:4px">含：${cluster.members.map(m => m.name).join('、')}</div>`
+          : '';
+        const parkList = nearbyParks.length > 0
+          ? nearbyParks.sort((a,b) => a.dist - b.dist).slice(0,5).map(p => `<div>🌳 ${p.name} (${(p.dist*1000).toFixed(0)}m)</div>`).join('')
+          : '<div style="color:#64748b">1km内无公园</div>';
+        const stationList = nearbyStations.size > 0
+          ? [...nearbyStations].slice(0,5).map(s => `<div>🚇 ${s}</div>`).join('')
+          : '<div style="color:#64748b">1km内无地铁站</div>';
+        infoWindow.setContent(`
+          <div class="custom-info-window" style="min-width:280px">
+            <div style="font-size:14px;font-weight:bold;color:#06b6d4;margin-bottom:2px">🏥 ${mainName}</div>
+            <div style="font-size:11px;color:#94a3b8;margin-bottom:4px">${tierName}${extraCount > 0 ? ` · 共${cluster.members.length}个设施` : ''}</div>
+            ${membersHTML}
+            <div style="border-top:1px solid rgba(59,130,246,0.2);padding-top:6px;font-size:12px;line-height:1.8">
+              <div style="color:#10b981;font-weight:bold;margin-bottom:2px">🌳 周边公园</div>${parkList}
+              <div style="color:#38bdf8;font-weight:bold;margin-top:6px;margin-bottom:2px">🚇 周边地铁站</div>${stationList}
+            </div>
+          </div>
+        `);
+        infoWindow.open(map, [rep.lng, rep.lat]);
+      });
+
+      dot._tier = bestTier;
       dot.setMap(map);
       facilityMarkers.push(dot);
 
-      // 三甲加名称标签
-      if (tier === 1) {
+      // 三甲加名称标签（用主名）
+      if (bestTier === 1) {
         const label = new AMap.Text({
-          text: item.name.length > 8 ? item.name.slice(0, 8) + '...' : item.name,
-          position: [item.lng, item.lat],
+          text: mainName.length > 8 ? mainName.slice(0, 8) + '...' : mainName,
+          position: [rep.lng, rep.lat],
           offset: new AMap.Pixel(10, -10),
           style: {
             'font-size': '9px',
@@ -606,6 +734,7 @@ const renderEnvironmentLayers = () => {
           },
           zIndex: 126
         });
+        label._tier = bestTier;
         label.setMap(map);
         facilityMarkers.push(label);
       }
@@ -1008,6 +1137,34 @@ const renderEnvironmentLayers = () => {
 }
 
 /* 🗺️ 新增：地图右上角一体化图面交互工具栏 */
+/* 医院分级查询按钮组 */
+.hospital-filter-overlay {
+  position: absolute;
+  top: 56px;
+  right: 16px;
+  z-index: 99;
+  display: flex;
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 4px 6px;
+  border-radius: 8px;
+  border: 1px solid rgba(51, 65, 85, 0.5);
+}
+.filter-chip {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.filter-chip:hover { color: #cbd5e1; border-color: rgba(255,255,255,0.15); }
+.filter-chip.chip-active { background: rgba(6,182,212,0.15); color: #06b6d4; border-color: rgba(6,182,212,0.4); font-weight: 600; }
+
 .map-toolbar-overlay {
   position: absolute;
   top: 16px;
@@ -1123,6 +1280,7 @@ const renderEnvironmentLayers = () => {
 .legend-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; font-size: 11px; color: #cbd5e1; }
 .legend-dot { flex-shrink: 0; }
 .legend-divider { border-top: 1px solid rgba(255,255,255,0.08); margin: 8px 0; }
+.legend-hint { font-size: 10px; color: #64748b; margin-bottom: 6px; font-style: italic; }
 .legend-bars { display: flex; gap: 12px; }
 .legend-bars span { display: flex; align-items: center; gap: 4px; color: #cbd5e1; font-size: 11px; }
 .bar { width: 14px; height: 7px; border-radius: 1px; display: inline-block; }
@@ -1171,14 +1329,35 @@ const renderEnvironmentLayers = () => {
 .custom-info-window ul::-webkit-scrollbar { width: 4px; }
 .custom-info-window ul::-webkit-scrollbar-thumb { background-color: #475569; border-radius: 2px; }
 
-:deep(.custom-info-window) { background: rgba(15, 23, 42, 0.95) !important; backdrop-filter: blur(6px); border: 1px solid #3b82f6 !important; border-radius: 6px; padding: 12px; min-width: 210px; color: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.6); }
+/* 信息窗容器：深色背景 + 滚动支持 */
+:deep(.custom-info-window) {
+  background: rgba(15, 23, 42, 0.95) !important;
+  backdrop-filter: blur(6px);
+  border: 1px solid #3b82f6 !important;
+  border-radius: 6px;
+  padding: 12px;
+  min-width: 210px;
+  max-height: 320px;
+  overflow-y: auto;
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+}
+:deep(.custom-info-window)::-webkit-scrollbar { width: 4px; }
+:deep(.custom-info-window)::-webkit-scrollbar-thumb { background-color: #475569; border-radius: 2px; }
 :deep(.window-header) { font-weight: 600; color: #38bdf8 !important; border-bottom: 1px solid rgba(59, 130, 246, 0.2) !important; padding-bottom: 6px; margin-bottom: 8px; font-size: 13px; }
 :deep(.window-body) { font-size: 12px; }
 :deep(.window-body ul) { list-style: none; padding: 0; margin: 4px 0 0 0; max-height: 140px; overflow-y: auto; }
 :deep(.window-body li) { padding: 5px 0; color: #cbd5e1; border-bottom: 1px solid rgba(255,255,255,0.05); }
 
-/* 复写高德原生外壳，确保无边框穿透 */
-:deep(.amap-info-content) { background: transparent !important; border: none !important; padding: 0 !important; box-shadow: none !important; }
+/* 复写高德原生信息窗：启用鼠标交互（滚动/点击），取消默认边框 */
+:deep(.amap-info-content) {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  pointer-events: auto !important; /* 必须设为 auto 才能滚动和点击 */
+  overflow: visible !important;    /* 不裁剪子元素 */
+}
 :deep(.amap-info-sharp) { border-top-color: rgba(15, 23, 42, 0.95) !important; }
 
 /* ==========================================

@@ -26,14 +26,13 @@ const cardConfig = computed(() => [
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  padding: 5px;
+  gap: 8px;
+  padding: 0;
 }
 
 .card {
-  /* 玻璃拟态：深色渐变 + 模糊 */
   background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
-  padding: 12px;
+  padding: 8px 10px;
   border-radius: 8px;
   text-align: center;
   /* 关键：半透明蓝色边框 */
@@ -59,18 +58,6 @@ const cardConfig = computed(() => [
   border-left: 2px solid #3b82f6;
 }
 
-.card-label { 
-  display: block;
-  font-size: 11px; 
-  color: #94a3b8; 
-  margin-bottom: 4px;
-}
-
-.card-value { 
-  font-size: 24px; 
-  font-weight: bold; 
-  color: #3b82f6; 
-  /* 增加文字发光 */
-  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5); 
-}
+.card-label { display: block; font-size: 10px; color: #94a3b8; margin-bottom: 2px; }
+.card-value { font-size: 20px; font-weight: bold; color: #3b82f6; text-shadow: 0 0 8px rgba(59, 130, 246, 0.4); }
 </style>
