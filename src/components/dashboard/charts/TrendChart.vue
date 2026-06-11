@@ -231,32 +231,28 @@ async function updateTrendChart() {
 
   hourE.setOption({
       backgroundColor: 'transparent', // ⭐ 背景设为透明
-      color: ['#3b82f6', '#60a5fa', '#10b981', '#f59e0b', '#ef4444'], // 科技蓝绿板
+      color: ['#38bdf8', '#818cf8', '#10b981', '#f59e0b', '#f472b6'],
       tooltip: {
         trigger: 'axis',
-        backgroundColor: 'rgba(17, 24, 39, 0.9)', // 深色背景
-        borderColor: '#3b82f6',
-        textStyle: { color: '#fff', fontSize: 11 },
-        axisPointer: { type: 'line', lineStyle: { color: '#3b82f6', type: 'dashed' } }
+        backgroundColor: 'rgba(15,23,42,0.95)', borderColor: 'rgba(59,130,246,0.3)',
+        textStyle: { color: '#e2e8f0', fontSize: 11 },
+        axisPointer: { type: 'line', lineStyle: { color: 'rgba(56,189,248,0.3)', type: 'dashed' } }
       },
       legend: {
-        data: Object.values(svcMap),
-        bottom: '1%',
-        textStyle: { fontSize: 10, color: '#94a3b8' }, // 浅灰色文字
-        icon: 'circle'
+        data: Object.values(svcMap), bottom: '1%',
+        textStyle: { fontSize: 9, color: '#64748b' }, icon: 'circle'
       },
-      xAxis: { 
-        type: 'category', 
-        data: times,
-        axisLabel: { fontSize: 10, color: '#94a3b8' },
-        axisLine: { lineStyle: { color: '#1e293b' } } // 极淡的分割线
+      grid: { top: 8, bottom: 28, left: 8, right: 8 },
+      xAxis: {
+        type: 'category', data: times,
+        axisLabel: { fontSize: 9, color: '#64748b' },
+        axisLine: { lineStyle: { color: 'rgba(255,255,255,0.06)' } },
+        axisTick: { show: false }
       },
-      yAxis: { 
-        type: 'value',
-        name: '(单)',
-        splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } }, // ⭐ 虚线深色网格
-        axisLabel: { fontSize: 10, color: '#94a3b8' },
-        nameTextStyle: { color: '#94a3b8' }
+      yAxis: {
+        type: 'value', name: '',
+        splitLine: { lineStyle: { color: 'rgba(255,255,255,0.04)', type: 'dashed' } },
+        axisLabel: { fontSize: 9, color: '#475569' }
       },
       series: series // 这里的 series 内部 areaStyle 的 opacity 建议调成 0.2 更有质感
     }, true);

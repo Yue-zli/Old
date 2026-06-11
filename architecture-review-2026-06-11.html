@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>Architecture review — 养老资源时空分析决策平台</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, theme: "neutral", securityLevel: "loose" });
+  </script>
+  <style>
+    .seam { stroke-dasharray: 4 4; }
+    .leak { stroke: #dc2626; }
+    .deep { background: linear-gradient(135deg, #0f172a, #1e293b); }
+    body { font-family: "PingFang SC", "Inter", system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-stone-50 text-slate-900">
+
+<main class="max-w-5xl mx-auto px-6 py-12 space-y-12">
+
+  <!-- ===== HEADER ===== -->
+  <header class="space-y-4">
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-3xl font-serif font-bold tracking-tight text-slate-900">架构审查报告</h1>
+        <p class="text-sm text-slate-500 mt-1">养老资源时空分析决策平台 · 2026-06-11</p>
+      </div>
+      <div class="text-right text-xs text-slate-400 space-y-1">
+        <div class="flex items-center gap-2"><span class="inline-block w-4 h-4 border-2 border-slate-400 rounded"></span> module</div>
+        <div class="flex items-center gap-2"><span class="inline-block w-4 border-t-2 border-dashed border-red-400"></span> leakage</div>
+        <div class="flex items-center gap-2"><span class="inline-block w-4 h-4 deep rounded"></span> deep module</div>
+      </div>
+    </div>
+    <p class="text-sm text-slate-500 max-w-2xl leading-relaxed">
+      审查基于 <a href="https://github.com/mattpocock/skills" class="text-indigo-600 underline">mattpocock/skills</a> 的
+      <code class="bg-slate-100 px-1 rounded">improve-codebase-architecture</code> 流程。
+      使用 <strong>module / interface / seam / depth / leverage / locality</strong> 术语体系。
+      项目无 CONTEXT.md 或 ADR，以下建议均不与之冲突。
+    </p>
+  </header>
+
+  <!-- ===== CANDIDATES ===== -->
+  <section id="candidates" class="space-y-10">
+
+    <!-- ===== CANDIDATE 1: ConvergeAnalysis.vue Monster ===== -->
+    <article class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm space-y-5">
+      <div class="flex items-start justify-between">
+        <div>
+          <h2 class="text-xl font-serif font-bold">1. ConvergeAnalysis 巨模块：拆分选址分析页面</h2>
+          <p class="text-xs text-slate-400 mt-1">src/views/ConvergeAnalysis.vue</p>
+        </div>
+        <div class="flex gap-2">
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700">Strong</span>
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-500">in-process</span>
+        </div>
+      </div>
+
+      <div class="text-xs font-mono text-slate-500 space-x-2">
+        <span>ConvergeAnalysis.vue (1500+ 行)</span>
+      </div>
+
+      <!-- Before / After -->
+      <div class="grid grid-cols-2 gap-6">
+        <div class="rounded-lg border border-red-200 bg-red-50/30 p-4">
+          <p class="text-xs uppercase tracking-wider text-red-500 font-semibold mb-3">Before — 单文件承载一切</p>
+          <div class="space-y-1.5">
+            <div class="h-5 bg-red-200/60 rounded text-[9px] px-2 leading-5 text-red-800">模板: 地图+工具栏+图例+控制面板 (300行)</div>
+            <div class="h-5 bg-red-200/60 rounded text-[9px] px-2 leading-5 text-red-800">script: 状态+turf分析+AMap渲染+弹窗+模拟 (900行)</div>
+            <div class="h-5 bg-red-200/60 rounded text-[9px] px-2 leading-5 text-red-800">style: 全局CSS+AMap穿透+组件样式 (500行)</div>
+          </div>
+          <p class="text-[10px] text-red-500 mt-2 leading-relaxed">一个 SFC 承担 8 种职责：地图初始化、网格分析、设施渲染、评分计算、弹窗生成、图层切换、分级筛选、选址模拟。修改任一部分都需要导航到这 1500 行中定位。</p>
+        </div>
+        <div class="rounded-lg border border-emerald-200 bg-emerald-50/30 p-4">
+          <p class="text-xs uppercase tracking-wider text-emerald-600 font-semibold mb-3">After — 按 seam 拆分为 5 个 module</p>
+          <div class="space-y-1.5">
+            <div class="h-5 bg-emerald-200/60 rounded text-[9px] px-2 leading-5 text-emerald-800">ConvergeAnalysis.vue — 仅布局+编排 (80行)</div>
+            <div class="h-5 bg-emerald-200/60 rounded text-[9px] px-2 leading-5 text-emerald-800 font-bold">useSpatialAnalysis.js — turf 网格计算接口</div>
+            <div class="h-5 bg-emerald-200/60 rounded text-[9px] px-2 leading-5 text-emerald-800 font-bold">useMapLayers.js — AMap 图层渲染接口</div>
+            <div class="h-5 bg-emerald-200/60 rounded text-[9px] px-2 leading-5 text-emerald-800">useSiteScoring.js — 选址评分纯逻辑</div>
+            <div class="h-5 bg-emerald-200/60 rounded text-[9px] px-2 leading-5 text-emerald-800">ControlPanel.vue — 侧边栏参数面板</div>
+          </div>
+          <p class="text-[10px] text-emerald-600 mt-2 leading-relaxed">每个 module 拥有小而深的 interface：useSpatialAnalysis 暴露 { executeAnalysis(bbox) → gridResults }；useMapLayers 暴露 { renderGrid, renderFacilities, toggleLayer }。</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Problem</p>
+          <p class="text-sm">一个 Vue SFC 承担 8 种正交职责。界面等于实现——每个改动都要在 1500 行中定位，没有独立的测试面。</p>
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Solution</p>
+          <p class="text-sm">沿自然 seam 拆分：空间分析、地图渲染、选址评分各成一个 composable hook，每个拥有可独立测试的 interface。</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Wins</p>
+        <ul class="text-sm space-y-0.5 list-disc list-inside text-slate-600">
+          <li><strong>locality</strong>: 网格算法修改只需动 useSpatialAnalysis.js</li>
+          <li><strong>leverage</strong>: useSiteScoring 可在无地图环境下纯逻辑测试</li>
+          <li><strong>interface shrinks</strong>: 每个 hook 暴露 ≤5 个函数，替代当前 900 行 script</li>
+          <li><strong>testability</strong>: turf 计算 + 评分逻辑可脱离浏览器运行</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ===== CANDIDATE 2: AMap Duplication ===== -->
+    <article class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm space-y-5">
+      <div class="flex items-start justify-between">
+        <div>
+          <h2 class="text-xl font-serif font-bold">2. AMap 初始化泄漏：三处重复加载地图 SDK</h2>
+          <p class="text-xs text-slate-400 mt-1">MapContainer.vue · DispatchAnalysis.vue · ConvergeAnalysis.vue</p>
+        </div>
+        <div class="flex gap-2">
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700">Strong</span>
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-500">in-process</span>
+        </div>
+      </div>
+
+      <div class="text-xs font-mono text-slate-500 space-x-2">
+        <span>MapContainer.vue:39-48</span><span>DispatchAnalysis.vue:72-93</span><span>ConvergeAnalysis.vue:267-303</span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div class="rounded-lg border border-red-200 bg-red-50/30 p-4">
+          <p class="text-xs uppercase tracking-wider text-red-500 font-semibold mb-3">Before — key/security 散落三处</p>
+          <pre class="mermaid">
+            flowchart LR
+              MC[MapContainer.vue] -->|AMapLoader.load| AM[AMap SDK]
+              DA[DispatchAnalysis.vue] -->|AMapLoader.load| AM
+              CA[ConvergeAnalysis.vue] -->|AMapLoader.load| AM
+              style MC fill:#fecaca,stroke:#dc2626
+              style DA fill:#fecaca,stroke:#dc2626
+              style CA fill:#fecaca,stroke:#dc2626
+          </pre>
+          <p class="text-[10px] text-red-500 mt-2 leading-relaxed">每个 view 独立调用 AMapLoader.load({ key, version, plugins })，key 和 securityJsCode 硬编码在三处。改 key 需要全局搜索替换。</p>
+        </div>
+        <div class="rounded-lg border border-emerald-200 bg-emerald-50/30 p-4">
+          <p class="text-xs uppercase tracking-wider text-emerald-600 font-semibold mb-3">After — 单一 adapter 封装</p>
+          <pre class="mermaid">
+            flowchart LR
+              MC[MapContainer.vue] -->|useMap| AMH[useAmap.js]
+              DA[DispatchAnalysis.vue] -->|useMap| AMH
+              CA[ConvergeAnalysis.vue] -->|useMap| AMH
+              AMH -->|load once| AM[AMap SDK]
+              style AMH fill:#bbf7d0,stroke:#16a34a,stroke-width:2px
+          </pre>
+          <p class="text-[10px] text-emerald-600 mt-2 leading-relaxed">useAmap composable 封装 key/security/插件加载。一个 adapter 一处配置，三处调用。未来换地图 SDK 只需改一个 module。</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Problem</p>
+          <p class="text-sm">AMapLoader.load({ key, version, plugins }) 在三处重复，key 和安全码硬编码。没有统一的地图 SDK 接入点。</p>
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Solution</p>
+          <p class="text-sm">创建 useAmap() composable 作为唯一 AMap adapter。内部处理加载、去重、配置。一个 seam，一个地方改 key。</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Wins</p>
+        <ul class="text-sm space-y-0.5 list-disc list-inside text-slate-600">
+          <li><strong>locality</strong>: key/config 集中一处，修改零散播</li>
+          <li><strong>two adapters justify the seam</strong>: 真实 AMap + 测试 mock 两个 adapter</li>
+          <li><strong>leverage</strong>: 新增地图页面只需调 useAmap()，不再拷贝初始化代码</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ===== CANDIDATE 3: Duplicated Constants & Helpers ===== -->
+    <article class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm space-y-5">
+      <div class="flex items-start justify-between">
+        <div>
+          <h2 class="text-xl font-serif font-bold">3. 常量和工具函数泄漏：svcMap / formatTime 重复定义</h2>
+          <p class="text-xs text-slate-400 mt-1">useDashboardState.js · DetailPanel.vue</p>
+        </div>
+        <div class="flex gap-2">
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-700">Worth exploring</span>
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-500">in-process</span>
+        </div>
+      </div>
+
+      <div class="text-xs font-mono text-slate-500 space-x-2">
+        <span>useDashboardState.js:29</span><span>useDashboardState.js:82</span><span>DetailPanel.vue:37</span><span>DetailPanel.vue:39</span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div class="rounded-lg border border-red-200 bg-red-50/30 p-4">
+          <p class="text-xs uppercase tracking-wider text-red-500 font-semibold mb-3">Before — 两份副本独立维护</p>
+          <div class="space-y-2">
+            <div class="border border-red-300 rounded p-2 bg-white">
+              <p class="text-[9px] text-red-600 font-bold mb-1">useDashboardState.js</p>
+              <code class="text-[9px] text-slate-700">svcMap = {0:'基础照护',1:'陪护服务',...}<br>formatTime(t){ return new Date(t).toLocaleString() }</code>
+            </div>
+            <div class="flex justify-center text-red-400 text-xs">⬇ copy-paste ⬇</div>
+            <div class="border border-red-300 rounded p-2 bg-white">
+              <p class="text-[9px] text-red-600 font-bold mb-1">DetailPanel.vue</p>
+              <code class="text-[9px] text-slate-700">svcMap = {0:'基础照护',1:'陪护服务',...}<br>formatTime(t){ return new Date(t).toLocaleString() }</code>
+            </div>
+          </div>
+          <p class="text-[10px] text-red-500 mt-2 leading-relaxed">修改 svcMap 需要改两处。两处不一致会导致 DetailPanel 显示的服务类型名与父组件不同。</p>
+        </div>
+        <div class="rounded-lg border border-emerald-200 bg-emerald-50/30 p-4">
+          <p class="text-xs uppercase tracking-wider text-emerald-600 font-semibold mb-3">After — 单一来源</p>
+          <div class="space-y-2">
+            <div class="border-2 border-emerald-400 rounded p-2 bg-white">
+              <p class="text-[9px] text-emerald-600 font-bold mb-1">src/constants.js</p>
+              <code class="text-[9px] text-slate-700">export const SVC_MAP = {...}<br>export { formatTime } from './utils/time'</code>
+            </div>
+            <div class="flex justify-center text-emerald-500 text-xs">⬇ import ⬇</div>
+            <div class="flex gap-2">
+              <div class="border border-emerald-300 rounded p-1 bg-white flex-1 text-center text-[9px]">useDashboardState</div>
+              <div class="border border-emerald-300 rounded p-1 bg-white flex-1 text-center text-[9px]">DetailPanel</div>
+            </div>
+          </div>
+          <p class="text-[10px] text-emerald-600 mt-2 leading-relaxed">常量模块一个 seam，所有 consumer import 同一来源。修改一处，全局生效。</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Problem</p>
+          <p class="text-sm">svcMap 和 formatTime 在两处独立定义，属于典型的 copy-paste 泄漏。interface 重复，implementation 重复。</p>
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Solution</p>
+          <p class="text-sm">创建 src/constants.js 和 src/utils/time.js 作为共享 module，删除两处内联定义。</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Wins</p>
+        <ul class="text-sm space-y-0.5 list-disc list-inside text-slate-600">
+          <li><strong>locality</strong>: svcMap 修改一处即全局一致</li>
+          <li><strong>deletion test</strong>: 删除 DetailPanel 的 svcMap 副本，复杂度消失而非转移</li>
+          <li><strong>adapter ready</strong>: formatTime 提取后，可替换为 dayjs/date-fns 而无需改调用方</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ===== CANDIDATE 4: useDashboardCharts — Unused Shallow Module ===== -->
+    <article class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm space-y-5">
+      <div class="flex items-start justify-between">
+        <div>
+          <h2 class="text-xl font-serif font-bold">4. useDashboardCharts：未被使用的浅层模块</h2>
+          <p class="text-xs text-slate-400 mt-1">src/hooks/useDashboardCharts.js</p>
+        </div>
+        <div class="flex gap-2">
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600">Speculative</span>
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-500">in-process</span>
+        </div>
+      </div>
+
+      <div class="text-xs font-mono text-slate-500 space-x-2">
+        <span>useDashboardCharts.js (全局)</span><span>AgeChart.vue</span><span>GenderChart.vue</span><span>TypeChart.vue</span><span>TrendChart.vue</span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div class="rounded-lg border border-amber-200 bg-amber-50/30 p-4">
+          <p class="text-xs uppercase tracking-wider text-amber-600 font-semibold mb-3">Before — hook 存在但无人调用</p>
+          <pre class="mermaid">
+            flowchart TD
+              H[useDashboardCharts.js<br/>initChart / resizeAll] -.->|never imported| BS[BigScreen.vue]
+              AG[AgeChart.vue] -->|own echarts init| E[ECharts]
+              GD[GenderChart.vue] -->|own echarts init| E
+              TY[TypeChart.vue] -->|own echarts init| E
+              TR[TrendChart.vue] -->|own echarts init| E
+              style H fill:#fef3c7,stroke:#d97706,stroke-dasharray:3 3
+          </pre>
+          <p class="text-[10px] text-amber-600 mt-2 leading-relaxed">useDashboardCharts 只有 initChart/resizeAll 两个薄封装——interface 几乎等于 implementation。且 BigScreen.vue 根本未 import 它。</p>
+        </div>
+        <div class="rounded-lg border border-emerald-200 bg-emerald-50/30 p-4">
+          <p class="text-xs uppercase tracking-wider text-emerald-600 font-semibold mb-3">After — 两个选择</p>
+          <div class="space-y-2">
+            <div class="border border-emerald-300 rounded p-2 bg-white">
+              <p class="text-[9px] font-bold text-emerald-700">方案A: 删除模块</p>
+              <p class="text-[9px] text-slate-600">每个 chart 组件独立管理自己的 echarts 实例。deletion test 通过——删除后无复杂度转移。</p>
+            </div>
+            <div class="border border-emerald-300 rounded p-2 bg-white">
+              <p class="text-[9px] font-bold text-emerald-700">方案B: 深化模块</p>
+              <p class="text-[9px] text-slate-600">增强为 useECharts(id) → { instance, setOption, resize }，底层处理 init/dispose 生命周期，chart 组件只需传 option。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Problem</p>
+          <p class="text-sm">未使用的 hook，interface 浅到只有 initChart/resizeAll 两个薄封装。每个 chart 组件各自重复 echarts.init 模式。</p>
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Solution</p>
+          <p class="text-sm">二选一：删除它（deletion test 通过），或深化为真正的 ECharts instance manager —— 接管 init/dispose/option/resize 全生命周期。</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Wins</p>
+        <ul class="text-sm space-y-0.5 list-disc list-inside text-slate-600">
+          <li><strong>删除方案</strong>: 消除死代码，减少维护负担</li>
+          <li><strong>深化方案</strong>: 4 个 chart 组件共享一个 instance manager，locality 集中</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ===== CANDIDATE 5: Direct JSON import without data seam ===== -->
+    <article class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm space-y-5">
+      <div class="flex items-start justify-between">
+        <div>
+          <h2 class="text-xl font-serif font-bold">5. 数据层无 seam：JSON 文件被视图直接 import</h2>
+          <p class="text-xs text-slate-400 mt-1">ConvergeAnalysis.vue · src/data/*.json</p>
+        </div>
+        <div class="flex gap-2">
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-700">Worth exploring</span>
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-500">in-process</span>
+        </div>
+      </div>
+
+      <div class="text-xs font-mono text-slate-500 space-x-2">
+        <span>ConvergeAnalysis.vue:161-164</span><span>facilities.json</span><span>real_parks.json</span><span>nanchang_transit.json</span><span>nanchang_nimby.json</span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div class="rounded-lg border border-red-200 bg-red-50/30 p-4">
+          <p class="text-xs uppercase tracking-wider text-red-500 font-semibold mb-3">Before — 视图直接绑定数据文件</p>
+          <pre class="mermaid">
+            flowchart LR
+              CA[ConvergeAnalysis.vue] -->|import| FJ[facilities.json]
+              CA -->|import| PJ[real_parks.json]
+              CA -->|import| TJ[nanchang_transit.json]
+              CA -->|import| NJ[nanchang_nimby.json]
+              style CA fill:#fecaca,stroke:#dc2626
+          </pre>
+          <p class="text-[10px] text-red-500 mt-2 leading-relaxed">视图层直接耦合 JSON 文件路径和数据结构。切换到 API 数据源需大改视图代码。无法在测试中用 mock 数据替换。</p>
+        </div>
+        <div class="rounded-lg border border-emerald-200 bg-emerald-50/30 p-4">
+          <p class="text-xs uppercase tracking-wider text-emerald-600 font-semibold mb-3">After — 数据 adapter 隔离</p>
+          <pre class="mermaid">
+            flowchart LR
+              CA[ConvergeAnalysis.vue] -->|useFacilityData| FD[useFacilityData.js]
+              CA -->|useSpatialData| SD[useSpatialData.js]
+              FD -->|adapter| FJ[facilities.json]
+              SD -->|adapter| PJ[real_parks.json]
+              SD -->|adapter| TJ[nanchang_transit.json]
+              style FD fill:#bbf7d0,stroke:#16a34a
+              style SD fill:#bbf7d0,stroke:#16a34a
+          </pre>
+          <p class="text-[10px] text-emerald-600 mt-2 leading-relaxed">数据 adapter 提供 interface（如 getFacilities() → FeatureCollection）。视图只依赖 interface，不感知数据来源。切换 JSON → API 只需改 adapter 内部。</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Problem</p>
+          <p class="text-sm">视图直接 import JSON 文件，数据结构和文件路径与视图紧耦合。无 adapter seam 可用于测试或数据源切换。</p>
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Solution</p>
+          <p class="text-sm">创建 useFacilityData / useSpatialData composable，提供数据访问 interface。内部 adapter 可对接 JSON 文件或后端 API。</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Wins</p>
+        <ul class="text-sm space-y-0.5 list-disc list-inside text-slate-600">
+          <li><strong>two adapters justify the seam</strong>: JSON adapter (dev) + API adapter (prod)</li>
+          <li><strong>testability</strong>: 注入 mock 数据 adapter，验证分析逻辑而不加载真实文件</li>
+          <li><strong>interface stable</strong>: getFacilities() 签名不变，数据源可变</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ===== CANDIDATE 6: BigScreen state hub ===== -->
+    <article class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm space-y-5">
+      <div class="flex items-start justify-between">
+        <div>
+          <h2 class="text-xl font-serif font-bold">6. BigScreen 状态导出过多：27 个值从一个 hook 流出</h2>
+          <p class="text-xs text-slate-400 mt-1">src/hooks/useDashboardState.js · src/views/BigScreen.vue</p>
+        </div>
+        <div class="flex gap-2">
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-700">Worth exploring</span>
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-500">in-process</span>
+        </div>
+      </div>
+
+      <div class="text-xs font-mono text-slate-500 space-x-2">
+        <span>useDashboardState.js:133-145</span><span>BigScreen.vue:74-85</span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div class="rounded-lg border border-amber-200 bg-amber-50/30 p-4">
+          <p class="text-xs uppercase tracking-wider text-amber-600 font-semibold mb-3">Before — 27 个导出值平铺</p>
+          <div class="flex flex-wrap gap-1">
+            <span class="bg-amber-100 text-[8px] px-1 rounded">currentMode</span><span class="bg-amber-100 text-[8px] px-1 rounded">modeTitle</span><span class="bg-amber-100 text-[8px] px-1 rounded">modeIcon</span><span class="bg-amber-100 text-[8px] px-1 rounded">orders</span><span class="bg-amber-100 text-[8px] px-1 rounded">managers</span><span class="bg-amber-100 text-[8px] px-1 rounded">volunteers</span><span class="bg-amber-100 text-[8px] px-1 rounded">heatmap</span><span class="bg-amber-100 text-[8px] px-1 rounded">totalStats</span><span class="bg-amber-100 text-[8px] px-1 rounded">selectedDateStr</span><span class="bg-amber-100 text-[8px] px-1 rounded">detailItem</span><span class="bg-amber-100 text-[8px] px-1 rounded">detailVisible</span><span class="bg-amber-100 text-[8px] px-1 rounded">ageData</span><span class="bg-amber-100 text-[8px] px-1 rounded">genderData</span><span class="bg-amber-100 text-[8px] px-1 rounded">typeData</span><span class="bg-amber-100 text-[8px] px-1 rounded">peakInfo</span><span class="bg-amber-100 text-[8px] px-1 rounded">ageChart</span><span class="bg-amber-100 text-[8px] px-1 rounded">genderChart</span><span class="bg-amber-100 text-[8px] px-1 rounded">typeChart</span><span class="bg-amber-100 text-[8px] px-1 rounded">trendChart</span><span class="bg-amber-100 text-[8px] px-1 rounded">currentScale</span><span class="bg-amber-100 text-[8px] px-1 rounded">selectedDate</span><span class="bg-amber-100 text-[8px] px-1 rounded">playbackScale</span><span class="bg-amber-100 text-[8px] px-1 rounded">displayOrders</span><span class="bg-amber-100 text-[8px] px-1 rounded">isPlaying</span><span class="bg-amber-100 text-[8px] px-1 rounded">playProgress</span><span class="bg-amber-100 text-[8px] px-1 rounded">goCoverage</span><span class="bg-amber-100 text-[8px] px-1 rounded">toggleHeatmap</span><span class="bg-amber-100 text-[8px] px-1 rounded">...</span>
+          </div>
+          <p class="text-[10px] text-amber-600 mt-2 leading-relaxed">interface 有 27 个成员——几乎与 implementation 一样大。BigScreen.vue 需要逐个解构所有值，任何调用方必须了解全部导出。</p>
+        </div>
+        <div class="rounded-lg border border-emerald-200 bg-emerald-50/30 p-4">
+          <p class="text-xs uppercase tracking-wider text-emerald-600 font-semibold mb-3">After — 分组导出</p>
+          <div class="space-y-1.5">
+            <div class="border border-emerald-300 rounded p-1.5 bg-white">
+              <p class="text-[9px] font-bold text-emerald-700">useDashboardState → { mode, stats, charts }</p>
+              <div class="flex gap-2 mt-1">
+                <span class="bg-emerald-100 text-[8px] px-1 rounded">mode: { current, title, icon, switch() }</span>
+                <span class="bg-emerald-100 text-[8px] px-1 rounded">stats: { orders, managers, volunteers, total }</span>
+                <span class="bg-emerald-100 text-[8px] px-1 rounded">charts: { age, gender, type, trend }</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-[10px] text-emerald-600 mt-2 leading-relaxed">拆分为 3 个子 hook。每个子 hook 的 interface 只有 3-6 个成员。BigScreen 按需解构，不需要的部分不进入作用域。</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Problem</p>
+          <p class="text-sm">useDashboardState 返回 27 个值——interface 宽度接近 implementation。调用方必须解构全部。播放逻辑、图表数据、模式切换混在一个 hook。</p>
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Solution</p>
+          <p class="text-sm">按职责拆分为 useModeSwitch / useChartData / usePlayback(已存在) 三个 hook。每个 interface ≤ 6 个导出。</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Wins</p>
+        <ul class="text-sm space-y-0.5 list-disc list-inside text-slate-600">
+          <li><strong>depth</strong>: 每个子 hook 的小 interface 背后是独立实现</li>
+          <li><strong>locality</strong>: 播放 bug 只需排查 usePlayback.js，不碰模式切换代码</li>
+          <li><strong>interface shrinks</strong>: 27 → 3×5 平均导出量</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ===== CANDIDATE 7: Dead Code & Orphaned Modules ===== -->
+    <article class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm space-y-5">
+      <div class="flex items-start justify-between">
+        <div>
+          <h2 class="text-xl font-serif font-bold">7. 死代码清理：3 个模块从未被引用 + 1 个危险 Bug</h2>
+          <p class="text-xs text-slate-400 mt-1">Cards.vue · TheHeader.vue · useDashboardCharts.js · TrendChart.vue</p>
+        </div>
+        <div class="flex gap-2">
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700">Strong</span>
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-500">in-process</span>
+        </div>
+      </div>
+
+      <div class="text-xs font-mono text-slate-500 space-x-2">
+        <span>Cards.vue (63行)</span><span>TheHeader.vue (141行)</span><span>useDashboardCharts.js (35行)</span><span>mockService.js (110行)</span><span>TrendChart.vue:155</span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div class="rounded-lg border border-red-200 bg-red-50/30 p-4">
+          <p class="text-xs uppercase tracking-wider text-red-500 font-semibold mb-3">Before — 死代码 + 潜在运行时错误</p>
+          <div class="space-y-1.5">
+            <div class="h-5 bg-red-100/60 rounded text-[9px] px-2 leading-5 text-red-700">Cards.vue — KPI 卡片组件，BigScreen 已内联相同逻辑</div>
+            <div class="h-5 bg-red-100/60 rounded text-[9px] px-2 leading-5 text-red-700">TheHeader.vue — 导航头，BigScreen 有 hud-title-bar 替代</div>
+            <div class="h-5 bg-red-100/60 rounded text-[9px] px-2 leading-5 text-red-700">useDashboardCharts.js — chart refs 无人消费</div>
+            <div class="h-5 bg-red-100/60 rounded text-[9px] px-2 leading-5 text-red-700">mockService.js — 上海坐标假数据，从未 import</div>
+            <div class="h-5 bg-red-300/80 rounded text-[9px] px-2 leading-5 text-white font-bold">🐛 TrendChart:155 — ullYear() 未定义 → 月份模式静默崩溃</div>
+          </div>
+          <p class="text-[10px] text-red-500 mt-2 leading-relaxed">4 个文件合计 ~350 行死代码。TrendChart 第 155 行 <code>ullYear()</code> 缺少 <code>baseDate.</code> 前缀，切换月份刻度时静默抛错。</p>
+        </div>
+        <div class="rounded-lg border border-emerald-200 bg-emerald-50/30 p-4">
+          <p class="text-xs uppercase tracking-wider text-emerald-600 font-semibold mb-3">After — 清理 + 修复</p>
+          <div class="space-y-1.5">
+            <div class="h-5 bg-emerald-100/60 rounded text-[9px] px-2 leading-5 text-emerald-700">删除 Cards.vue, TheHeader.vue, mockService.js</div>
+            <div class="h-5 bg-emerald-100/60 rounded text-[9px] px-2 leading-5 text-emerald-700">删除 useDashboardCharts.js（或深化为真正的图表 manager）</div>
+            <div class="h-5 bg-emerald-200/80 rounded text-[9px] px-2 leading-5 text-emerald-800 font-bold">✅ TrendChart:155 — new Date(baseDate.getFullYear(), ...)</div>
+          </div>
+          <p class="text-[10px] text-emerald-600 mt-2 leading-relaxed">删除 350 行死代码 → 减少认知负荷。修复 ullYear bug → 月份维度回放恢复正常。</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Problem</p>
+          <p class="text-sm">Cards, TheHeader, useDashboardCharts, mockService 从未被 import。TrendChart 第 155 行 <code>ullYear()</code> 缺少对象前缀，是运行时 ReferenceError。</p>
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Solution</p>
+          <p class="text-sm">删除 4 个死文件。修复 TrendChart 第 155 行为 <code>baseDate.getFullYear()</code>。</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Wins</p>
+        <ul class="text-sm space-y-0.5 list-disc list-inside text-slate-600">
+          <li><strong>350 行死代码移除</strong>：减少维护负担和认知负荷</li>
+          <li><strong>🐛 修复</strong>：月份刻度回放从静默崩溃 → 正常工作</li>
+          <li><strong>deletion test 全部通过</strong>：删除后无复杂度转移</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ===== CANDIDATE 8: Data Mutation Bug ===== -->
+    <article class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm space-y-5">
+      <div class="flex items-start justify-between">
+        <div>
+          <h2 class="text-xl font-serif font-bold">8. 选址模拟污染 JSON 数据源：facilityData.push 跨路由持久化</h2>
+          <p class="text-xs text-slate-400 mt-1">ConvergeAnalysis.vue · facilities.json</p>
+        </div>
+        <div class="flex gap-2">
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700">Strong</span>
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-500">in-process</span>
+        </div>
+      </div>
+
+      <div class="text-xs font-mono text-slate-500 space-x-2">
+        <span>ConvergeAnalysis.vue:161</span><span>ConvergeAnalysis.vue:600-604</span><span>ConvergeAnalysis.vue:624</span>
+      </div>
+
+      <div class="rounded-lg border border-red-200 bg-red-50/30 p-4">
+        <p class="text-xs uppercase tracking-wider text-red-500 font-semibold mb-3">数据流污染路径</p>
+        <pre class="mermaid">
+          flowchart LR
+            FJ[facilities.json] -->|import| FD[facilityData]
+            SM[选址模拟点击] -->|push| FD
+            FD -->|污染| GA[网格分析]
+            CA[撤销操作] -->|pop| FD
+            style FD fill:#fecaca,stroke:#dc2626,stroke-width:2px
+            style SM fill:#fecaca,stroke:#dc2626
+        </pre>
+        <p class="text-[10px] text-red-500 mt-2 leading-relaxed">第 600 行 <code>facilityData.push({...})</code> 直接修改 import 的模块默认导出。Vite 下模块是单例，数据在路由切换后不重置。用户切走再切回，上次模拟的 "拟建" 设施仍然存在。第 624 行的 <code>facilityData.pop()</code> 依赖与 marker 数组同步，任何不一致都会导致数据漂移。</p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Problem</p>
+          <p class="text-sm">import 的 JSON 数据被 push/pop 直接变异。路由切换不重置，造成跨页面数据污染。没有 onBeforeUnmount 清理。</p>
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Solution</p>
+          <p class="text-sm">创建 <code>ref([...facilityData])</code> 本地副本，模拟操作只修改副本。组件卸载时自动回收。</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Wins</p>
+        <ul class="text-sm space-y-0.5 list-disc list-inside text-slate-600">
+          <li><strong>数据完整性</strong>：原始 JSON 数据保持不变</li>
+          <li><strong>路由隔离</strong>：每次进入 /coverage 获得干净数据</li>
+          <li><strong>adapter ready</strong>：本地副本模式天然支持后续 API 数据源切换</li>
+        </ul>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- ===== TOP RECOMMENDATION ===== -->
+  <section id="top-recommendation" class="rounded-xl border-2 border-indigo-200 bg-indigo-50/50 p-6 space-y-4">
+    <p class="text-xs uppercase tracking-wider text-indigo-500 font-semibold">Top recommendation</p>
+    <h2 class="text-xl font-serif font-bold text-indigo-900">
+      <a href="#candidates" class="hover:underline">#1: 拆分 ConvergeAnalysis 巨模块</a>
+    </h2>
+    <p class="text-sm text-indigo-800 max-w-2xl leading-relaxed">
+      这是当前代码库最大的架构风险。一个 1500+ 行的 SFC 承担了 8 种正交职责，修改任一部分都需要在全文中定位。
+      提取 useSpatialAnalysis / useMapLayers / useSiteScoring 三个 hook 是投入产出比最高的操作：
+      每个新 module 的 interface 小而深，可独立测试，后续增改功能只需动对应 hook。
+      这项拆分也是其他优化的前置条件——没有它，候选人 #5（数据层 seam）和 #2（AMap adapter）无处安放。
+    </p>
+    <div class="text-xs text-indigo-400">
+      建议顺序：① ConvergeAnalysis 拆分 → ② AMap adapter → ③ 数据层 seam → ④ 常量提取 → ⑤ useDashboardState 分组
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>

@@ -1,179 +1,69 @@
 <template>
-  <div class="playback-panel">
-      <div class="playback-header">
-          <span class="play-status">{{ isPlaying ? '正在回放...' : '准备回放' }}</span>
-          <div class="playback-tabs">
-            <button
-              v-for="(label,key) in scaleMap"
-              :key="key"
-              :class="{ active: currentScale === key  }"
-              @click="$emit('change-scale', key)"
-            >
-              {{ label }}
-            </button>
-          </div>
-          <span class="current-time-text">{{ currentTimeDisplay || '---' }}</span>
+  <div class="pb">
+    <!-- 播放按钮 -->
+    <button class="pb-btn" @click="$emit('play')" :disabled="isPlaying">
+      {{ isPlaying ? '⏸' : '▶' }}
+    </button>
+
+    <!-- 时间轴 -->
+    <div class="pb-track">
+      <div class="pb-fill" :style="{ width: playProgress + '%' }"></div>
+      <div class="pb-ticks">
+        <span v-for="t in timeAxisTicks" :key="t">{{ t }}</span>
       </div>
+    </div>
 
-      <div class="axis-container">
-        <button class="play-main-btn" @click="$emit('play')" :disabled="isPlaying">
-          <span v-if="!isPlaying">▶</span>
-          <span v-else class="loading-spinner"></span>
-        </button>
+    <!-- 当前时间 -->
+    <span class="pb-time">{{ currentTimeDisplay || '--:--' }}</span>
 
-        <div class="timeline-track">
-          <div class="progress-bar" :style="{width: playProgress + '%'}"></div>
-          <div class="axis-ticks">
-            <span v-for="tick in timeAxisTicks" :key="tick" class="tick-item">
-            {{ tick }}
-            </span>
-          </div>
-        </div>
-     </div>
+    <!-- 缩放切换 -->
+    <div class="pb-tabs">
+      <button v-for="(label, key) in scaleMap" :key="key" :class="{ on: currentScale === key }" @click="$emit('change-scale', key)">{{ label }}</button>
+    </div>
   </div>
 </template>
 
 <script setup>
-//接收父组件传来的状态
-defineProps({
-    isPlaying: Boolean,
-    playProgress: Number,
-    currentTimeDisplay:String,
-    timeAxisTicks: Array,
-    currentScale: String,
-    scaleMap: Object
-});
-
-defineEmits(['play', 'change-scale']);
+defineProps({ isPlaying:Boolean, playProgress:Number, currentTimeDisplay:String, timeAxisTicks:Array, currentScale:String, scaleMap:Object });
+defineEmits(['play','change-scale']);
 </script>
 
 <style scoped>
-.playback-panel {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  right: 20px;
-  background: rgba(15,23,42,0.9);
-  border: 1px solid rgba(59, 130, 246, 0.5);
-  border-radius: 8px;
-  padding: 12px 20px;
-  z-index: 1000;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+.pb { display: flex; align-items: center; gap: 12px; width: 100%; }
+
+/* 播放按钮 */
+.pb-btn {
+  width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(56,189,248,0.3);
+  background: rgba(56,189,248,0.1); color: #38bdf8; font-size: 12px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.25s; flex-shrink: 0;
+}
+.pb-btn:hover:not(:disabled) { background: rgba(56,189,248,0.2); transform: scale(1.08); }
+.pb-btn:disabled { opacity: 0.3; cursor: default; }
+
+/* 时间轴 */
+.pb-track { flex: 1; height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; position: relative; }
+.pb-fill {
+  height: 100%; background: linear-gradient(90deg, rgba(56,189,248,0.4), #38bdf8);
+  border-radius: 2px; transition: width 0.15s linear; position: relative; z-index: 1;
+}
+.pb-ticks {
+  position: absolute; top: 8px; width: 100%; display: flex; justify-content: space-between;
+  font-size: 9px; color: #475569; z-index: 0;
 }
 
-.playback-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
+/* 时间 */
+.pb-time {
+  font-family: "Orbitron","Courier New",monospace; font-size: 14px; font-weight: 600;
+  color: #38bdf8; min-width: 50px; text-align: center; flex-shrink: 0;
 }
 
-.play-status {
-  color: #94a3b8;
-  font-size: 12px;
+/* 缩放 */
+.pb-tabs { display: flex; gap: 2px; background: rgba(255,255,255,0.03); border-radius: 6px; padding: 2px; flex-shrink: 0; }
+.pb-tabs button {
+  background: transparent; border: none; color: #64748b; font-size: 11px;
+  padding: 3px 10px; border-radius: 4px; cursor: pointer; transition: all 0.2s;
 }
-
-.current-time-text {
-  color: #60a5fa;
-  font-family: 'Courier New', monospace;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-.axis-container {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.play-main-btn {
-  width: 40px;
-  height: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border:none;
-  background: #3b82f6;
-  color: white;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  transition: all 0.3s;
-
-}
-
-.play-main-btn:hover:not(:disabled) {
-  transform: scale(1.1);
-  background: #2563eb;
-}
-
-.play-main-btn:disabled {
-  background: #475569;
-}
-
-.timeline-track {
-  flex: 1;
-  height: 6px;
-  background: #334155;
-  border-radius: 3px;
-  position: relative;
-}
-
-.progress-bar {
-  position: absolute;
-  height: 100%;
-  background: linear-gradient(90deg, #3b82f6, #60a5fa);
-  border-radius: 3px;
-  transition: width 0.1s linear;
-}
-
-.axis-ticks {
-  position: absolute;
-  top: 12px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.tick-item {
-  color: #64748b;
-  font-size: 10px;
-}
-
-/* 简单的加载动画 */
-.loading-spinner {
-  width: 20px;
-  height: 20px;
-  border: 2px solid #fff;
-  border-top-color: transparent;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-.playback-tabs {
-  display: flex;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 2px;
-  border-radius: 4px;
-}
-
-.playback-tabs button {
-  padding: 2px 12px;
-  font-size: 11px;
-  border: none;
-  background: transparent;
-  color: #94a3b8;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.playback-tabs button.active {
-  background: #3b82f6;
-  color: white;
-  border-radius: 2px;
-}
-
-.playback-tabs button:hover:not(.active) {
-  color: #fff;
-}
+.pb-tabs button.on { background: rgba(56,189,248,0.15); color: #38bdf8; }
+.pb-tabs button:hover:not(.on) { color: #94a3b8; }
 </style>

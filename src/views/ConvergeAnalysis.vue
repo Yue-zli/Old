@@ -235,6 +235,12 @@ const toggleLayer = (layerType) => {
     map.getAllOverlays('polygon').forEach(p => {
       if (p.getOptions().zIndex === 10) isVisible ? p.show() : p.hide();
     });
+  } else if (layerType === 'parks') {
+    parkMarkers.forEach(m => isVisible ? m.show() : m.hide());
+  } else if (layerType === 'transits') {
+    transitMarkers.forEach(m => isVisible ? m.show() : m.hide());
+  } else if (layerType === 'nimbys') {
+    nimbyMarkers.forEach(m => isVisible ? m.show() : m.hide());
   } else if (layerType === 'facilities') {
     [...parkMarkers, ...transitMarkers, ...nimbyMarkers].forEach(layer => {
       isVisible ? layer.show() : layer.hide();
@@ -401,7 +407,9 @@ const executeAnalysis = (bbox) => {
     const covering = hospitalBuffers.filter(h => {
       try { return turf.booleanPointInPolygon(currentCenterPt, h.buffer); } catch (e) { return false; }
     });
-    const medicalWeight = covering.reduce((s, h) => s + h.weight, 0);
+    // 饱和上限：超过5个有效权重单位即视为完全覆盖，避免市中心重叠过多
+    const rawWeight = covering.reduce((s, h) => s + h.weight, 0);
+    const medicalWeight = Math.min(5, rawWeight);
     const medicalCount = covering.length;
     cell.properties.count = medicalWeight;
     if (medicalWeight >= 1) coveredCells++;
@@ -413,8 +421,8 @@ const executeAnalysis = (bbox) => {
     }).length;
     const nd = getCountInRange(nimbyFeatures, currentCenterPt, 1.0);
 
+    // 选址评分仅由公园+地铁+邻避三因子驱动，医疗设施不参与权重计算
     let score = 65 + Math.min(30, (pd.count || 0) * 4 * weightPark.value) + Math.min(30, stationCount * 15 * weightTransit.value) - ((nd.count || 0) * 15 * weightNimby.value);
-    if (covering.some(h => h.name.includes('拟建'))) score += 15;
     if (nd.minDist < 0.2) score -= 40 * weightNimby.value;
     score = Math.max(0, Math.min(100, Math.floor(score)));
 
@@ -459,11 +467,16 @@ const executeAnalysis = (bbox) => {
         const tier3Count = covering.filter(h => h.tier === 3).length;
         let medicalDesc = '<span style="color:#ef4444;">盲区</span>';
         if (medicalCount > 0) {
-          const parts = [];
-          if (tier1Count) parts.push(`<span style="color:#06b6d4;">三甲×${tier1Count}</span>`);
-          if (tier2Count) parts.push(`<span style="color:#0ea5e9;">综合×${tier2Count}</span>`);
-          if (tier3Count) parts.push(`<span style="color:#94a3b8;">专科×${tier3Count}</span>`);
-          medicalDesc = parts.join(' '); // 医院仅展示，不参与选址评分
+          // 收敛显示：超过6家时仅展示等级汇总，避免"十几二十处"刷屏
+          if (medicalCount <= 6) {
+            const parts = [];
+            if (tier1Count) parts.push(`<span style="color:#06b6d4;">三甲×${tier1Count}</span>`);
+            if (tier2Count) parts.push(`<span style="color:#0ea5e9;">综合×${tier2Count}</span>`);
+            if (tier3Count) parts.push(`<span style="color:#94a3b8;">专科×${tier3Count}</span>`);
+            medicalDesc = parts.join(' ');
+          } else {
+            medicalDesc = `<span style="color:#10b981;">充沛覆盖</span> <span style="color:#64748b;font-size:10px;">(${medicalCount}家，三甲${tier1Count}/综合${tier2Count}/专科${tier3Count})</span>`;
+          }
         }
 
         let parkDesc = pd.count > 0 ? `<span style="color:#10b981;">${pd.count}处 (+${Math.min(30, pd.count * 4 * weightPark.value)}分)</span>` : `<span style="color:#94a3b8;">无公园</span>`;
@@ -486,26 +499,38 @@ const executeAnalysis = (bbox) => {
             ${advice}
           </div>`;
       } else {
-        // === 普通模式：按等级分组展示（避免列20+个医院名） ===
+        // === 普通模式：按等级分组展示（超过6家仅汇总，避免弹窗过长） ===
         if (medicalCount > 0) {
-           const tier1Names = covering.filter(h => h.tier === 1).map(h => h.name);
-           const tier2Names = covering.filter(h => h.tier === 2).map(h => h.name);
+           const tier1Count = covering.filter(h => h.tier === 1).length;
+           const tier2Count = covering.filter(h => h.tier === 2).length;
            const tier3Count = covering.filter(h => h.tier === 3).length;
-           let listHTML = '';
-           if (tier1Names.length) listHTML += `<div style="color:#06b6d4;font-weight:bold;margin-top:4px;">▸ 三甲 (${tier1Names.length}家)</div>`
-             + tier1Names.slice(0, 5).map(n => `<li>📍 ${n}</li>`).join('')
-             + (tier1Names.length > 5 ? `<li style="color:#64748b;">...还有${tier1Names.length - 5}家</li>` : '');
-           if (tier2Names.length) listHTML += `<div style="color:#0ea5e9;font-weight:bold;margin-top:4px;">▸ 综合 (${tier2Names.length}家)</div>`
-             + tier2Names.slice(0, 5).map(n => `<li>📍 ${n}</li>`).join('')
-             + (tier2Names.length > 5 ? `<li style="color:#64748b;">...还有${tier2Names.length - 5}家</li>` : '');
-           if (tier3Count) listHTML += `<div style="color:#94a3b8;font-weight:bold;margin-top:4px;">▸ 专科/其他 (${tier3Count}家)</div>`;
+           let bodyHTML = '';
+           if (medicalCount <= 6) {
+             // 少量医院：列出名字
+             const tier1Names = covering.filter(h => h.tier === 1).map(h => h.name);
+             const tier2Names = covering.filter(h => h.tier === 2).map(h => h.name);
+             let listHTML = '';
+             if (tier1Names.length) listHTML += `<div style="color:#06b6d4;font-weight:bold;margin-top:4px;">▸ 三甲 (${tier1Names.length}家)</div>`
+               + tier1Names.map(n => `<li>📍 ${n}</li>`).join('');
+             if (tier2Names.length) listHTML += `<div style="color:#0ea5e9;font-weight:bold;margin-top:4px;">▸ 综合 (${tier2Names.length}家)</div>`
+               + tier2Names.map(n => `<li>📍 ${n}</li>`).join('');
+             if (tier3Count) listHTML += `<div style="color:#94a3b8;font-weight:bold;margin-top:4px;">▸ 专科/其他 (${tier3Count}家)</div>`;
+             bodyHTML = `<p style="margin: 0 0 6px 0; color: #10b981;">覆盖 ${medicalCount} 处设施</p>
+               <ul style="max-height: 200px; overflow-y: auto; font-size:11px;">${listHTML}</ul>`;
+           } else {
+             // 大量覆盖：仅汇总计数
+             bodyHTML = `<p style="margin: 0 0 4px 0; color: #10b981; font-size: 13px;">🟢 医疗资源充沛</p>
+               <p style="margin:0;color:#94a3b8;font-size:11px;">共 ${medicalCount} 家医院覆盖此网格</p>
+               <div style="display:flex;gap:12px;margin-top:6px;font-size:11px;">
+                 <span style="color:#06b6d4;">🏥 三甲 ${tier1Count}</span>
+                 <span style="color:#0ea5e9;">🏥 综合 ${tier2Count}</span>
+                 <span style="color:#94a3b8;">🏥 专科 ${tier3Count}</span>
+               </div>`;
+           }
            popupContent = `
             <div class="custom-info-window" style="min-width: 240px;">
               <div class="window-header">🏥 医疗覆盖评估</div>
-              <div class="window-body">
-                <p style="margin: 0 0 6px 0; color: #10b981;">覆盖 ${medicalCount} 处设施（仅供参考，不参与评分）</p>
-                <ul style="max-height: 200px; overflow-y: auto; font-size:11px;">${listHTML}</ul>
-              </div>
+              <div class="window-body">${bodyHTML}</div>
             </div>`;
         } else {
            popupContent = `<div class="custom-info-window" style="padding: 8px 12px; color: #f87171;">⚠️ 医疗服务盲区</div>`;

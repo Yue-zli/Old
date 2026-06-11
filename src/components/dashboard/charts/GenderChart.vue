@@ -26,47 +26,11 @@ watch(() => props.data, () => updateChart(), { deep: true });
 function updateChart() {
   if (!chartE || !props.data.length) return;
   chartE.setOption({
-    title: { 
-      text: '性别比例', 
-      left: 'center', 
-      top: '3%',
-      textStyle: { fontSize: 12, color: '#1e3a8a' }
-    },
-    tooltip: { 
-      trigger: 'item',
-      formatter: '{b}: {c}人 ({d}%)'
-    },
-    legend: {
-      bottom: '3%',
-      left: 'center',
-      orient: 'horizontal',
-      itemWidth: 8,
-      itemHeight: 8,
-      textStyle: { fontSize: 10, color: '#64748b' }
-    },
-    series: [{
-      type: 'pie',
-      radius: ['38%', '62%'],
-      center: ['50%', '52%'],
-      data: props.data.map(i => ({ name: i.name, value: i.value })),
-      color: ['#3b82f6', '#f472b6'],
-      label: { 
-        show: true, 
-        formatter: '{d}%', 
-        fontSize: 11,
-        fontWeight: 'bold',
-        color: '#fff',
-        position: 'inside'
-      },
-      labelLine: { show: false },
-      emphasis: {
-        itemStyle: {
-          shadowBlur: 8,
-          shadowOffsetX: 0,
-          shadowColor: 'rgba(0,0,0,0.2)'
-        }
-      }
-    }]
+    backgroundColor: 'transparent',
+    title: { text:'性别比例', left:'center', top:4, textStyle:{ fontSize:11, color:'#64748b', fontWeight:400 } },
+    tooltip: { trigger:'item', backgroundColor:'rgba(15,23,42,0.95)', borderColor:'rgba(59,130,246,0.3)', textStyle:{ color:'#e2e8f0', fontSize:11 } },
+    legend: { bottom:'2%', left:'center', itemWidth:6, itemHeight:6, textStyle:{ fontSize:9, color:'#64748b' } },
+    series: [{ type:'pie', radius:['40%','62%'], center:['50%','53%'], data:props.data.map(i=>({ name:i.name, value:i.value })), color:['#38bdf8','#f472b6'], label:{ show:true, formatter:'{d}%', fontSize:12, fontWeight:'bold', color:'#e2e8f0', position:'inside' }, labelLine:{ show:false }, emphasis:{ itemStyle:{ shadowBlur:10, shadowColor:'rgba(56,189,248,0.3)' } } }]
   }, true);
 }
 

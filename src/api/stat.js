@@ -51,3 +51,7 @@ export async function getServiceOrderDetail(id) {
 export async function listOrderByElderlyId(elderlyId) {
   return getData(`${base}/service/by-elderly`, { elderlyId });
 }
+
+export async function getAnimationData() {
+  return getData(`${base}/service/animation-data`);
+}

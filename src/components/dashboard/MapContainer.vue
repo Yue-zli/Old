@@ -26,7 +26,8 @@ import AMapLoader from '@amap/amap-jsapi-loader';
 
 const props = defineProps({
   services: { type: Array, default: () => [] },
-  heatmap: { type: Boolean, default: false }
+  heatmap: { type: Boolean, default: false },
+  trailingData: { type: Array, default: () => [] }  // 4D 拖尾数据 [{lng, lat, opacity, raw}, ...]
 });
 
 const emit = defineEmits(['marker-click']);
@@ -34,6 +35,7 @@ const emit = defineEmits(['marker-click']);
 let map = null;
 let heatmapInstance = null;
 let markers = [];
+let massMarks = null;  // 4D 海量点图层
 
 // 安全密钥配置
 window._AMapSecurityConfig = { securityJsCode: '158271bb9de2653a0ff710b76a77a458' };
@@ -43,17 +45,18 @@ async function initMap() {
     const AMap = await AMapLoader.load({
       key: '3b1255de527dd6a6af98dd5bdd4970dd',
       version: '2.0',
-      plugins: ['AMap.HeatMap']
+      plugins: ['AMap.HeatMap', 'AMap.MassMarks']
     });
 
     map = new AMap.Map('map-container', {
       zoom: 12,
       center: [115.892151, 28.676493],
-      mapStyle: 'amap://styles/normal', // 保持标准底图
+      mapStyle: 'amap://styles/dark',              // 暗色底图
+      features: ['bg', 'road', 'building'],        // 只显示背景/道路/建筑，去掉POI文字噪音
       viewMode: '2D',
-      dragEnable: true,      // 允许鼠标拖拽
-      zoomEnable: true,      // 允许鼠标滚轮缩放
-      doubleClickZoom: true, // 允许双击放大
+      dragEnable: true,
+      zoomEnable: true,
+      doubleClickZoom: true,
     });
 
     // 初始化热力图：参数调优以适配白底地图
@@ -67,6 +70,28 @@ async function initMap() {
         1.0: 'rgb(255, 0, 0)'    // 红
       }
     });
+
+    // 4D 海量点图层：3 档样式对应 3 级拖尾透明度
+    try {
+      massMarks = new AMap.MassMarks([], {
+        zIndex: 111,
+        cursor: 'pointer'
+      });
+      massMarks.setStyle([
+        { anchor: new AMap.Pixel(6, 6),  size: new AMap.Size(14, 14), fillColor: '#38bdf8', fillOpacity: 1.0, strokeColor: 'rgba(255,255,255,0.9)', strokeWeight: 2, zIndex: 200 },
+        { anchor: new AMap.Pixel(5, 5),  size: new AMap.Size(10, 10), fillColor: '#38bdf8', fillOpacity: 0.5, strokeColor: 'rgba(255,255,255,0.5)', strokeWeight: 1, zIndex: 150 },
+        { anchor: new AMap.Pixel(4, 4),  size: new AMap.Size(7, 7),   fillColor: '#38bdf8', fillOpacity: 0.2, strokeColor: 'rgba(255,255,255,0.2)', strokeWeight: 0, zIndex: 100 }
+      ]);
+      massMarks.setMap(map);
+      massMarks.on('click', (e) => {
+        if (e.data && e.data.raw) {
+          emit('marker-click', e.data.raw);
+        }
+      });
+    } catch (e) {
+      console.warn('MassMarks 初始化失败，将使用 DOM Marker 模式:', e);
+      massMarks = null;
+    }
 
     updateDisplay();
   } catch (e) {
@@ -145,8 +170,38 @@ function renderMarkers(points) {
   map.add(markers);
 }
 
+/**
+ * 4D 拖尾渲染：MassMarks WebGL 批量更新
+ */
+function updateMassMarks(data) {
+  if (!massMarks || !map) return;
+  if (!data || data.length === 0) {
+    massMarks.clear();
+    return;
+  }
+  const styledData = data.map(pt => ({
+    lnglat: [pt.lng, pt.lat],
+    style: pt.opacity <= 0.2 ? 2 : pt.opacity <= 0.5 ? 1 : 0,
+    raw: pt.raw
+  }));
+  massMarks.setData(styledData);
+}
+
 watch(() => props.services, updateDisplay, { deep: true });
 watch(() => props.heatmap, updateDisplay);
+watch(() => props.trailingData, (newData) => {
+  if (newData && newData.length > 0) {
+    // 4D 播放模式：使用 MassMarks
+    if (heatmapInstance) heatmapInstance.hide();
+    // 清理旧 DOM markers
+    if (markers.length > 0) { map?.remove(markers); markers = []; }
+    updateMassMarks(newData);
+  } else {
+    // 非播放模式：回退到原有逻辑
+    massMarks?.clear();
+    updateDisplay();
+  }
+});
 
 onMounted(async () => {
   await nextTick();
@@ -173,13 +228,17 @@ onBeforeUnmount(() => map?.destroy());
 
 /* 地图上的点标记样式 */
 :deep(.map-dot) {
-  width: 12px;
-  height: 12px;
-  background: #1e3a8a;
-  border: 2px solid #fff;
+  width: 10px; height: 10px;
+  background: #38bdf8;
+  border: 2px solid rgba(255,255,255,0.9);
   border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  box-shadow: 0 0 10px rgba(56,189,248,0.6), 0 0 2px rgba(56,189,248,0.8);
   cursor: pointer;
+  animation: dot-pulse 3s ease-in-out infinite;
+}
+@keyframes dot-pulse {
+  0%, 100% { box-shadow: 0 0 6px rgba(56,189,248,0.4), 0 0 2px rgba(56,189,248,0.6); }
+  50% { box-shadow: 0 0 14px rgba(56,189,248,0.8), 0 0 4px rgba(56,189,248,1); }
 }
 
 /* 悬浮图例样式 */
