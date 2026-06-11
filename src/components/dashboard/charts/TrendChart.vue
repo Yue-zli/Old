@@ -55,7 +55,7 @@
 <script setup>
 import { ref, watch, computed, onMounted, onBeforeUnmount, nextTick } from 'vue';
 import * as echarts from 'echarts';
-import * as api from '../../api/stat.js';
+import * as api from '../../../api/stat.js';
 
 const props = defineProps({
   currentScale: { type: String, default: 'day' },
