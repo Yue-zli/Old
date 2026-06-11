@@ -301,8 +301,15 @@ const executeAnalysis = (bbox) => {
     return {count, minDist};
   }
 
-  const points = turf.featureCollection(facilityData.map((d, i) => {
-    return turf.point([d.lng, d.lat], { name: d.name, type: i < 5 ? '三甲医院' : '社区卫生服务中心' });
+  // 医院分级：根据 type 字段判断
+  const getHospitalTier = (type) => {
+    if (!type) return 3;
+    if (type.includes('三级甲等')) return 1;          // 三甲
+    if (type.includes('综合医院')) return 2;           // 综合医院
+    return 3;                                          // 专科/其他
+  };
+  const points = turf.featureCollection(facilityData.map((d) => {
+    return turf.point([d.lng, d.lat], { name: d.name, type: d.type, tier: getHospitalTier(d.type) });
   }));
 
   const turfPoints = turf.featureCollection(facilityData.map(d => turf.point([d.lng, d.lat])));
@@ -359,9 +366,14 @@ const executeAnalysis = (bbox) => {
 
     validGridCount++;
     const ptsInGrid = turf.pointsWithinPolygon(points, cell);
+    // 加权医疗资源：三甲×3 + 综合×2 + 其他×1
+    const medicalWeight = ptsInGrid.features.reduce((sum, f) => {
+      const t = f.properties.tier || 3;
+      return sum + (t === 1 ? 3 : t === 2 ? 2 : 1);
+    }, 0);
     const medicalCount = ptsInGrid.features.length;
-    cell.properties.count = medicalCount;
-    if (medicalCount > 0) coveredCells++;
+    cell.properties.count = medicalWeight;
+    if (medicalWeight >= 1) coveredCells++;
 
     const pd = getCountInRange(parkFeatures, currentCenterPt, 0.8);
     // 地铁改面状评分：网格中心落在几个站点服务区内（一站点只算一次）
@@ -420,7 +432,7 @@ const executeAnalysis = (bbox) => {
               <span>🎯 选址综合诊断评估</span><span style="color: ${score >= 80 ? '#22d3ee' : (score >= 60 ? '#f59e0b' : '#ef4444')}; font-size: 16px;">${score} 分</span>
             </div>
             <div style="font-size: 12px; line-height: 1.8; margin-bottom: 10px;">
-                <div><strong>🏥 现状医疗：</strong>${medicalCount > 0 ? `<span style="color:#10b981;">已覆盖 (${medicalCount}处)</span>` : '盲区'}</div>
+                <div><strong>🏥 医疗资源：</strong>${medicalCount > 0 ? `<span style="color:#10b981;">${medicalCount}处 (加权${medicalWeight}分)</span>` : '<span style="color:#ef4444;">盲区</span>'}</div>
                 <div><strong>🌳 生态环境：</strong>${parkDesc}</div>
                 <div><strong>🚇 交通节点：</strong>${transitDesc}</div>
                 <div><strong>🛣️ 道路环境影响：</strong>${nimbyDesc}</div>
@@ -547,21 +559,56 @@ const renderEnvironmentLayers = () => {
     return;
   }
 
-  // 🏥 0. 医疗设施：青色圆点
+  // 🏥 0. 医疗设施：三级分级展示
   if (facilityData && facilityMarkers.length === 0) {
+    const getTier = (type) => {
+      if (!type) return 3;
+      if (type.includes('三级甲等')) return 1;
+      if (type.includes('综合医院')) return 2;
+      return 3;
+    };
     facilityData.forEach(item => {
+      const tier = getTier(item.type);
+      const config = tier === 1
+        ? { radius: 6, fillColor: '#06b6d4', opacity: 1.0, zIndex: 125 }   // 三甲：亮青大圆
+        : tier === 2
+        ? { radius: 4, fillColor: '#0ea5e9', opacity: 0.85, zIndex: 120 }  // 综合：中蓝
+        : { radius: 2.5, fillColor: '#64748b', opacity: 0.7, zIndex: 115 }; // 专科：灰蓝小圆
+
       const dot = new AMap.CircleMarker({
         center: [item.lng, item.lat],
-        radius: 4,
-        fillColor: '#22d3ee',
-        fillOpacity: 0.9,
-        strokeColor: '#020617',
-        strokeWeight: 1,
-        zIndex: 120,
-        title: item.name
+        radius: config.radius,
+        fillColor: config.fillColor,
+        fillOpacity: config.opacity,
+        strokeColor: tier === 1 ? '#fff' : '#020617',
+        strokeWeight: tier === 1 ? 2 : 0.5,
+        zIndex: config.zIndex,
+        title: item.name + (tier === 1 ? ' [三甲]' : tier === 2 ? ' [综合]' : '')
       });
       dot.setMap(map);
       facilityMarkers.push(dot);
+
+      // 三甲加名称标签
+      if (tier === 1) {
+        const label = new AMap.Text({
+          text: item.name.length > 8 ? item.name.slice(0, 8) + '...' : item.name,
+          position: [item.lng, item.lat],
+          offset: new AMap.Pixel(10, -10),
+          style: {
+            'font-size': '9px',
+            'color': '#cffafe',
+            'background-color': 'rgba(0,0,0,0.6)',
+            'border-color': '#06b6d4',
+            'border-width': '1px',
+            'border-style': 'solid',
+            'border-radius': '2px',
+            'padding': '1px 4px',
+          },
+          zIndex: 126
+        });
+        label.setMap(map);
+        facilityMarkers.push(label);
+      }
     });
   }
 
@@ -588,12 +635,14 @@ const renderEnvironmentLayers = () => {
       const [lng, lat] = item.geometry.coordinates;
       const rawName = item.properties.name || '';
       // 清洗：统一各种写法 → 纯站名
-      // "高新大道(地铁站)" / "高新大道地铁站出入口" / "高新大道地铁站1号口" → "高新大道站"
+      // "地铁大厦地铁站地铁·更新天地南口" / "高新大道(地铁站)" → "地铁大厦站" / "高新大道站"
       let baseName = rawName
         .replace(/[\(\（][^)）]*[\)\）]/g, '')   // 去 (地铁站) (1号口) 等
         .replace(/地铁站/g, '')                   // 去 "地铁站"
-        .replace(/\d+号口|[A-Z]口/g, '')          // 去 "1号口" "A口"
+        .replace(/·.+$/, '')                     // 去 "·更新天地南口"
+        .replace(/\d+号口|[A-Z]口|[南北东西]口/g, '') // 去 "1号口" "南口"
         .replace(/出入口/g, '')                   // 去 "出入口"
+        .replace(/地铁$/, '')                     // 去尾部残留 "地铁"
         .trim();
       if (!baseName.endsWith('站')) baseName += '站';
       if (!stationGroups[baseName]) stationGroups[baseName] = [];
