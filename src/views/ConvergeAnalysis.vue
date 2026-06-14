@@ -162,6 +162,8 @@ import facilityData from '../data/facilities.json';
 import parkData from '../data/real_parks.json';
 import transitData from '../data/nanchang_transit.json';
 import nimbyData from '../data/nanchang_nimby.json';
+import { useSpatialAnalysis } from '../hooks/useSpatialAnalysis.js';
+import { renderEnvironmentLayers as renderEnvLayers } from '../hooks/useMapLayers.js';
 
 // --- 状态变量 ---
 const showEvaluationMode = ref(false);
@@ -170,6 +172,8 @@ const weightTransit = ref(1.0);
 const weightNimby = ref(2.0);
 const activeGradeFilter = ref('ALL'); // 网格分级筛选
 const hospitalFilter = ref('all');    // 医院分级查询
+
+const { analyzeGrid, coverageRate, totalGridCount } = useSpatialAnalysis();
 
 const parkFeatures = parkData;
 const transitFeatures = transitData;
@@ -181,8 +185,6 @@ const isSimulating = ref(false);
 const coverageDelta = ref(0);
 const showDeltaBadge = ref(false);
 
-const totalGridCount = ref(0);
-const coverageRate = ref(0);
 const searchRadius = ref(0.8);
 const richThreshold = ref(3);
 const zoomLevelText = ref('城市级');
@@ -317,139 +319,23 @@ const executeAnalysis = (bbox) => {
   }
   if (infoWindow) infoWindow.close();
 
-  const gridCellSize = 0.8;
-  const squareGrid = turf.squareGrid(bbox, gridCellSize, {units: 'kilometers'});
-  
-  const getCountInRange = (geoJsonData, centerPt, radiusKm) => {
-    if(!geoJsonData || !geoJsonData.features || !Array.isArray(geoJsonData.features)) return { count: 0, minDist: 999};
-    let count = 0; let minDist = 999;
-    geoJsonData.features.forEach(f => {
-      try {
-        const dist = turf.distance(centerPt, f, { units: 'kilometers'});
-        if(dist < minDist) minDist = dist;
-        if(dist <= radiusKm) count++;
-      } catch (err) {}
-    });
-    return {count, minDist};
-  }
-
-  // 医院分级：根据 type 字段判断
-  const getHospitalTier = (type) => {
-    if (!type) return 3;
-    if (type.includes('三级甲等')) return 1;          // 三甲
-    if (type.includes('综合医院')) return 2;           // 综合医院
-    return 3;                                          // 专科/其他
-  };
-  // 医院服务区缓冲面：三甲3km / 综合2km / 专科1km
-  const hospitalBuffers = facilityData.map(d => {
-    const tier = getHospitalTier(d.type);
-    const radiusKm = tier === 1 ? 3 : tier === 2 ? 2 : 1;
-    const weight = tier === 1 ? 3 : tier === 2 ? 2 : 1;
-    return {
-      buffer: turf.buffer(turf.point([d.lng, d.lat]), radiusKm, { units: 'kilometers' }),
-      name: d.name, tier, weight, lng: d.lng, lat: d.lat
-    };
+  // 委托给空间分析 hook（纯计算，不涉及渲染）
+  const { cells, hospitalBuffers } = analyzeGrid(bbox, {
+    facilityData, parkFeatures, transitPolygons, nimbyFeatures,
+    weights: { park: weightPark.value, transit: weightTransit.value, nimby: weightNimby.value },
+    gradeFilter: activeGradeFilter.value,
+    showEvaluationMode: showEvaluationMode.value,
+    richThreshold: richThreshold.value
   });
 
-  let coveredCells = 0; let validGridCount = 0;
-  
-  // 赣江多分支排除 — 每条线各自缓冲，逐个判断（避免 union 在不重叠时返回 null）
-  const riverMain = turf.buffer(turf.lineString([
-    [115.813531, 28.559122], [115.820607, 28.585707],
-    [115.827391, 28.607841], [115.836063, 28.624838],
-    [115.843848, 28.639141], [115.860899, 28.655955],
-    [115.864645, 28.664164], [115.867854, 28.675827],
-    [115.87386, 28.685062],  [115.88685, 28.698198]
-  ]), 0.65, { units: 'kilometers' });
-
-  const riverBranch1 = turf.buffer(turf.lineString([
-    [115.889321, 28.710838], [115.892347, 28.719039],
-    [115.893538, 28.728927], [115.894593, 28.736363],
-    [115.89527, 28.74478],   [115.903619, 28.755819],
-    [115.91873, 28.765207],  [115.935743, 28.771323]
-  ]), 0.5, { units: 'kilometers' });
-
-  const riverBranch2 = turf.buffer(turf.lineString([
-    [115.904342, 28.707857], [115.914689, 28.714304],
-    [115.922442, 28.719456]
-  ]), 0.5, { units: 'kilometers' });
-
-  const riverBranch21 = turf.buffer(turf.lineString([
-    [115.925682, 28.725122], [115.931217, 28.731904],
-    [115.935265, 28.735839], [115.947193, 28.74853],
-    [115.964565, 28.762397], [115.977559, 28.773416]
-  ]), 0.4, { units: 'kilometers' });
-
-  const riverBranch22 = turf.buffer(turf.lineString([
-    [115.933195, 28.721669], [115.941853, 28.727136],
-    [115.958264, 28.733389], [115.971216, 28.734178],
-    [115.981191, 28.730595], [115.991096, 28.727376],
-    [116.002265, 28.72484],  [116.016338, 28.724322]
-  ]), 0.35, { units: 'kilometers' });
-
-  const riverZones = [riverMain, riverBranch1, riverBranch2, riverBranch21, riverBranch22];
-
-  const exclusionZones = {
-    lakes: turf.multiPolygon([[[[115.990, 28.660], [116.030, 28.660], [116.030, 28.720], [115.990, 28.720], [115.990, 28.660]]]]),
-    mountains: turf.polygon([[[115.600, 28.740], [115.730, 28.740], [115.760, 28.780], [115.750, 28.880], [115.600, 28.880], [115.600, 28.740]]])
-  };
-
-  squareGrid.features.forEach((cell) => {
-    const currentCenterPt = turf.center(cell);
-    const [lng, lat] = currentCenterPt.geometry.coordinates;
-    const isExcluded = riverZones.some(z => turf.booleanPointInPolygon(currentCenterPt, z))
-      || turf.booleanPointInPolygon(currentCenterPt, exclusionZones.lakes)
-      || turf.booleanPointInPolygon(currentCenterPt, exclusionZones.mountains);
-    if (isExcluded) return;
-
-    validGridCount++;
-    // 网格中心被哪些医院服务区覆盖（三甲3km/综合2km/专科1km）
-    const covering = hospitalBuffers.filter(h => {
-      try { return turf.booleanPointInPolygon(currentCenterPt, h.buffer); } catch (e) { return false; }
-    });
-    // 饱和上限：超过5个有效权重单位即视为完全覆盖，避免市中心重叠过多
-    const rawWeight = covering.reduce((s, h) => s + h.weight, 0);
-    const medicalWeight = Math.min(5, rawWeight);
-    const medicalCount = covering.length;
-    cell.properties.count = medicalWeight;
-    if (medicalWeight >= 1) coveredCells++;
-
-    const pd = getCountInRange(parkFeatures, currentCenterPt, 0.8);
-    // 地铁改面状评分：网格中心落在几个站点服务区内（一站点只算一次）
-    const stationCount = transitPolygons.filter(p => {
-      try { return turf.booleanPointInPolygon(currentCenterPt, p); } catch (e) { return false; }
-    }).length;
-    const nd = getCountInRange(nimbyFeatures, currentCenterPt, 1.0);
-
-    // 选址评分仅由公园+地铁+邻避三因子驱动，医疗设施不参与权重计算
-    let score = 65 + Math.min(30, (pd.count || 0) * 4 * weightPark.value) + Math.min(30, stationCount * 15 * weightTransit.value) - ((nd.count || 0) * 15 * weightNimby.value);
-    if (nd.minDist < 0.2) score -= 40 * weightNimby.value;
-    score = Math.max(0, Math.min(100, Math.floor(score)));
-
-    // 🚀 过滤逻辑：根据用户点击的按钮进行分级过滤拦截
-    if (showEvaluationMode.value && activeGradeFilter.value !== 'ALL') {
-      if (activeGradeFilter.value === 'A' && score < 80) return;
-      if (activeGradeFilter.value === 'B' && (score >= 80 || score < 60)) return;
-      if (activeGradeFilter.value === 'C' && score >= 60) return;
-    }
-
-    // 绘制逻辑
-    let fillColor = medicalCount >= richThreshold.value ? '#10b981' : (medicalCount >= 1 ? '#f59e0b' : '#334155');
-    let strokeColor = 'rgba(255,255,255,0.15)';
-    let strokeWeight = 0.8;
-    // 🐞 修复点：提取基础透明度常量，防止 mouseout 中出现 ReferenceError
-    const baseFillOpacity = medicalCount > 0 ? 0.12 : 0.02;
-
-    if (showEvaluationMode.value) {
-      if (score >= 80) { strokeColor = '#22d3ee'; strokeWeight = 2.5; fillColor = '#22d3ee'; } 
-      else if (score >= 60) { strokeColor = '#f59e0b'; strokeWeight = 2.5; fillColor = '#f59e0b'; } 
-      else { strokeColor = '#ef4444'; strokeWeight = 2.5; fillColor = '#ef4444'; } 
-    }
-    
+  // 渲染网格（AMap 对象创建保留在组件中——和视图紧耦合）
+  cells.forEach(({ geometry, center: { lng, lat }, medicalWeight, medicalCount, covering,
+                     score, fillColor, strokeColor, strokeWeight, baseFillOpacity,
+                     showEvaluationMode: isEval, pd, stationCount, nd }) => {
     const polygon = new AMap.Polygon({
-      path: cell.geometry.coordinates[0], 
-      fillColor: fillColor, 
-      fillOpacity: showEvaluationMode.value ? 0.15 : baseFillOpacity, // 评估模式下加强色彩感
+      path: geometry.coordinates[0],
+      fillColor: fillColor,
+      fillOpacity: isEval ? 0.15 : baseFillOpacity,
       strokeWeight: strokeWeight, strokeColor: strokeColor,
       map: map, zIndex: 10, bubble: true
     });
@@ -460,7 +346,7 @@ const executeAnalysis = (bbox) => {
       let popupContent = '';
       
       // ---- 弹窗内容 ----
-      if (showEvaluationMode.value) {
+      if (isEval) {
         // === 评估模式：分级汇总 ===
         const tier1Count = covering.filter(h => h.tier === 1).length;
         const tier2Count = covering.filter(h => h.tier === 2).length;
@@ -543,22 +429,14 @@ const executeAnalysis = (bbox) => {
 
     // 鼠标离开：恢复样式，弹窗保持打开（点击地图空白处关闭）
     polygon.on('mouseout', ()=> {
-      polygon.setOptions({ fillOpacity: showEvaluationMode.value ? 0.15 : baseFillOpacity, strokeWeight: strokeWeight, strokeColor: strokeColor });
+      polygon.setOptions({ fillOpacity: isEval ? 0.15 : baseFillOpacity, strokeWeight: strokeWeight, strokeColor: strokeColor });
     });
   });
-
-  coverageRate.value = validGridCount > 0 ? ((coveredCells / validGridCount * 100).toFixed(1)) : 0;
 };
 
 const startAnalysis = () => {
   const defaultBbox = [115.75, 28.55, 116.05, 28.80];
   executeAnalysis(defaultBbox);
-};
-
-const renderFacilityPoints = () => {
-  facilityData.forEach(item => {
-    map.add(new AMap.CircleMarker({ center: [item.lng, item.lat], radius: 4, fillColor: '#ffffff', strokeColor: '#00ffff', zIndex: 99 }));
-  });
 };
 
 const startDraw = () => {
@@ -633,291 +511,14 @@ const undoLastAction = () => {
 }
 
 const renderEnvironmentLayers = () => {
-  if (!map) return;
-  
-  // 如果 markers 已存在则跳过（防止重复创建）
-  if (parkMarkers.length > 0 || transitMarkers.length > 0 || nimbyMarkers.length > 0) {
-    return;
-  }
-
-  // 🏥 0. 医疗设施：三级分级展示 + 200m内同院合并
-  if (facilityData && facilityMarkers.length === 0) {
-    const getTier = (type) => {
-      if (!type) return 3;
-      if (type.includes('三级甲等')) return 1;
-      if (type.includes('综合医院')) return 2;
-      return 3;
-    };
-
-    // 200m内聚类合并（门诊/院区 → 归入同一家医院）
-    const dist = (a, b) => {
-      const dx = (a.lng - b.lng) * 111320 * Math.cos((a.lat + b.lat) / 2 * Math.PI / 180);
-      const dy = (a.lat - b.lat) * 111320;
-      return Math.sqrt(dx * dx + dy * dy);
-    };
-    const clusters = [];
-    facilityData.forEach(item => {
-      let found = false;
-      for (const c of clusters) {
-        if (dist(item, c.rep) < 200) { c.members.push(item); found = true; break; }
-      }
-      if (!found) clusters.push({ rep: item, members: [item] });
-    });
-
-    clusters.forEach(cluster => {
-      // 取簇内最高等级（数字最小 = 等级最高）
-      const bestTier = Math.min(...cluster.members.map(m => getTier(m.type)));
-      // 主名：最短的那个（去括号后的核心名），副名：其余
-      const names = cluster.members.map(m => m.name.replace(/[\(\（][^)）]*[\)\）]/g, '').trim());
-      const mainName = names.reduce((a, b) => a.length <= b.length ? a : b);
-      const extraCount = cluster.members.length - 1;
-      const tooltip = extraCount > 0
-        ? `${mainName} + ${extraCount}个附属设施\n${cluster.members.map(m => '  ' + m.name).join('\n')}`
-        : cluster.members[0].name;
-
-      const config = bestTier === 1
-        ? { radius: 6, fillColor: '#06b6d4', opacity: 1.0, zIndex: 125 }
-        : bestTier === 2
-        ? { radius: 4, fillColor: '#0ea5e9', opacity: 0.85, zIndex: 120 }
-        : { radius: 2.5, fillColor: '#64748b', opacity: 0.7, zIndex: 115 };
-
-      const rep = cluster.rep;
-      const dot = new AMap.CircleMarker({
-        center: [rep.lng, rep.lat],
-        radius: config.radius,
-        fillColor: config.fillColor,
-        fillOpacity: config.opacity,
-        strokeColor: bestTier === 1 ? '#fff' : '#020617',
-        strokeWeight: bestTier === 1 ? 2 : 0.5,
-        zIndex: config.zIndex,
-        title: tooltip
-      });
-
-      // 点击：查周边
-      dot.on('click', () => {
-        const nearbyParks = [];
-        const nearbyStations = new Set();
-        if (parkFeatures && parkFeatures.features) {
-          parkFeatures.features.forEach(p => {
-            const d = turf.distance(turf.point([rep.lng, rep.lat]), p, { units: 'kilometers' });
-            if (d <= 1) nearbyParks.push({ name: p.properties.name, dist: d });
-          });
-        }
-        if (transitFeatures && transitFeatures.features) {
-          transitFeatures.features.forEach(t => {
-            const d = turf.distance(turf.point([rep.lng, rep.lat]), t, { units: 'kilometers' });
-            if (d <= 1) {
-              let sn = t.properties.name || '';
-              sn = sn.replace(/[\(\（][^)）]*[\)\）]/g, '').replace(/地铁站|出入口|\d+号口|[A-Z]口|[南北东西]口/g, '').replace(/·.+$/, '').trim();
-              if (sn) nearbyStations.add(sn);
-            }
-          });
-        }
-        const tierName = bestTier === 1 ? '三级甲等' : bestTier === 2 ? '综合医院' : '专科/其他';
-        const membersHTML = cluster.members.length > 1
-          ? `<div style="font-size:10px;color:#64748b;margin-bottom:4px">含：${cluster.members.map(m => m.name).join('、')}</div>`
-          : '';
-        const parkList = nearbyParks.length > 0
-          ? nearbyParks.sort((a,b) => a.dist - b.dist).slice(0,5).map(p => `<div>🌳 ${p.name} (${(p.dist*1000).toFixed(0)}m)</div>`).join('')
-          : '<div style="color:#64748b">1km内无公园</div>';
-        const stationList = nearbyStations.size > 0
-          ? [...nearbyStations].slice(0,5).map(s => `<div>🚇 ${s}</div>`).join('')
-          : '<div style="color:#64748b">1km内无地铁站</div>';
-        infoWindow.setContent(`
-          <div class="custom-info-window" style="min-width:280px">
-            <div style="font-size:14px;font-weight:bold;color:#06b6d4;margin-bottom:2px">🏥 ${mainName}</div>
-            <div style="font-size:11px;color:#94a3b8;margin-bottom:4px">${tierName}${extraCount > 0 ? ` · 共${cluster.members.length}个设施` : ''}</div>
-            ${membersHTML}
-            <div style="border-top:1px solid rgba(59,130,246,0.2);padding-top:6px;font-size:12px;line-height:1.8">
-              <div style="color:#10b981;font-weight:bold;margin-bottom:2px">🌳 周边公园</div>${parkList}
-              <div style="color:#38bdf8;font-weight:bold;margin-top:6px;margin-bottom:2px">🚇 周边地铁站</div>${stationList}
-            </div>
-          </div>
-        `);
-        infoWindow.open(map, [rep.lng, rep.lat]);
-      });
-
-      dot._tier = bestTier;
-      dot.setMap(map);
-      facilityMarkers.push(dot);
-
-      // 三甲加名称标签（用主名）
-      if (bestTier === 1) {
-        const label = new AMap.Text({
-          text: mainName.length > 8 ? mainName.slice(0, 8) + '...' : mainName,
-          position: [rep.lng, rep.lat],
-          offset: new AMap.Pixel(10, -10),
-          style: {
-            'font-size': '9px',
-            'color': '#cffafe',
-            'background-color': 'rgba(0,0,0,0.6)',
-            'border-color': '#06b6d4',
-            'border-width': '1px',
-            'border-style': 'solid',
-            'border-radius': '2px',
-            'padding': '1px 4px',
-          },
-          zIndex: 126
-        });
-        label._tier = bestTier;
-        label.setMap(map);
-        facilityMarkers.push(label);
-      }
-    });
-  }
-
-  // 🌳 1. 公园：绿色实心方块（数据源已换为 real_parks.json，全部是真正公园）
-  if (parkFeatures && parkFeatures.features) {
-    parkFeatures.features.forEach(item => {
-      const [lng, lat] = item.geometry.coordinates;
-      const marker = new AMap.Marker({
-        position: [lng, lat],
-        content: '<div style="width:10px;height:10px;background:#10b981;border:2px solid #fff;display:inline-block;font-size:0;line-height:0;vertical-align:top;" title="' + (item.properties.name || '') + '"></div>',
-        offset: new AMap.Pixel(-6, -6),
-        zIndex: 91
-      });
-      marker.setMap(map);
-      parkMarkers.push(marker);
-    });
-  }
-
-  // 🚇 2. 地铁：按站聚合为服务区面（凸包 + 分级缓冲）
-  transitPolygons = [];
-  if (transitFeatures && transitFeatures.features) {
-    const stationGroups = {};
-    transitFeatures.features.forEach(item => {
-      const [lng, lat] = item.geometry.coordinates;
-      const rawName = item.properties.name || '';
-      // 清洗：统一各种写法 → 纯站名
-      // "地铁大厦地铁站地铁·更新天地南口" / "高新大道(地铁站)" → "地铁大厦站" / "高新大道站"
-      let baseName = rawName
-        .replace(/[\(\（][^)）]*[\)\）]/g, '')   // 去 (地铁站) (1号口) 等
-        .replace(/地铁站/g, '')                   // 去 "地铁站"
-        .replace(/·.+$/, '')                     // 去 "·更新天地南口"
-        .replace(/\d+号口|[A-Z]口|[南北东西]口/g, '') // 去 "1号口" "南口"
-        .replace(/出入口/g, '')                   // 去 "出入口"
-        .replace(/地铁$/, '')                     // 去尾部残留 "地铁"
-        .trim();
-      if (!baseName.endsWith('站')) baseName += '站';
-      if (!stationGroups[baseName]) stationGroups[baseName] = [];
-      stationGroups[baseName].push([lng, lat]);
-    });
-
-    Object.entries(stationGroups).forEach(([stationName, coords]) => {
-      // 出口越多 → 缓冲半径越大（300m/350m/400m）
-      const exitCount = coords.length;
-      let bufferKm = 0.3;
-      if (exitCount >= 4) bufferKm = 0.4;
-      else if (exitCount >= 2) bufferKm = 0.35;
-
-      let serviceArea;
-      if (coords.length >= 2) {
-        try {
-          const hull = turf.convex(turf.featureCollection(coords.map(c => turf.point(c))));
-          if (hull) serviceArea = turf.buffer(hull, bufferKm, { units: 'kilometers' });
-        } catch (e) {}
-      }
-      if (!serviceArea) {
-        // 单出口或凸包失败 → 直接缓冲点
-        serviceArea = turf.buffer(turf.point(coords[0]), bufferKm, { units: 'kilometers' });
-      }
-
-      transitPolygons.push(serviceArea);
-
-      // 绘制服务区面
-      try {
-        const polygon = new AMap.Polygon({
-          path: serviceArea.geometry.coordinates[0],
-          fillColor: '#38bdf8',
-          fillOpacity: 0.08,
-          strokeColor: '#38bdf8',
-          strokeWeight: 1,
-          strokeOpacity: 0.5,
-          strokeStyle: 'dashed',
-          zIndex: 55,
-          bubble: true
-        });
-        polygon.setMap(map);
-        transitMarkers.push(polygon);
-
-        // 站名标签（面中心）
-        const center = turf.center(serviceArea).geometry.coordinates;
-        const label = new AMap.Text({
-          text: stationName.replace('站', ''),
-          position: [center[0], center[1]],
-          style: {
-            'background-color': 'rgba(15,23,42,0.8)',
-            'border-color': '#38bdf8',
-            'border-width': '1px',
-            'border-style': 'solid',
-            'border-radius': '3px',
-            'padding': '2px 6px',
-            'font-size': '10px',
-            'color': '#bae6fd',
-            'text-align': 'center',
-          },
-          zIndex: 110
-        });
-        label.setMap(map);
-        transitMarkers.push(label);
-      } catch (e) {}
-    });
-  }
-
-  // 3. 高架/快速路：按道路聚合为环境影响带（面状要素）
-  if (nimbyFeatures && nimbyFeatures.features) {
-    const roadGroups = {};
-    nimbyFeatures.features.forEach(item => {
-      const name = item.properties.name || '';
-      // 提取道路名（取"出口""入口""与""交叉口"之前的部分）
-      const roadName = name.split(/出口|入口|与|交叉口/)[0].trim();
-      if (!roadName) return;
-      if (!roadGroups[roadName]) roadGroups[roadName] = [];
-      roadGroups[roadName].push(item.geometry.coordinates);
-    });
-
-    Object.entries(roadGroups).forEach(([roadName, coords]) => {
-      if (coords.length >= 2) {
-        // 多个出入口：画缓冲面（道路环境影响带）
-        coords.sort((a, b) => a[0] - b[0]);
-        try {
-          const line = turf.lineString(coords);
-          const buffer = turf.buffer(line, 0.3, { units: 'kilometers' });
-          const polygon = new AMap.Polygon({
-            path: buffer.geometry.coordinates[0],
-            fillColor: '#ef4444',
-            fillOpacity: 0.08,
-            strokeColor: '#ef4444',
-            strokeWeight: 1,
-            strokeOpacity: 0.4,
-            strokeStyle: 'dashed',
-            zIndex: 50,
-            bubble: true
-          });
-          polygon.setMap(map);
-          nimbyMarkers.push(polygon);
-        } catch (e) { /* buffer 失败则跳过 */ }
-      } else {
-        // 单个出入口：红色三角标记
-        const [lng, lat] = coords[0];
-        const marker = new AMap.Marker({
-          position: [lng, lat],
-          content: '<div style="width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:10px solid #ef4444;font-size:0;line-height:0;" title="' + roadName + '"></div>',
-          offset: new AMap.Pixel(-5, -10),
-          zIndex: 85
-        });
-        marker.setMap(map);
-        nimbyMarkers.push(marker);
-      }
-    });
-  }
-  
-  // 🔄 最终联动：根据当前工具栏控制的默认显隐状态，决定新生成的图层是显示还是隐藏
-  // （比如用户刚把交通关了，突然刷新了网格，这里可以保证它继续保持隐藏状态）
-  parkMarkers.forEach(m => layerVisibility.value.parks ? m.show() : m.hide());
-  transitMarkers.forEach(m => layerVisibility.value.transits ? m.show() : m.hide());
-  nimbyMarkers.forEach(m => layerVisibility.value.nimbys ? m.show() : m.hide());
+  renderEnvLayers({
+    map, infoWindow, turf,
+    facilityData, parkFeatures, transitFeatures, nimbyFeatures,
+    facilityMarkers, parkMarkers, transitMarkers, nimbyMarkers, transitPolygons,
+    layerVisibility
+  });
 };
+
 </script>
 
 
