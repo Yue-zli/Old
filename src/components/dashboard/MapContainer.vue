@@ -27,7 +27,7 @@ import AMapLoader from '@amap/amap-jsapi-loader';
 const props = defineProps({
   services: { type: Array, default: () => [] },
   heatmap: { type: Boolean, default: false },
-  trailingData: { type: Array, default: () => [] }  // 4D 拖尾数据 [{lng, lat, opacity, raw}, ...]
+  trailingData: { type: Array, default: () => [] }  // 4D 拖尾 [{lng,lat,opacity,raw}]
 });
 
 const emit = defineEmits(['marker-click']);
@@ -35,7 +35,7 @@ const emit = defineEmits(['marker-click']);
 let map = null;
 let heatmapInstance = null;
 let markers = [];
-let massMarks = null;  // 4D 海量点图层
+let spacetimeMarkers = [];  // 4D 播放时的光点
 
 // 安全密钥配置
 window._AMapSecurityConfig = { securityJsCode: '158271bb9de2653a0ff710b76a77a458' };
@@ -45,7 +45,7 @@ async function initMap() {
     const AMap = await AMapLoader.load({
       key: '3b1255de527dd6a6af98dd5bdd4970dd',
       version: '2.0',
-      plugins: ['AMap.HeatMap', 'AMap.MassMarks']
+      plugins: ['AMap.HeatMap']
     });
 
     map = new AMap.Map('map-container', {
@@ -70,29 +70,6 @@ async function initMap() {
         1.0: 'rgb(255, 0, 0)'    // 红
       }
     });
-
-    // 4D 海量点图层：3 档样式对应 3 级拖尾透明度
-    try {
-      massMarks = new AMap.MassMarks([], {
-        zIndex: 111,
-        cursor: 'pointer'
-      });
-      massMarks.setStyle([
-        { anchor: new AMap.Pixel(6, 6),  size: new AMap.Size(14, 14), fillColor: '#38bdf8', fillOpacity: 1.0, strokeColor: 'rgba(255,255,255,0.9)', strokeWeight: 2, zIndex: 200 },
-        { anchor: new AMap.Pixel(5, 5),  size: new AMap.Size(10, 10), fillColor: '#38bdf8', fillOpacity: 0.5, strokeColor: 'rgba(255,255,255,0.5)', strokeWeight: 1, zIndex: 150 },
-        { anchor: new AMap.Pixel(4, 4),  size: new AMap.Size(7, 7),   fillColor: '#38bdf8', fillOpacity: 0.2, strokeColor: 'rgba(255,255,255,0.2)', strokeWeight: 0, zIndex: 100 }
-      ]);
-      massMarks.setMap(map);
-      massMarks.on('click', (e) => {
-        if (e.data && e.data.raw) {
-          emit('marker-click', e.data.raw);
-        }
-      });
-    } catch (e) {
-      console.warn('MassMarks 初始化失败，将使用 DOM Marker 模式:', e);
-      massMarks = null;
-    }
-
     updateDisplay();
   } catch (e) {
     console.error('地图加载失败:', e);
@@ -103,6 +80,33 @@ async function initMap() {
  * 执行地图显示更新
  * 核心逻辑：数据清洗 -> 热力图数据同步 -> 根据开关控制 Marker/热力图层显隐
  */
+
+
+function updateSpacetimeMarkers(data) {
+  if (!map) return;
+  // 清理上一帧的光点
+  spacetimeMarkers.forEach(m => map.remove(m));
+  spacetimeMarkers = [];
+  if (!data || data.length === 0) return;
+
+  data.forEach(pt => {
+    const r = pt.opacity >= 0.8 ? 7 : pt.opacity >= 0.4 ? 5 : 3.5;
+    const alpha = pt.opacity;
+    const cm = new AMap.CircleMarker({
+      center: [pt.lng, pt.lat],
+      radius: r,
+      fillColor: '#38bdf8',
+      fillOpacity: alpha,
+      strokeColor: alpha >= 0.8 ? '#fff' : 'transparent',
+      strokeWeight: alpha >= 0.8 ? 1.5 : 0,
+      zIndex: Math.round(alpha * 200)
+    });
+    cm.on('click', () => emit('marker-click', pt.raw));
+    cm.setMap(map);
+    spacetimeMarkers.push(cm);
+  });
+}
+
 function updateDisplay() {
   console.log("地图接收到的原始数据量:", props.services.length);
   if (!map) return;
@@ -170,38 +174,22 @@ function renderMarkers(points) {
   map.add(markers);
 }
 
-/**
- * 4D 拖尾渲染：MassMarks WebGL 批量更新
- */
-function updateMassMarks(data) {
-  if (!massMarks || !map) return;
-  if (!data || data.length === 0) {
-    massMarks.clear();
-    return;
-  }
-  const styledData = data.map(pt => ({
-    lnglat: [pt.lng, pt.lat],
-    style: pt.opacity <= 0.2 ? 2 : pt.opacity <= 0.5 ? 1 : 0,
-    raw: pt.raw
-  }));
-  massMarks.setData(styledData);
-}
+let playbackStarted = false;  // 是否已进入 4D 播放状态
 
 watch(() => props.services, updateDisplay, { deep: true });
 watch(() => props.heatmap, updateDisplay);
 watch(() => props.trailingData, (newData) => {
-  if (newData && newData.length > 0) {
-    // 4D 播放模式：使用 MassMarks
+  if (newData?.length > 0) {
+    playbackStarted = true;
     if (heatmapInstance) heatmapInstance.hide();
-    // 清理旧 DOM markers
     if (markers.length > 0) { map?.remove(markers); markers = []; }
-    updateMassMarks(newData);
-  } else {
-    // 非播放模式：回退到原有逻辑
-    massMarks?.clear();
-    updateDisplay();
+    updateSpacetimeMarkers(newData);
+  } else if (playbackStarted) {
+    // 空帧：清光点
+    spacetimeMarkers.forEach(m => map?.remove(m));
+    spacetimeMarkers = [];
   }
-});
+})
 
 onMounted(async () => {
   await nextTick();
@@ -210,6 +198,8 @@ onMounted(async () => {
   }, 100);
 });
 onBeforeUnmount(() => map?.destroy());
+
+
 </script>
 
 <style scoped>

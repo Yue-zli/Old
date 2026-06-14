@@ -1,12 +1,11 @@
 // useDashboardState.js — BigScreen 全部状态 + 数据获取 + 交互方法
-import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue';
+import { watch,ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useRouter } from 'vue-router';
 import * as api from '../api/stat.js';
 import { mockManagers, mockVolunteers } from '../data/mockUsers.js';
 import { usePlayback } from './usePlayback.js';
 import { useSpacetimePreprocess } from './useSpacetimePreprocess.js';
 import { useSpacetimePlayer } from './useSpacetimePlayer.js';
-
 export function useDashboardState() {
   const router = useRouter();
 
@@ -39,7 +38,6 @@ export function useDashboardState() {
   const genderData = ref([]);
   const typeData = ref([]);
   const peakInfo = ref({ time: '', value: 0 });
-  // 图表实例 ref（供 resize 和 TrendChart 双向绑定）
   const ageChart = ref(null);
   const genderChart = ref(null);
   const typeChart = ref(null);
@@ -61,40 +59,25 @@ export function useDashboardState() {
     label: '订单总量'
   }));
 
-  // ===== 6. 播放逻辑（集成 usePlayback — 旧版兼容） =====
+  // ===== 6a. 播放逻辑（集成 usePlayback） =====
   const {
     displayOrders, isPlaying, playProgress, currentTimeDisplay,
     timeAxisTicks, startMapPlayback, stopPlayback, initDisplayOrders, seekToPercent
   } = usePlayback(orders, heatmap, playbackScale, selectedDate);
-
-  // ===== 6b. 4D 时空漫游引擎 =====
+  
+  // ===== 6b.时空漫游引擎
   const playbackSpeedMs = ref(800);
   const {
-    bucketMap, timeAxisKeys: spacetimeTimeAxisKeys, orderCountPerBucket,
-    rawOrders, dateRange,
-    isLoading: isSpacetimeLoading, error: spacetimeError,
+    bucketMap, timeAxisKeys, orderCountPerBucket,
+    rawOrders, isLoading: isSpacetimeLoading, error: spacetimeError,
     fetchAndPreprocess, recomputeBuckets
   } = useSpacetimePreprocess();
 
   const {
-    currentIndex, currentTimeLabel,
-    trailingData,
-    play, pause, stop: spacetimeStop, seek, setSpeed,
-    isPlaying: spacetimeIsPlaying
-  } = useSpacetimePlayer(bucketMap, spacetimeTimeAxisKeys, playbackSpeedMs);
-
-  // merge: 旧的 play/stop 别名，供 TimelinePlayer 使用
-  const spacetimePlay = play;
-  const spacetimePause = pause;
-  const spacetimeStopWrapper = () => {
-    spacetimeStop();
-    stopPlayback(); // 同时停掉旧播放器
-  };
-  const spacetimePlayProgress = computed(() => {
-    const len = spacetimeTimeAxisKeys.value.length;
-    if (len <= 1) return 0;
-    return Math.round((currentIndex.value / (len - 1)) * 100);
-  });
+    isPlaying: spacetimeIsPlaying, currentIndex, currentTimeLabel,
+    trailingData, playProgress: spacetimePlayProgress,
+    play, pause, stop: spacetimeStop, seek, setSpeed
+  } = useSpacetimePlayer(bucketMap, timeAxisKeys, playbackSpeedMs);
 
   // ===== 7. 交互方法 =====
   function handleModeSwitch(mode) {
@@ -119,62 +102,41 @@ export function useDashboardState() {
   function goCoverage() { router.push('/coverage'); }
   function goList() { router.push('/requesters'); }
 
-  // 4D 时空漫游：切换粒度时基于选中日期重新分桶
+  //4D时空漫游： 切换维度换单位
   function handlePlaybackScaleChange(scale) {
-    spacetimeStopWrapper();
+    spacetimeStop();
     playbackScale.value = scale;
     recomputeBuckets(scale, selectedDate.value);
   }
 
-  // 初始加载后首次分桶
+  //首次加载后做初始分桶
   function initSpacetimeBuckets() {
     recomputeBuckets(playbackScale.value, selectedDate.value);
-    currentIndex.value = 0;
+    currentIndex.value=0;
   }
 
-  // 用户在 TrendChart 切换日期 → 自动重新分桶
-  watch(selectedDate, (newDate) => {
+  watch(selectedDate ,(newDate)=>{
     recomputeBuckets(playbackScale.value, newDate);
-    currentIndex.value = 0;
-  });
+    currentIndex.value=0;
+  })
 
   // ===== 8. 数据获取 =====
   async function fetchAll() {
     try {
-      // 4D 时空漫游：拉取全量订单
       await fetchAndPreprocess();
-      // 基于当前选中日期做首次分桶
       initSpacetimeBuckets();
-
-      // 向后兼容：用 rawOrders 填充旧的 orders ref（供 KPI/图表/DetailPanel）
-      if (rawOrders.value && rawOrders.value.length > 0) {
-        orders.value = rawOrders.value.map(item => ({
-          ...item,
-          rName: item.rName || item.r_name || '未知人员',
-          rPhone: item.rPhone || item.r_phone || '无',
-          rLat: parseFloat(item.rLat || item.r_lat || item.rlat || 0),
-          rLng: parseFloat(item.rLng || item.r_lng || item.rlng || 0),
-          serviceType: (item.serviceType !== undefined ? item.serviceType : item.service_type) ?? 0,
-          status: item.status || '进行中',
-          publishTime: item.publishTime || item.publish_time || item.publishtime
-        }));
-      } else {
-        // 降级：如果时空数据为空，回退到旧 API
-        const list = await api.listServiceOrders();
-        orders.value = (list || []).map(item => ({
-          ...item,
-          rName: item.rName || item.r_name || '未知人员',
-          rPhone: item.rPhone || item.r_phone || '无',
-          rLat: parseFloat(item.rLat || item.r_lat || item.rlat || 0),
-          rLng: parseFloat(item.rLng || item.r_lng || item.rlng || 0),
-          serviceType: (item.serviceType !== undefined ? item.serviceType : item.service_type) ?? 0,
-          status: item.status || '进行中',
-          publishTime: item.publishTime || item.publish_time || item.publishtime
-        }));
-      }
-
+      const list = rawOrders.value;
+      orders.value = (list || []).map(item => ({
+        ...item,
+        rName: item.rName || item.r_name || '未知人员',
+        rPhone: item.rPhone || item.r_phone || '无',
+        rLat: parseFloat(item.rLat || item.r_lat || item.rlat || 0),
+        rLng: parseFloat(item.rLng || item.r_lng || item.rlng || 0),
+        serviceType: (item.serviceType !== undefined ? item.serviceType : item.service_type) ?? 0,
+        status: item.status || '进行中',
+        publishTime: item.publishTime || item.publish_time || item.publishtime
+      }));
       initDisplayOrders();
-      // 图表各自独立请求
       try { ageData.value = await api.statElderlyAge(60, 70, 80); } catch (e) { console.error('年龄统计失败:', e); }
       try { genderData.value = await api.statElderlyGender(); } catch (e) { console.error('性别统计失败:', e); }
       try { typeData.value = await api.statServiceType(); } catch (e) { console.error('服务类型统计失败:', e); }
@@ -213,20 +175,11 @@ export function useDashboardState() {
     timeAxisTicks, startMapPlayback, stopPlayback, seekToPercent, initDisplayOrders,
     toggleHeatmap, formatTime, goAnalysis, goCoverage, goList,
     fetchAll,
-    // === 4D 时空漫游新增 ===
-    timeAxisKeys: spacetimeTimeAxisKeys,
-    orderCountPerBucket,
-    currentIndex,
-    currentTimeLabel,
+    // ===4D时空漫游导出
+    timeAxisKeys, orderCountPerBucket, currentIndex,currentTimeLabel,
     trailingData,
-    spacetimeIsPlaying,
-    spacetimePlay,
-    spacetimePause,
-    spacetimeStop: spacetimeStopWrapper,
+    spacetimeIsPlaying, spacetimePlay:play, spacetimePause: pause, spacetimeStop,
     spacetimePlayProgress,
-    seek,
-    playbackSpeedMs,
-    setSpeed,
-    handlePlaybackScaleChange
+    seek, handlePlaybackScaleChange
   };
 }

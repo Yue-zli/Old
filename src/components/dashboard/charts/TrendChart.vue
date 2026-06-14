@@ -152,7 +152,7 @@ async function updateTrendChart() {
     const sun = new Date(mon); sun.setDate(mon.getDate() + 6);
     startTime = `${formatDate(mon)} 00:00:00`; endTime = `${formatDate(sun)} 23:59:59`;
   } else if (props.currentScale === 'month') {
-    const first = new Date(ullYear(), baseDate.getMonth(), 1);
+    const first = new Date(baseDate.getFullYear(), baseDate.getMonth(), 1);
     const last = new Date(baseDate.getFullYear(), baseDate.getMonth() + 1, 0);
     startTime = `${formatDate(first)} 00:00:00`; endTime = `${formatDate(last)} 23:59:59`;
   }

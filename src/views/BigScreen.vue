@@ -2,7 +2,12 @@
   <div class="cockpit">
     <!-- ===== 地图铺满全屏 ===== -->
     <div class="map-full">
-      <MapContainer :services="displayOrders" :trailingData="trailingData" :heatmap="heatmap" :currentMode="currentMode" @marker-click="openDetail" />
+      <MapContainer 
+      :services="displayOrders" 
+      :heatmap="heatmap" 
+      :currentMode="currentMode" 
+      @marker-click="openDetail" 
+      :trailingData="trailingData"/>
     </div>
 
     <!-- ===== 悬浮标题（顶部居中） ===== -->
@@ -65,6 +70,7 @@
         @stop="spacetimeStop"
         @seek="seek"
         @change-scale="handlePlaybackScaleChange"
+
       />
     </div>
 
@@ -90,21 +96,24 @@ const {
   displayOrders, isPlaying, playProgress, currentTimeDisplay,
   timeAxisTicks, startMapPlayback, stopPlayback, seekToPercent, initDisplayOrders,
   toggleHeatmap, goAnalysis, goCoverage, goList,
-  // === 4D 时空漫游 ===
-  timeAxisKeys, orderCountPerBucket, currentIndex, currentTimeLabel,
+  //===4D时空漫游
+  timeAxisKeys,orderCountPerBucket,currentIndex,currentTimeLabel,
   trailingData,
-  spacetimeIsPlaying, spacetimePlay, spacetimePause, spacetimeStop, spacetimePlayProgress,
-  seek, handlePlaybackScaleChange
+  spacetimeIsPlaying,
+  spacetimePlay,spacetimePause,spacetimeStop,
+  spacetimePlayProgress,
+  seek,
+  handlePlaybackScaleChange
 } = useDashboardState();
 
 import MapContainer from '../components/dashboard/MapContainer.vue';
-// import PlaybackPanel from '../components/dashboard/PlaybackPanel.vue'; // Replaced by TimelinePlayer
-import TimelinePlayer from '../components/dashboard/TimelinePlayer.vue';
+import PlaybackPanel from '../components/dashboard/PlaybackPanel.vue';
 import AgeChart from '../components/dashboard/charts/AgeChart.vue';
 import GenderChart from '../components/dashboard/charts/GenderChart.vue';
 import TypeChart from '../components/dashboard/charts/TypeChart.vue';
 import TrendChart from '../components/dashboard/charts/TrendChart.vue';
 import DetailPanel from '../components/dashboard/DetailPanel.vue';
+import TimelinePlayer from '../components/dashboard/TimelinePlayer.vue';
 </script>
 
 <style>

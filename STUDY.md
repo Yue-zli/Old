@@ -1,4 +1,4 @@
-#养老系统
+# 养老系统
 
 ##1.后端数据传输逻辑
 const base='/api/stat' 接口前缀
@@ -69,7 +69,7 @@ ref
     例如：const orders = ref([]); // 声明一个初始为空数组的响应式状态
     逻辑层访问（Script）：在 <script setup> 逻辑中，必须通过 .value 属性访问或修改数据。
     例如：orders.value = list; // 将获取的数据赋值给响应式对象
-    视图层访问（Template）：在 <template> 模板中，Vue 会自动执行“解包”操作，无需使用 .value。
+    视图层访问（Template）：在 <template> 模板中，Vue 会自动执行"解包"操作，无需使用 .value。
 
 
 例如：{{ orders.length }} // 直接引用变量名即可获取长度
@@ -1021,7 +1021,7 @@ polygon.on('mouseout', () => {
 
 // 改后：各自独立判断
 const shouldShowNimby = zoom >= 13.5 && layerVisibility.value.nimbys;
-nimbyMarkers.forEach(m => shouldShowNimby ? m.show() : m.hide());
+nimbymarkers.forEach(m => shouldShowNimby ? m.show() : m.hide());
 const shouldShowBasic = zoom >= 12.5;
 if (layerVisibility.value.parks)    parkMarkers.forEach(m => shouldShowBasic ? m.show() : m.hide());
 if (layerVisibility.value.transits) transitMarkers.forEach(m => shouldShowBasic ? m.show() : m.hide());
@@ -1044,3 +1044,363 @@ if (layerVisibility.value.transits) transitMarkers.forEach(m => shouldShowBasic 
 |---|---|
 | `src/views/ConvergeAnalysis.vue` | 服务半径覆盖 + 200m聚类 + 三级渲染 + 分级按钮 + 弹窗优化 + 工具栏分离 + 点击互动 |
 | `src/data/facilities.json` | 换用 196 条真医院数据（33三甲+44综合+119专科） |
+
+
+---
+
+# 2026-06-12 计算机技术速查
+
+## `||` 短路求值
+
+`||` 不是返回布尔值，而是返回**第一个 truthy 操作数**。
+
+```js
+console.log(1 || 7);     // → 1
+console.log(0 || 7);     // → 7  (0 是 falsy)
+console.log(3 || 7);     // → 3
+```
+
+JS 的 falsy 值只有 6 个：`false, 0, -0, 0n, ""（空字符串）, null, undefined, NaN`。
+其他一切（`"0"`、`[]`、`{}`）都是 truthy。
+
+经典用法：`date.getDay() || 7` → 周日返回 0 (falsy) → 被替换成 7。
+
+---
+
+## `padStart` — 字符串左侧补位
+
+```js
+str.padStart(targetLength, padString)
+```
+
+```js
+String(6).padStart(2, '0')    // '6' → "06"
+String(14).padStart(2, '0')   // '14' → "14"（已达标，不变）
+String(0).padStart(2, '0')    // '0' → "00"
+```
+
+用途：时间轴 key 必须等长，否则 `'6:00'` 和 `'16:00'` 字符串排序 `'16:00' < '6:00'` 错乱。
+补零后 `'06:00' < '16:00'` 正确。
+
+---
+
+## `computed` — Vue 的自动计算公式
+
+**类比 Excel**：A1 填数字，B1 写 `=A1*2`。A1 改了 B1 自动跟着变。
+
+```js
+const count = ref(2);
+const double = computed(() => count.value * 2);
+// double.value → 4
+
+count.value = 5;
+// double.value → 10  （自动重算）
+```
+
+| | ref | computed |
+|---|---|---|
+| 谁来更新 | 你手动 `.value = xxx` | Vue 自动 |
+| 什么时候算 | 你说了算 | 依赖变了就算 |
+
+播放器里：你只负责改 `currentIndex.value++`，`currentBucketKey`、`playProgress`、`trailingData` 全部 computed 自动重算。
+
+---
+
+## Map 作为去重字典
+
+```js
+const dedup = new Map();
+
+const ck = "115.892151,28.676493";        // 坐标"身份证号"
+const exist = dedup.get(ck);               // 查有没有存过
+
+if (!exist || exist.opacity < opacity) {   // 没存过 或 之前的更暗
+    dedup.set(ck, { lng, lat, opacity });  // 存入（或覆盖）
+}
+```
+
+同一个坐标多次出现 → 只保留 opacity 最高的那次。
+
+---
+
+## 时间桶概念
+
+```
+全量订单 → 按 selectedDate 范围切成时间桶 → 播放器逐桶取出
+
+日维度: keys = ['00:00', '01:00', ..., '23:00']   (24桶)
+周维度: keys = ['6/09', '6/10', ..., '6/15']      (7桶)
+月维度: keys = ['6/01', '6/02', ..., '6/30']      (28-31桶)
+
+bucketMap: Map<key, 订单数组>
+  '08:00' → [订单A, 订单B]
+  '09:00' → [订单C]
+  ...
+
+播放: currentIndex → keys[idx] → bucketMap.get(key) → O(1) 取出 → 渲染
+```
+
+| 概念 | 是什么 | 类比 |
+|------|--------|------|
+| key | 时间段标签 `'08:00'` | 快递柜门编号 |
+| 桶 (bucket) | key 对应的订单数组 | 柜门里的快递 |
+| bucketMap | 所有 key→桶 的映射表 | 整面快递柜 |
+
+---
+
+## 拖尾数据 (trailingData)
+
+合并当前帧 + 前 2 帧，不同透明度：
+
+```
+offset=0 → 当前帧 → opacity 1.0 → 最亮
+offset=1 → 前1帧  → opacity 0.5 → 半暗
+offset=2 → 前2帧  → opacity 0.2 → 很暗
+
+按坐标去重，保留最高 opacity（同坐标只画最亮的点）
+```
+
+效果：光点"亮起 → 变暗 → 消失"，像流星拖尾。
+
+---
+
+## 4D 时空漫游数据流
+
+```
+getAnimationData() → fetchAndPreprocess → rawOrders  (全量，只拉一次)
+  → recomputeBuckets(scale, selectedDate) → bucketMap + timeAxisKeys
+  → useSpacetimePlayer → currentIndex 逐帧推进
+    → trailingData (computed 自动) → MapContainer → massMarks.setData()
+```
+
+---
+
+# 2026-06-14 4D 时空漫游 — 全流程复盘
+
+## 一、整体架构
+
+7 个文件，1 条数据链：
+
+```
+API(getAnimationData) → fetchAndPreprocess → rawOrders(全量,只拉一次)
+  → recomputeBuckets(scale, selectedDate) → bucketMap + timeAxisKeys
+  → useSpacetimePlayer → currentIndex 逐帧推进
+    → trailingData(computed 自动) → MapContainer → CircleMarker 光点
+```
+
+## 二、7 个文件职责
+
+### 文件 1：`src/api/stat.js`
+新增 `getAnimationData()` → 调 `/api/stat/service/animation-data`，返回全量订单。
+
+### 文件 2：`src/hooks/useSpacetimePreprocess.js` — 时间桶引擎
+- 拉数据：`fetchAndPreprocess()` 调 API，解析 `publishTime` → `_ts` 时间戳（只执行一次）
+- 分桶：`buildBuckets(scale, selectedDate)` 纯内存运算，切换粒度毫秒级
+- 三个粒度：
+
+| 粒度 | 桶数 | key 示例 | 时间范围 |
+|------|------|---------|---------|
+| 日 | 24 | `08:00` | 选中那天 0-23 点 |
+| 周 | 7 | `06/09` | 选中那周周一~日 |
+| 月 | ~13 | `4/07` | 近三个月，按周切分 |
+
+### 文件 3：`src/hooks/useSpacetimePlayer.js` — 播放引擎
+- 心脏：`currentIndex` — 变了就全局联动
+- 五个 computed（只读，自动算）：`currentBucketKey`、`currentBucketOrders`、`playProgress`、`currentTimeLabel`、`trailingData`
+- 五个控制函数：`play()`、`pause()`、`stop()`、`seek(n)`、`setSpeed(ms)`
+- `trailingData` = 当前帧(opacity 1.0) + 前1帧(0.5) + 前2帧(0.2)，坐标去重保留最亮
+
+### 文件 4：`src/hooks/useDashboardState.js` — 集成层
+- 实例化 `useSpacetimePreprocess()` + `useSpacetimePlayer()`
+- 改 `fetchAll`：先拉时空数据 → 分桶 → 用 `rawOrders` 填旧 `orders`（兼容 KPI）
+- 新增 `handlePlaybackScaleChange` + `watch(selectedDate)` 自动重分桶
+
+### 文件 5：`src/components/dashboard/TimelinePlayer.vue` — 时间轴 UI
+- 三层叠加：Layer1 ECharts柱状图 → Layer2 高亮染色 → Layer3 透明滑块
+- 悬浮 tooltip：鼠标在时间轴上显示帧信息
+- `defineExpose({ resize })` 窗口自适应
+
+### 文件 6：`src/components/dashboard/MapContainer.vue` — 地图渲染
+- 新增 `trailingData` prop
+- `updateSpacetimeMarkers(data)` — 用 `AMap.CircleMarker` 画光点（已验证 API）
+- `playbackStarted` 标志位区分"未播放"与"播放中空桶"
+
+### 文件 7：`src/views/BigScreen.vue` — 最终接线
+- MapContainer 加 `:trailingData="trailingData"`
+- PlaybackPanel 替换为 TimelinePlayer
+
+## 三、踩过的全部 Bug
+
+| # | 文件 | 行 | 根因 | 症状 |
+|---|------|----|------|------|
+| 1 | ConvergeAnalysis | 230 | `toggleLayer` 没处理 parks/transits | 公园地铁按钮无效 |
+| 2 | ConvergeAnalysis | 弹窗 | 三甲 3km 缓冲重叠过多 | 弹窗 10-20 处医院 |
+| 3 | ConvergeAnalysis | 425 | 选址含拟建 +15 分 | 评分不纯 |
+| **4** | **useSpacetimePlayer** | **56** | **`o.rlng` 拼写错误** | **全部订单被跳过，trailingData 永远空** |
+| 5 | useSpacetimePlayer | 76 | `lenth` 拼写 | play() 判断失败 |
+| 6 | useSpacetimePlayer | 85 | `timeAxisKeys.length` 缺 `.value` | ref 没有 length |
+| 7 | useSpacetimePlayer | 60 | 去重 key 多了空格 | 同坐标匹配不上 |
+| 8 | TimelinePlayer | 99 | `hocerBucket` 拼写 | ReferenceError |
+| 9 | TimelinePlayer | 28 | `wid` → `width` | 高亮条宽度不更新 |
+| 10 | TimelinePlayer | 34 | `style=` 缺 `:` | tooltip 定位失效 |
+| 11 | MapContainer | — | MassMarks 不支持 fillColor | 光点不可见 |
+| 12 | TimelinePlayer | CSS | `overflow: hidden` 裁剪 tooltip | 悬浮提示看不见 |
+| 13 | TrendChart | 155 | `ullYear()` 缺对象前缀 | 切月维度崩溃 |
+
+## 四、核心教训
+
+- **拼写 Bug 不会报错**：`rlng` `lenth` `hocerBucket` `wid` — JS 静默失效，最难排查
+- **ref 在 JS 里要 `.value`**：模板自动解包，script 里必须手动
+- **第三方 API 先验证再使用**：MassMarks → LabelsLayer → CircleMarker，降级到已验证的 API
+- **`clearInterval` 防双重定时器**：开新定时器前必须先杀旧的
+- **`computed` 不是魔法**：就是 Excel 公式——依赖变了自动重算
+
+---
+
+# 2026-06-13 useSpacetimePlayer 播放引擎笔记
+
+## 一、整体结构
+
+```
+外部传入 3 个参数 (bucketMap, timeAxisKeys, speedMs)
+  │
+  ├─ 3 个内部变量 (isPlaying, currentIndex, intervalId)
+  │
+  ├─ 6 个 computed (只读，依赖 currentIndex 自动重算)
+  │     currentBucketKey → currentBucketOrders → playProgress
+  │     → currentTimeLabel → trailingData
+  │
+  ├─ 5 个控制函数 (play, pause, stop, seek, setSpeed)
+  │
+  └─ return { ... } 暴露给 useDashboardState
+```
+
+## 二、参数 vs 内部变量
+
+| 变量 | 类型 | 谁管的 | 作用 |
+|------|------|--------|------|
+| `bucketMap` | 参数 `Ref<Map>` | useSpacetimePreprocess 算好喂进来 | `get(key)` 拿订单数组 |
+| `timeAxisKeys` | 参数 `Ref<string[]>` | useSpacetimePreprocess | 数组下标 = 帧编号 |
+| `speedMs` | 参数 `Ref<number>` | useDashboardState 传进来 | 每帧间隔 ms |
+| `isPlaying` | 内部 `ref(false)` | play/pause 改它 | UI 按钮显示 ▶/⏸ |
+| `currentIndex` | 内部 `ref(0)` | 定时器/set/stop 改它 | **整个引擎的心脏** |
+| `intervalId` | 内部 `let null` | play 存，pause 清 | 杀定时器的凭证 |
+
+## 三、currentIndex 是心脏
+
+```
+currentIndex 一变 →
+  currentBucketKey   自动 → '08:00'
+  currentBucketOrders 自动 → [订单A, 订单B]
+  playProgress        自动 → 33%
+  currentTimeLabel    自动 → '08:00'
+  trailingData        自动 → [{lng,lat,opacity=1.0}, ...]
+```
+
+**你只负责改 currentIndex，剩下全自动。**
+
+## 四、6 个 computed 的依赖链
+
+```
+currentBucketKey = computed(() => timeAxisKeys.value[currentIndex.value])
+       │
+       └──→ currentBucketOrders = computed(() => bucketMap.value.get(currentBucketKey.value))
+       └──→ currentTimeLabel = computed(() => currentBucketKey.value || '--')
+
+playProgress = computed(() => (currentIndex.value / (len-1)) * 100)
+
+trailingData = computed(() => {
+    遍历 offset 0,1,2:
+      取 idx = currentIndex.value - offset
+      从 bucketMap 取对应桶的订单
+      按 opacity [1.0, 0.5, 0.2] 标记
+      坐标去重，保留最高 opacity
+})
+```
+
+## 五、5 个控制函数
+
+### play() — 启动播放
+
+```
+数据为空 → 直接 return
+已到末尾 → currentIndex 归零（循环）
+isPlaying = true
+clearInterval(旧) → 防双重定时器
+setInterval(回调, spd.value) → 每 N ms:
+    currentIndex++
+    到末尾了? → pause() + 停在最后一帧
+```
+
+### pause() — 暂停，保持位置
+
+```
+isPlaying = false
+clearInterval → 杀定时器
+intervalId = null → 标记"没有定时器"
+currentIndex 不动
+```
+
+**与 stop 的区别**：pause 停在原地，stop 回到起点。
+
+### stop() — 回到起点
+
+```
+pause()           → 杀定时器
+currentIndex = 0  → 回到第一帧
+```
+
+### seek(index) — 跳转到任意帧
+
+```js
+currentIndex.value = Math.max(0, Math.min(最后一帧, index));
+```
+
+安全裁剪：传入 -3 → 裁到 0，传入 999 → 裁到最后一帧。不改变播放状态——正在播就继续从新位置播。
+
+### setSpeed(ms) — 改播放速度
+
+```
+spd.value = 裁剪到 100~5000ms
+如果正在播放 → pause() + play()（用新速度重启）
+```
+
+`spd` 必须是 ref 而非普通数字：`setInterval` 的间隔是**创建时写死**的，要改速度只能杀旧定时器 + 开新的。
+
+## 六、setInterval 和 intervalId
+
+```
+setInterval(fn, 800) → 返回编号 47 → 存到 intervalId
+clearInterval(47)    → 浏览器杀编号 47 的定时器
+clearInterval(null)  → 不报错，不做事
+```
+
+- `intervalId` 是**杀定时器的凭证**，没它停不下来
+- `play()` 里 `clearInterval(intervalId)` → 防双重定时器（连按两下按钮不会加速）
+- `pause()` 里 `clearInterval(intervalId); intervalId = null` → 清干净
+
+## 七、spd.value 为什么不是 spd
+
+```js
+const spd = speedMs || ref(800);
+
+setInterval(fn, spd.value);  // ✅ 800（数字）
+setInterval(fn, spd);        // ❌ RefImpl { value: 800 }（对象）
+```
+
+`setInterval` 第二个参数必须是数字毫秒数，不能是 Vue ref 对象。
+
+## 八、return 用花括号
+
+```js
+// ❌ 逗号连接——不是对象！
+return isPlaying, currentIndex, play, pause;
+
+// ✅ 花括号包起来——返回对象
+return { isPlaying, currentIndex, play, pause };
+```
+
+外面解构时：
+```js
+const { isPlaying, currentIndex, play, pause } = useSpacetimePlayer(...)
+```
