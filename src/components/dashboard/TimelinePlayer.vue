@@ -114,9 +114,10 @@ function onTrackHover(e) {
   const idx=Math.round(ratio*(props.timeAxisKeys.length-1));
   const clamped=Math.max(0, Math.min(props.timeAxisKeys.length-1,idx));
 
-  hoverBucket.value={
-    key: props.timeAxisKeys[clamped],
-    count: props.orderCountPerBucket?.[clamped]||0
+  const rawKey = props.timeAxisKeys[clamped];
+  hoverBucket.value = {
+    key: props.scale === 'month' ? rawKey.replace(/^\d+\//, '') + '日' : rawKey,
+    count: props.orderCountPerBucket?.[clamped] || 0
   };
   tooltipVisible.value=true;
   tooltipX.value=Math.min(x,rect.width-120);

@@ -102,6 +102,14 @@ export function useDashboardState() {
   function goCoverage() { router.push('/coverage'); }
   function goList() { router.push('/requesters'); }
 
+  // 4D 播放时间标签：月维度时显示月份而非日期
+  const spacetimeTimeLabel = computed(() => {
+    const label = currentTimeLabel.value;
+    if (playbackScale.value !== 'month' || !label) return label;
+    const m = label.split('/')[0];
+    return m + '月';
+  });
+
   //4D时空漫游： 切换维度换单位
   function handlePlaybackScaleChange(scale) {
     spacetimeStop();
@@ -176,7 +184,8 @@ export function useDashboardState() {
     toggleHeatmap, formatTime, goAnalysis, goCoverage, goList,
     fetchAll,
     // ===4D时空漫游导出
-    timeAxisKeys, orderCountPerBucket, currentIndex,currentTimeLabel,
+    timeAxisKeys, orderCountPerBucket, currentIndex,
+    currentTimeLabel: spacetimeTimeLabel,
     trailingData,
     spacetimeIsPlaying, spacetimePlay:play, spacetimePause: pause, spacetimeStop,
     spacetimePlayProgress,

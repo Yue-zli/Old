@@ -27,7 +27,8 @@ import AMapLoader from '@amap/amap-jsapi-loader';
 const props = defineProps({
   services: { type: Array, default: () => [] },
   heatmap: { type: Boolean, default: false },
-  trailingData: { type: Array, default: () => [] }  // 4D 拖尾 [{lng,lat,opacity,raw}]
+  trailingData: { type: Array, default: () => [] },
+  isSpacetimePlaying: { type: Boolean, default: false }
 });
 
 const emit = defineEmits(['marker-click']);
@@ -174,20 +175,50 @@ function renderMarkers(points) {
   map.add(markers);
 }
 
-let playbackStarted = false;  // 是否已进入 4D 播放状态
+let playbackActive = false;
 
-watch(() => props.services, updateDisplay, { deep: true });
-watch(() => props.heatmap, updateDisplay);
-watch(() => props.trailingData, (newData) => {
-  if (newData?.length > 0) {
-    playbackStarted = true;
-    if (heatmapInstance) heatmapInstance.hide();
+// ① 4D 播放启停：清除/恢复旧标记
+watch(() => props.isSpacetimePlaying, (playing) => {
+  if (playing) {
+    playbackActive = true;
     if (markers.length > 0) { map?.remove(markers); markers = []; }
+  } else {
+    playbackActive = false;
+    updateDisplay();  // 停止播放 → 恢复旧 DOM 标记/热力图
+  }
+});
+
+// ② 非播放时：services 变化 → 重绘 DOM 标记
+watch(() => props.services, () => {
+  if (!playbackActive) updateDisplay();
+}, { deep: true });
+
+// ③ 热力图按钮：播放中只显隐，非播放走完整刷新
+watch(() => props.heatmap, () => {
+  if (playbackActive) {
+    if (heatmapInstance) props.heatmap ? heatmapInstance.show() : heatmapInstance.hide();
+  } else {
+    updateDisplay();
+  }
+});
+
+// ④ 4D 帧更新：画光点 + 同步热力图（仅当前帧数据）
+watch(() => props.trailingData, (newData) => {
+  if (!playbackActive) return;
+  if (newData?.length > 0) {
     updateSpacetimeMarkers(newData);
-  } else if (playbackStarted) {
-    // 空帧：清光点
+    if (heatmapInstance && props.heatmap) {
+      const heatData = newData
+        .filter(pt => pt.opacity >= 0.8)
+        .map(pt => ({ lng: pt.lng, lat: pt.lat, count: 1 }));
+      heatmapInstance.setDataSet({ data: heatData, max: 5 });
+    }
+  } else {
     spacetimeMarkers.forEach(m => map?.remove(m));
     spacetimeMarkers = [];
+    if (heatmapInstance && props.heatmap) {
+      heatmapInstance.setDataSet({ data: [], max: 1 });
+    }
   }
 })
 

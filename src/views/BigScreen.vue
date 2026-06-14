@@ -2,12 +2,13 @@
   <div class="cockpit">
     <!-- ===== 地图铺满全屏 ===== -->
     <div class="map-full">
-      <MapContainer 
-      :services="displayOrders" 
-      :heatmap="heatmap" 
-      :currentMode="currentMode" 
-      @marker-click="openDetail" 
-      :trailingData="trailingData"/>
+      <MapContainer
+      :services="displayOrders"
+      :heatmap="heatmap"
+      :currentMode="currentMode"
+      @marker-click="openDetail"
+      :trailingData="trailingData"
+      :isSpacetimePlaying="spacetimeIsPlaying"/>
     </div>
 
     <!-- ===== 悬浮标题（顶部居中） ===== -->
